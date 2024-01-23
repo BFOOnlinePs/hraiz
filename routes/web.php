@@ -474,6 +474,22 @@ Route::group(['middleware' => 'auth',], function () {
             Route::get('delete/{id}',[App\Http\Controllers\MachineController::class, 'delete'])->name('setting.machine.delete');
         });
     });
+    Route::group(['prefix'=>'hr'],function(){
+        Route::group(['prefix'=>'employees'],function(){
+            Route::get('index',[App\Http\Controllers\hr\EmployeesController::class, 'index'])->name('hr.employees.index');
+            Route::get('add',[App\Http\Controllers\hr\EmployeesController::class, 'add'])->name('hr.employees.add');
+            Route::post('create',[App\Http\Controllers\users\EmployeesController::class, 'create'])->name('hr.employees.create');
+            Route::post('employee_table',[App\Http\Controllers\hr\EmployeesController::class, 'employee_table'])->name('hr.employees.employee_table');
+            Route::get('details/{id}',[App\Http\Controllers\hr\EmployeesController::class, 'details'])->name('hr.employees.details');
+            Route::get('edit/{id}',[App\Http\Controllers\hr\EmployeesController::class, 'edit'])->name('hr.employees.edit');
+        });
+        Route::group(['prefix'=>'attendance'],function(){
+            Route::post('create',[App\Http\Controllers\hr\AttendanceController::class, 'create'])->name('hr.attendance.create');
+            Route::post('editOutTime',[App\Http\Controllers\hr\AttendanceController::class, 'editOutTime'])->name('hr.attendance.editOutTime');
+            Route::post('delete',[App\Http\Controllers\hr\AttendanceController::class, 'delete'])->name('hr.attendance.delete');
+            Route::post('edit',[App\Http\Controllers\hr\AttendanceController::class, 'edit'])->name('hr.attendance.edit');
+        });
+    });
 
     Route::get('generate', function () {
         \Illuminate\Support\Facades\Artisan::call('storage:link');
