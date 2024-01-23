@@ -24,6 +24,9 @@ class AttendanceController extends Controller
             return redirect()->route('hr.employees.details' , ['id' => $request->employee_id])->with(['success'=>'تم تسجيل حضور الموظف بنجاح','tab_id'=>2]);
 
         }
+        else {
+            return redirect()->route('hr.employees.details' , ['id' => $request->employee_id])->with(['fail'=>'لم يتم تسجيل حضور الموظف ، هناك خلل ما']);
+        }
     }
     public function editOutTime(Request $request)
     {
@@ -37,6 +40,9 @@ class AttendanceController extends Controller
             return redirect()->route('hr.employees.details' , ['id' => $request->employee_id])->with(['success'=>'تم تسجيل مغادرة الموظف بنجاح','tab_id'=>2]);
 
         }
+        else {
+            return redirect()->route('hr.employees.details' , ['id' => $request->employee_id])->with(['fail'=>'لم يتم تسجيل مغادرة الموظف ، هناك خلل ما']);
+        }
     }
     public function delete(Request $request)
     {
@@ -45,7 +51,9 @@ class AttendanceController extends Controller
         if($bfo_attendance->save())
         {
             return redirect()->route('hr.employees.details' , ['id' => $request->employee_id])->with(['success'=>'تم حذف السجل بنجاح','tab_id'=>2]);
-
+        }
+        else {
+            return redirect()->route('hr.employees.details' , ['id' => $request->employee_id])->with(['fail'=>'لم يتم حذف السجل ، هناك خلل ما']);
         }
     }
     public function edit(Request $request)
@@ -60,6 +68,9 @@ class AttendanceController extends Controller
         {
             return redirect()->route('hr.employees.details' , ['id' => $request->employee_id])->with(['success'=>'تم تعديل السجل بنجاح','tab_id'=>2]);
 
+        }
+        else {
+            return redirect()->route('hr.employees.details' , ['id' => $request->employee_id])->with(['fail'=>'لم يتم تعديل السجل ، هناك خلل ما']);
         }
     }
 
