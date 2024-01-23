@@ -181,9 +181,6 @@
     <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 
-
-    <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
     <script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 
     <script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
