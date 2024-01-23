@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="dc0963de-5d4a-497e-a864-4d74efffd831" name="Changes" comment="edit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/bank/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/bank/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/shipping_methods/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/shipping_methods/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/clearance_attachment/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/clearance_attachment/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/estimation_cost_element/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/estimation_cost_element/index.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -257,7 +257,7 @@
       <workItem from="1705917855501" duration="11980000" />
       <workItem from="1705997636900" duration="2015000" />
       <workItem from="1706000861689" duration="1093000" />
-      <workItem from="1706010800601" duration="23000" />
+      <workItem from="1706010800601" duration="1374000" />
     </task>
     <task id="LOCAL-00001" summary="edit">
       <created>1692272515017</created>
