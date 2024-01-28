@@ -104,7 +104,7 @@
                         aria-expanded="false" class="nav-link text-white dropdown-toggle">الموارد البشرية</a>
                     <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                         <li><a href="{{route('hr.employees.index')}}" class="dropdown-item">الموظفين</a></li>
-                        <li><a href="#" class="dropdown-item">الرواتب</a></li>
+                        <li><a href="{{route('hr.salaries.index')}}" class="dropdown-item">الرواتب</a></li>
                         <li><a href="#" class="dropdown-item">الدوام</a></li>
                         <li><a href="#" class="dropdown-item">الحضور و المغادرة</a></li>
                     </ul>

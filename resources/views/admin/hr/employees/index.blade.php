@@ -51,7 +51,7 @@
                 "X-CSRF-Token": csrfToken
             };
             $.ajax({
-                url: '{{ url('users/updateStatus') }}',
+                url: "{{ url('users/updateStatus') }}",
                 method: 'post',
                 headers: headers,
                 data: {

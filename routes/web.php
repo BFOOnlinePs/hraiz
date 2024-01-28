@@ -482,12 +482,27 @@ Route::group(['middleware' => 'auth',], function () {
             Route::post('employee_table',[App\Http\Controllers\hr\EmployeesController::class, 'employee_table'])->name('hr.employees.employee_table');
             Route::get('details/{id}',[App\Http\Controllers\hr\EmployeesController::class, 'details'])->name('hr.employees.details');
             Route::get('edit/{id}',[App\Http\Controllers\hr\EmployeesController::class, 'edit'])->name('hr.employees.edit');
+            Route::group(['prefix'=>'rewards'],function(){
+                Route::post('create',[App\Http\Controllers\hr\DiscountRewardController::class, 'create_reward'])->name('hr.employees.rewards.create');
+                Route::post('edit',[App\Http\Controllers\hr\DiscountRewardController::class, 'create_reward'])->name('hr.employees.rewards.edit');
+            }); 
+            Route::group(['prefix'=>'discounts'],function(){
+                Route::post('create',[App\Http\Controllers\hr\DiscountRewardController::class, 'create_discount'])->name('hr.employees.discounts.create');
+                Route::post('edit',[App\Http\Controllers\hr\DiscountRewardController::class, 'edit_discount'])->name('hr.employees.discounts.edit');
+            }); 
+            Route::group(['prefix'=>'advances'],function(){
+                Route::post('create',[App\Http\Controllers\hr\DiscountRewardController::class, 'create_advance'])->name('hr.employees.advances.create');
+                Route::post('edit',[App\Http\Controllers\hr\DiscountRewardController::class, 'edit_advance'])->name('hr.employees.advances.edit');
+            }); 
         });
         Route::group(['prefix'=>'attendance'],function(){
             Route::post('create',[App\Http\Controllers\hr\AttendanceController::class, 'create'])->name('hr.attendance.create');
             Route::post('editOutTime',[App\Http\Controllers\hr\AttendanceController::class, 'editOutTime'])->name('hr.attendance.editOutTime');
             Route::post('delete',[App\Http\Controllers\hr\AttendanceController::class, 'delete'])->name('hr.attendance.delete');
             Route::post('edit',[App\Http\Controllers\hr\AttendanceController::class, 'edit'])->name('hr.attendance.edit');
+        });
+        Route::group(['prefix'=>'salaries'],function(){
+            Route::get('index',[App\Http\Controllers\hr\SalaryController::class, 'index'])->name('hr.salaries.index');
         });
     });
 
