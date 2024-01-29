@@ -28,6 +28,16 @@
             right: 5px;
             cursor: pointer;
         }
+
+        .nav-tabs .nav-link.active {
+            background-color: #17a2b8;
+            color: white; /* Optionally, you can change the text color */
+        }
+
+        .nav-tabs .nav-link {
+            background-color: #6c757d;
+            color: white; /* Optionally, you can change the text color */
+        }
     </style>
 @endsection
 @section('content')
@@ -43,55 +53,9 @@
                         </button>
                     </div>
                     <hr>
-                    <table class="table table-sm table-hover table-bordered">
-                        <thead>
-                        <tr>
-                            <th>اسم المدخل</th>
-                            <th>العدد</th>
-                            <th>تكلفة الوحدة</th>
-                            <th>المجموع</th>
-                            <th>الوزن</th>
-                            <th>الملاحظات</th>
-                            <th>العمليات</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @if($data->isEmpty())
-                            <tr>
-                                <td colspan="10" class="text-center">لا توجد بيانات</td>
-                            </tr>
-                        @else
-                            @foreach($data as $key)
-                                <tr>
-                                    <td>{{ $key->production_input_name }}</td>
-                                    <td>
-                                        {{ $key->qty }}
-                                    </td>
-                                    <td>
-                                        @if($key->product_id == -1)
-                                            {{ $key->estimated_cost }}
-                                        @else
-                                            {{ $key->product->cost_price }}
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if($key->product_id == -1)
-                                            {{ $key->estimated_cost * $key->qty }}
-                                        @else
-                                            {{ $key->product->cost_price * $key->qty }}
-                                        @endif
-                                    </td>
-                                    <td>{{ $key->product->weight??'' }}</td>
-                                    <td>{{ $key->production_input_notes }}</td>
-                                    <td>
-                                        {{--                                            <a href="" class="btn btn-success btn-sm"><span class="fa fa-edit"></span></a>--}}
-                                        <a href="{{ route('production.production_inputs.production_input_delete',['id'=>$key->id]) }}" class="btn btn-danger btn-sm"><span class="fa fa-trash"></span></a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        @endif
-                        </tbody>
-                    </table>
+                    <div id="production_inputs_table">
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -104,17 +68,25 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="">اسم الصنف المخرج</label>
-                                <select onchange="update_product_and_qty_for_production_lines_ajax(this.value,'product')" name="" id="" class="select2bs4 form-control">
+                                <select onchange="update_product_and_qty_for_production_lines_ajax(this.value,'product')" name="" id="selected_product" class="select2bs4 form-control">
                                     @foreach($products as $key)
                                         <option @if($key->id == $production_lines->product_id) selected @endif value="{{ $key->id }}">{{ $key->product_name_ar }}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="">عدد المخرجات</label>
-                                <input onchange="update_product_and_qty_for_production_lines_ajax(this.value,'qty')" type="text" value="{{ $production_lines->production_output_count }}" class="form-control" placeholder="عدد المخرجات">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">عدد المخرجات</label>
+                                    <input onchange="update_product_and_qty_for_production_lines_ajax(this.value,'qty')" type="text" value="{{ $production_lines->production_output_count }}" class="form-control" placeholder="عدد المخرجات">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">طول الصنف المخرج</label>
+                                    <input readonly type="text" id="the_length_of_the_output_item" class="form-control" placeholder="عدد المخرجات">
+                                </div>
                             </div>
                         </div>
                     </row>
@@ -129,78 +101,9 @@
                     <h5>الملخص</h5>
                 </div>
                 <div class="card-body">
-                    <table style="width: 100%" class="table-sm  table-bordered">
-                        <thead>
-                            <tr>
-                                <th>باركود</th>
-                                <th>اسم الصنف المخرج</th>
-                                <th>عدد وحدات الانتاج</th>
-                                <th class="text-center bg-warning">تفاصيل مدخلات الانتاج</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>{{ $production_lines->product->barcode }}</td>
-                                <td>{{ $production_lines->product->product_name_ar }}</td>
-                                <td>{{ $production_lines->production_output_count }}</td>
-                                <td>
-                                    <table style="width: 100%" class="table-sm bg-secondary">
-                                        <thead>
-                                        <tr>
-                                            <th>اسم المدخل</th>
-                                            <th>العدد</th>
-                                            <th>التكلفة</th>
-                                            <th>وزن بروفيل</th>
-                                            <th>وزن زاوية</th>
-                                            <th>تكلفة الزاوية</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @if($data->isEmpty())
-                                            <tr>
-                                                <td colspan="10" class="text-center">لا توجد بيانات</td>
-                                            </tr>
-                                        @else
-                                            @foreach($data as $key)
-                                                <tr>
-                                                    <td>{{ $key->production_input_name }}</td>
-                                                    <td>
-                                                        {{ $key->qty }}
-                                                    </td>
-                                                    <td>
-                                                        @if($key->product_id == -1)
-                                                            {{ $key->estimated_cost }}
-                                                        @else
-                                                            {{ $key->product->cost_price }}
-                                                        @endif
-                                                    </td>
-                                                    <td>
-                                                        {{ $key->product->weight??'' }}
-                                                    </td>
-                                                    <td class="bg-success">
-                                                        @if(!empty($key->product->weight) && !empty($production_lines->production_output_count))
-                                                            {!! number_format((float)($key->product->weight/$production_lines->production_output_count), 2) !!}
-                                                        @else
-                                                            -
-                                                        @endif
-                                                    </td>
-                                                    <td class="bg-success">
-                                                        @if(!empty($key->product->cost_price) && !empty($production_lines->production_output_count))
-{{--                                                            لتحديد عدد الاعداد العشرية--}}
-                                                            {!! number_format((float)($key->product->cost_price/$production_lines->production_output_count), 2) !!}
-                                                        @else
-                                                            -
-                                                        @endif
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        @endif
-                                        </tbody>
-                                    </table>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div id="summery_production_inputs_table">
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -215,7 +118,7 @@
                             {{--                                <a class="nav-link {{ !session('tab_id') ?'active':'' }}" id="custom-content-below-home-tab" data-toggle="pill" href="#custom-content-below-home" role="tab" aria-controls="custom-content-below-home" aria-selected="true">مدخلات الانتاج</a>--}}
                             {{--                            </li>--}}
                             <li class="nav-item">
-                                <a class="nav-link {{ !session('tab_id') ?'active':'' }} " id="settings-tab" data-toggle="pill" href="#settings" role="tab" aria-controls="settings" aria-selected="false">اعدادات</a>
+                                <a class="nav-link {{ !session('tab_id') ?'active':'' }} " id="settings-tab" data-toggle="pill" href="#settings" role="tab" aria-controls="settings" aria-selected="false">اعدادات الالات</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ session('tab_id') == 2?'active':'' }}" id="custom-content-below-profile-tab" data-toggle="pill" href="#custom-content-below-profile" role="tab" aria-controls="custom-content-below-profile" aria-selected="false">مرفقات</a>
@@ -333,29 +236,44 @@
                                                 @csrf
                                                 <input type="hidden" name="operation" value="product">
                                                 <input type="hidden" name="production_lines_id" value="{{ $production_input }}">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="">اختر صنف</label>
-                                                        <select class="form-control select2bs4" name="product_id" id="">
-                                                            @foreach($products as $key)
-                                                                <option value="{{ $key->id }}">{{ $key->product_name_ar }}</option>
-                                                            @endforeach
-                                                        </select>
+                                                    <div class="col-md-7">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <label for="">اختر صنف</label>
+                                                                    <select required class="form-control select2bs4" name="product_id" id="">
+                                                                        <option value="">اختر صنف ...</option>
+                                                                        @foreach($products as $key)
+                                                                            <option value="{{ $key->id }}">{{ $key->product_name_ar }}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <label for="">العدد</label>
+                                                                    <input type="number" value="1" min="1" name="qty" class="form-control" placeholder="العدد">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <label for="">ملاحظات</label>
+                                                                    <textarea class="form-control" name="production_input_notes" id="" cols="30" rows="3"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <button class="btn btn-dark">حفظ</button>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="">العدد</label>
-                                                        <input type="text" name="qty" class="form-control" placeholder="العدد">
+                                                    <div class="col-md-5">
+                                                        <div class="row text-center">
+                                                            <div class="col-md-12">
+                                                                <span style="font-size: 96px" class="fa fa-list"></span>
+                                                            </div>
+                                                        </div>
+                                                        <h3 class="text-center mt-2">اضافة صنف الى مدخلات الانتاج</h3>
+                                                        <hr>
+                                                        <p class="text-center">يمكنك من خلال هذا النموذج اختيار الاصناف التي تدخل في عملية الانتاج</p>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="">ملاحظات</label>
-                                                        <textarea class="form-control" name="production_input_notes" id="" cols="30" rows="3"></textarea>
-                                                    </div>
-                                                </div>
-                                                <button class="btn btn-dark">حفظ</button>
                                             </form>
                                         </div>
                                     </div>
@@ -366,30 +284,50 @@
                                                 <input type="hidden" name="operation" value="workers">
                                                     <input type="hidden" name="production_lines_id" value="{{ $production_input }}">
                                                     <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="">اسم المدخل</label>
-                                                        <input type="text" class="form-control" value="عمال">
-                                                    </div>
-                                                </div>
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <label for="">التكلفة التقديرية</label>
-                                                            <input type="text" class="form-control" name="estimated_cost" placeholder="التكلفة التقديرية">
+                                                        <div class="row">
+                                                            <div class="col-md-7">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <div class="form-group">
+                                                                            <label for="">اسم المدخل</label>
+                                                                            <input type="text" class="form-control" value="عمال">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-12">
+                                                                        <div class="form-group">
+                                                                            <label for="">التكلفة التقديرية</label>
+                                                                            <input type="text" class="form-control" name="estimated_cost" placeholder="التكلفة التقديرية">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-12">
+                                                                        <div class="form-group">
+                                                                            <label for="">العدد</label>
+                                                                            <input type="text" name="qty" class="form-control" placeholder="العدد">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-12">
+                                                                        <div class="form-group">
+                                                                            <label for="">ملاحظات</label>
+                                                                            <textarea class="form-control" name="production_input_notes" id="" cols="30" rows="3"></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <button class="btn btn-dark">حفظ</button>
+                                                            </div>
+                                                            <div class="col-md-5">
+                                                                <div class="row text-center">
+                                                                    <div class="col-md-12">
+                                                                        <span style="font-size: 96px" class="fa fa-list"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <h3 class="text-center mt-2">تكلفة عمالة الانتاج</h3>
+                                                                <hr>
+                                                                <p class="text-center">من خلال النموذج التالي يمكن تحديد عدد العمال والتكلفة التقديرية لانتاج وحدة واحدة من المنتج</p>
+
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="">العدد</label>
-                                                        <input type="text" name="qty" class="form-control" placeholder="العدد">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="">ملاحظات</label>
-                                                        <textarea class="form-control" name="production_input_notes" id="" cols="30" rows="3"></textarea>
-                                                    </div>
-                                                </div>
-                                                <button class="btn btn-dark">حفظ</button>
+
                                                 </div>
                                             </form>
                                     </div>
@@ -557,6 +495,9 @@
         $(document).ready(function () {
             production_setting_list();
             production_order_table_ajax();
+            production_input_table_ajax();
+            summery_production_inputs_table();
+            the_length_of_the_output_item_ajax();
         })
         $(document).ready(function() {
             list_image();
@@ -597,7 +538,6 @@
                 }
             });
         }
-
 
         $(function () {
             $('#submitBtn').on('click', (e) => {
@@ -676,7 +616,11 @@
                 },
                 success: function (data) {
                     if(data.success == 'true'){
+                        if(operation == 'product'){
+                            the_length_of_the_output_item_ajax();
+                        }
                         toastr.success(data.message);
+                        summery_production_inputs_table();
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -699,6 +643,29 @@
                 },
                 success: function (data) {
                     $('#production_setting_table').html(data.view);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('error');
+                }
+            });
+        }
+
+        function the_length_of_the_output_item_ajax() {
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            var headers = {
+                "X-CSRF-Token": csrfToken
+            };
+            $.ajax({
+                url: '{{ route('production.production_inputs.the_length_of_the_output_item_ajax') }}',
+                method: 'post',
+                headers: headers,
+                data: {
+                    'product_id':document.getElementById('selected_product').value,
+                },
+                success: function (data) {
+                    if(data.success == 'true'){
+                        document.getElementById('the_length_of_the_output_item').value = data.data.height;
+                    }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     alert('error');
@@ -730,6 +697,84 @@
             });
         }
 
+        function update_product_line_inputs_ajax(id,operation,value) {
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            var headers = {
+                "X-CSRF-Token": csrfToken
+            };
+            $.ajax({
+                url: '{{ route('production.production_inputs.update_product_line_inputs_ajax') }}',
+                method: 'post',
+                headers: headers,
+                data: {
+                    'id':id,
+                    'operation':operation,
+                    'value':value
+                },
+                success: function (data) {
+                    console.log(data)
+                    if(data.success == 'true'){
+                        production_input_table_ajax();
+                        summery_production_inputs_table();
+                        toastr.success(data.message);
+                    }
+                    else if(data.success == 'false'){
+                        toastr.error(data.message);
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('error');
+                }
+            });
+        }
+
+        function production_input_table_ajax() {
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            var headers = {
+                "X-CSRF-Token": csrfToken
+            };
+            $.ajax({
+                url: '{{ route('production.production_inputs.production_input_table_ajax') }}',
+                method: 'post',
+                headers: headers,
+                data: {
+                    'production_line_id':{{ $production_lines->id }},
+                },
+                success: function (data) {
+                    if(data.success == 'true'){
+                        $('#production_inputs_table').html(data.view)
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('error');
+                }
+            });
+        }
+
+        function delete_production_input_ajax(id) {
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            var headers = {
+                "X-CSRF-Token": csrfToken
+            };
+            $.ajax({
+                url: '{{ route('production.production_inputs.delete_production_input_ajax') }}',
+                method: 'post',
+                headers: headers,
+                data: {
+                    'id':id,
+                },
+                success: function (data) {
+                    if(data.success == 'true'){
+                        toastr.success(data.message);
+                        production_input_table_ajax();
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('error');
+                }
+            });
+        }
+
         function production_order_table_ajax(page) {
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
             var headers = {
@@ -745,6 +790,28 @@
                 },
                 success: function (data) {
                     $('#production_order_table').html(data.view)
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('error');
+                }
+            });
+        }
+
+        function summery_production_inputs_table() {
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            var headers = {
+                "X-CSRF-Token": csrfToken
+            };
+            $.ajax({
+                url: '{{ route('production.production_inputs.summery_production_inputs_table_ajax') }}',
+                method: 'post',
+                headers: headers,
+                data: {
+                    'production_line_id':{{ $production_lines->id }},
+                },
+                success: function (data) {
+                    console.log(data);
+                    $('#summery_production_inputs_table').html(data.view)
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     alert('error');

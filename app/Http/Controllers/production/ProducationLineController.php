@@ -20,6 +20,9 @@ class ProducationLineController extends Controller
     public function index(){
         $data = ProducationLinesModel::get();
         $products = ProductModel::get();
+        foreach ($data as $key){
+            $key->product = ProductModel::where('id',$key->product_id)->first();
+        }
         return view('admin.production.production_line.index',['data'=>$data,'products'=>$products]);
     }
 
@@ -282,6 +285,86 @@ class ProducationLineController extends Controller
         return response()->json([
             'success'=>'true',
             'view'=>view('admin.production.production_line.ajax.production_order_table',['data'=>$data])->render(),
+        ]);
+    }
+
+    public function update_product_line_inputs_ajax(Request $request){
+        $data = ProductionInputsModel::where('id',$request->id)->first();
+        $data->{$request->operation} = $request->value;
+        if ($data->save()){
+            return response()->json([
+                'success'=>'true',
+                'message'=>'تم تعديل البيانات بنجاح'
+            ]);
+        }
+        else{
+            return response()->json([
+                'success'=>'false',
+                'message'=>'هناك خلل ما لم يتم تعديل البيانات'
+            ]);
+        }
+    }
+
+    public function production_input_table_ajax(Request $request){
+        $production_lines = ProducationLinesModel::where('id',$request->production_line_id)->first();
+        $production_lines['product'] = ProductModel::where('id',$production_lines->product_id)->first();
+        $data = ProductionInputsModel::where('production_lines_id',$request->production_line_id)->get();
+        foreach ($data as $key){
+            $key->product = ProductModel::where('id',$key->product_id)->first();
+        }
+        return response()->json([
+            'success'=>'true',
+            'view'=>view('admin.production.production_line.ajax.production_inputs_table',['data'=>$data,'production_lines'=>$production_lines,])->render(),
+        ]);
+    }
+
+    public function delete_production_input_ajax(Request $request){
+        $data = ProductionInputsModel::where('id',$request->id)->first();
+        if ($data->delete()){
+            return response()->json([
+                'success'=>'true',
+                'message'=>'تم حذف البيانات بنجاح'
+            ]);
+        }
+    }
+
+    public function summery_production_inputs_table_ajax(Request $request){
+        $production_lines = ProducationLinesModel::where('id',$request->production_line_id)->first();
+        $production_lines['product'] = ProductModel::where('id',$production_lines->product_id)->first();
+        $data = ProductionInputsModel::where('production_lines_id',$request->production_line_id)->get();
+        foreach ($data as $key){
+            $key->product = ProductModel::where('id',$key->product_id)->first();
+        }
+        return response()->json([
+            'success'=>'true',
+            'view'=>view('admin.production.production_line.ajax.summery_production_inputs_table',['data'=>$data,'production_lines'=>$production_lines,])->render(),
+        ]);
+    }
+
+    public function the_length_of_the_output_item_ajax(Request $request){
+        $data = ProductModel::where('id',$request->product_id)->first();
+        return response()->json([
+            'success'=>'true',
+            'data'=>$data,
+        ]);
+    }
+
+    public function production_lines_table_ajax(Request $request){
+        $data = ProducationLinesModel::where('production_name','like','%'.$request->search_production_line.'%')->get();
+        foreach ($data as $key){
+            $key->product = ProductModel::where('id',$key->product_id)->first();
+        }
+        return response()->json([
+            'success'=>'true',
+            'view'=>view('admin.production.production_line.ajax.production_lines_table',['data'=>$data])->render()
+        ]);
+    }
+
+    public function get_product_name_for_add_production_name_ajax(Request $request){
+        $data = ProductModel::where('id',$request->product_id)->first();
+        return response()->json([
+            'success'=>'true',
+            'data'=>$data
         ]);
     }
 }

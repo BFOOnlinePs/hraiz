@@ -63,6 +63,7 @@
                         aria-expanded="false" class="nav-link text-white dropdown-toggle">مبيعات</a>
                     <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                         <li><a href="#" class="dropdown-item">فواتير مبيعات</a></li>
+                        <li><a href="{{ route('price_offer_sales.index') }}" class="dropdown-item">عروض اسعار البيع</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -94,7 +95,7 @@
                     <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false" class="nav-link text-white dropdown-toggle">الانتاج</a>
                     <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                        <li><a href="{{ route('production.index') }}" class="dropdown-item">معادلات الانتاج</a></li>
+                        <li><a href="{{ route('production.index') }}" class="dropdown-item">خطوط الانتاج</a></li>
                         <li><a href="#" class="dropdown-item">مخرجات الانتاج</a></li>
                         <li><a href="{{ route('production.production_orders.index') }}" class="dropdown-item">اوامر الانتاج</a></li>
                     </ul>

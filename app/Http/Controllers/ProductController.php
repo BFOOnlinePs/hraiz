@@ -40,13 +40,13 @@ class ProductController extends Controller
     }
 
     public function search_table(Request $request){
-        $data = ProductModel::where('product_name_ar','like',"%{$request->product_search}%")->orWhere('product_name_en','like',"%{$request->product_search}%")->orWhere('barcode','like',"%{$request->product_search}%")->paginate(20);
+        $data = ProductModel::where('product_name_ar','like',"%{$request->product_search}%")->orWhere('product_name_en','like',"%{$request->product_search}%")->orWhere('barcode','like',"%{$request->product_search}%")->paginate(8);
         foreach ($data as $key){
             $key->category = CategoryProductModel::where('id',$key->category_id)->first();
             $key->unit = UnitsModel::where('id',$key->unit_id)->first();
         }
         if ($request->ajax()) {
-            $data = ProductModel::where('product_name_ar','like',"%{$request->product_search}%")->orWhere('product_name_en','like',"%{$request->product_search}%")->orWhere('barcode','like',"%{$request->product_search}%")->paginate(20);
+            $data = ProductModel::where('product_name_ar','like',"%{$request->product_search}%")->orWhere('product_name_en','like',"%{$request->product_search}%")->orWhere('barcode','like',"%{$request->product_search}%")->paginate(8);
             foreach ($data as $key){
                 $key->category = CategoryProductModel::where('id',$key->category_id)->first();
                 $key->unit = UnitsModel::where('id',$key->unit_id)->first();
@@ -60,6 +60,7 @@ class ProductController extends Controller
         $data = new ProductModel();
         $data->product_name_ar = $request->product_name_ar;
         $data->product_name_en = $request->product_name_en;
+        $data->product_name_he = $request->product_name_he;
         $data->category_id = $request->category_id;
         $data->unit_id = $request->unit_id;
         $data->barcode = $request->barcode;
@@ -109,6 +110,7 @@ class ProductController extends Controller
         $data = ProductModel::find($id);
         $data->product_name_ar = $request->product_name_ar;
         $data->product_name_en = $request->product_name_en;
+        $data->product_name_he = $request->product_name_he;
         $data->category_id = $request->category_id;
         $data->unit_id = $request->unit_id;
         $data->barcode = $request->barcode;

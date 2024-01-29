@@ -23,89 +23,109 @@
 
     @include('admin.messge_alert.success')
     @include('admin.messge_alert.fail')
-    @include('admin.product.home_menu')
-    <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modal-default">اضافة مجموعة
-    </button>
-    <div class="card">
 
-        <div class="card-header">
-            <h3 class="text-center">قائمة المجموعات</h3>
-        </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="card">
 
-        <div class="card-body">
-            <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                <div class="row">
+                {{--                <div class="card-header">--}}
+                {{--                    <h3 class="text-center">قائمة الأصناف</h3>--}}
+                {{--                </div>--}}
 
-                    <div class="col-sm-12">
-                        <table id="example1" class="table table-bordered table-striped dataTable dtr-inline"
-                               aria-describedby="example1_info">
-                            <thead>
-                            <tr>
-                                <th>الاسم</th>
-                                <th>الصورة</th>
-                                <th>العمليات</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($data as $key)
-                                <tr>
-                                    <td>{{ $key->cat_name }}</td>
-                                    <td>
-                                        <img width="80" src="{{ asset('storage/category/'.$key->cat_pic) }}" alt="">
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-primary btn-sm" href="{{ route('category.edit',['id'=>$key->id]) }}">تعديل</a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
+                <div class="card-body">
+                    <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                        <div class="row">
+                            <div class="table-responsive">
+                                    <div class="col-sm-12">
+                                        <table id="example1" class="table table-bordered table-striped dataTable dtr-inline"
+                                               aria-describedby="example1_info">
+                                            <thead>
+                                            <tr>
+                                                <th>الاسم</th>
+                                                <th>الصورة</th>
+                                                <th>العمليات</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($data as $key)
+                                                <tr>
+                                                    <td>{{ $key->cat_name }}</td>
+                                                    <td>
+                                                        <img width="80" src="{{ asset('storage/category/'.$key->cat_pic) }}" alt="">
+                                                    </td>
+                                                    <td>
+                                                        <a class="btn btn-success btn-sm" href="{{ route('category.edit',['id'=>$key->id]) }}"><span class="fa fa-edit"></span></a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <div class="loader-container" id="loaderContainer" style="display: none;">
+                    <div class="loader"></div>
+                </div>
             </div>
-            <div class="modal fade" id="modal-default">
-                <div class="modal-dialog">
-                    <form action="{{ route('category.create') }}" method="post" enctype="multipart/form-data">
-                        @csrf
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title">اضافة مجموعة</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label for="">اسم المجموعة</label>
-                                    <input name="cat_name" class="form-control" type="text"
-                                           placeholder="اكتب اسم التصنيف" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="">صورة المجموعة</label>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" name="cat_pic" class="custom-file-input"
-                                                   id="exampleInputFile">
-                                            <label class="custom-file-label" for="exampleInputFile">اختر ملف</label>
-                                        </div>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">رفع الصورة</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer justify-content-between">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">اغلاق</button>
-                                <button type="submit" class="btn btn-primary">حفظ</button>
-                            </div>
 
-                        </div>
-                    </form>
-
+        </div>
+        <div class="col-md-2">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mb-2">
+                        <button type="button" class="btn btn-dark btn-sm form-control mb-2" data-toggle="modal" data-target="#modal-default">اضافة مجموعة
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    @include('admin.product.home_menu')
                 </div>
             </div>
         </div>
+    </div>
 
+    <div class="modal fade" id="modal-default">
+        <div class="modal-dialog">
+            <form action="{{ route('category.create') }}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">اضافة مجموعة</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="">اسم المجموعة</label>
+                            <input name="cat_name" class="form-control" type="text"
+                                   placeholder="اكتب اسم التصنيف" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="">صورة المجموعة</label>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" name="cat_pic" class="custom-file-input"
+                                           id="exampleInputFile">
+                                    <label class="custom-file-label" for="exampleInputFile">اختر ملف</label>
+                                </div>
+                                <div class="input-group-append">
+                                    <span class="input-group-text">رفع الصورة</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">اغلاق</button>
+                        <button type="submit" class="btn btn-primary">حفظ</button>
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
     </div>
 
 @endsection()

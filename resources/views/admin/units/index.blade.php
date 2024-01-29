@@ -23,85 +23,105 @@
 
     @include('admin.messge_alert.success')
     @include('admin.messge_alert.fail')
-    @include('admin.product.home_menu')
-    <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modal-default">اضافة وحدة
-    </button>
-    <div class="card">
 
-        <div class="card-header">
-            <h3 class="text-center">قائمة الوحدات</h3>
-        </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="card">
 
-        <div class="card-body">
-            <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                <div class="row">
+                {{--                <div class="card-header">--}}
+                {{--                    <h3 class="text-center">قائمة الأصناف</h3>--}}
+                {{--                </div>--}}
 
-                    <div class="col-sm-12">
-                        <table id="example1" class="table table-bordered table-striped dataTable dtr-inline"
-                               aria-describedby="example1_info">
-                            <thead>
-                            <tr>
-                                <th>الاسم</th>
-                                <th>الاسم باللغة الانجليزية</th>
-                                {{--                                <th>العمليات</th>--}}
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($data as $key)
-                                <tr>
-                                    <td>
-                                        <span hidden>{{ $key->unit_name }}</span>
-                                        <input type="text" class="form-control" onchange="updateUnitName({{ $key->id }})" id="unit_name_{{ $key->id }}" value="{{ $key->unit_name }}">
-                                    </td>
-                                    <td>
-                                        <span hidden>{{ $key->unit_name_en }}</span>
-                                        <input type="text" class="form-control" onchange="updateUnitName({{ $key->id }})" id="unit_name_en_{{ $key->id }}" value="{{ $key->unit_name_en }}">
-                                    </td>
-                                    {{--                                    <td>--}}
-                                    {{--                                        <a class="btn btn-primary btn-sm" href="{{ route('units.edit',['id'=>$key->id]) }}">تعديل</a>--}}
-                                    {{--                                    </td>--}}
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
+                <div class="card-body">
+                    <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                        <div class="row">
+                            <div class="table-responsive">
+                                <div class="col-md-12">
+                                    <table id="example1" class="table table-bordered table-striped dataTable dtr-inline"
+                                           aria-describedby="example1_info">
+                                        <thead>
+                                        <tr>
+                                            <th>الاسم</th>
+                                            <th>الاسم باللغة الانجليزية</th>
+                                            {{--                                <th>العمليات</th>--}}
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($data as $key)
+                                            <tr>
+                                                <td>
+                                                    <span hidden>{{ $key->unit_name }}</span>
+                                                    <input type="text" class="form-control" onchange="updateUnitName({{ $key->id }})" id="unit_name_{{ $key->id }}" value="{{ $key->unit_name }}">
+                                                </td>
+                                                <td>
+                                                    <span hidden>{{ $key->unit_name_en }}</span>
+                                                    <input type="text" class="form-control" onchange="updateUnitName({{ $key->id }})" id="unit_name_en_{{ $key->id }}" value="{{ $key->unit_name_en }}">
+                                                </td>
+                                                {{--                                    <td>--}}
+                                                {{--                                        <a class="btn btn-primary btn-sm" href="{{ route('units.edit',['id'=>$key->id]) }}">تعديل</a>--}}
+                                                {{--                                    </td>--}}
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <div class="loader-container" id="loaderContainer" style="display: none;">
+                    <div class="loader"></div>
+                </div>
             </div>
-            <div class="modal fade" id="modal-default">
-                <div class="modal-dialog">
-                    <form action="{{ route('units.create') }}" method="post" enctype="multipart/form-data">
-                        @csrf
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title">اضافة وحدة</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label for="">اسم الوحدة</label>
-                                    <input name="unit_name" class="form-control" type="text"
-                                           placeholder="اكتب اسم الوحدة" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="">اسم الوحدة</label>
-                                    <input name="unit_name_en" class="form-control" type="text"
-                                           placeholder="اكتب اسم باللغة الانجليزية">
-                                </div>
-                            </div>
-                            <div class="modal-footer justify-content-between">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">اغلاق</button>
-                                <button type="submit" class="btn btn-primary">حفظ</button>
-                            </div>
 
-                        </div>
-                    </form>
-
+        </div>
+        <div class="col-md-2">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mb-2">
+                        <button type="button" class="btn btn-dark btn-sm form-control mb-2" data-toggle="modal" data-target="#modal-default">اضافة وحدة
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    @include('admin.product.home_menu')
                 </div>
             </div>
         </div>
+    </div>
 
+    <div class="modal fade" id="modal-default">
+        <div class="modal-dialog">
+            <form action="{{ route('units.create') }}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">اضافة وحدة</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="">اسم الوحدة</label>
+                            <input name="unit_name" class="form-control" type="text"
+                                   placeholder="اكتب اسم الوحدة" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="">اسم الوحدة</label>
+                            <input name="unit_name_en" class="form-control" type="text"
+                                   placeholder="اكتب اسم باللغة الانجليزية">
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">اغلاق</button>
+                        <button type="submit" class="btn btn-dark">حفظ</button>
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
     </div>
 
 @endsection()

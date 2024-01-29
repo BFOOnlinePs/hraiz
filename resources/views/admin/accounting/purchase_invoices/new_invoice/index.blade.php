@@ -36,7 +36,7 @@
                 <div class="row">
                     <div class="col-md-8">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <?php
                                     $month = date('m');
@@ -49,16 +49,16 @@
                                            value="{{ $today }}">
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="">تاريخ التسليم</label>
-                                    <input required type="date" name="due_date" class="form-control text-center">
+                                    <input required type="date" value="{{ date('Y-m-d') }}" name="due_date" class="form-control text-center">
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="">الضريبة الاولى</label>
-                                    <select required name="tax_id" id="tax_id" class="form-control select2bs4">
+                                    <select name="tax_id" id="tax_id" class="form-control select2bs4">
                                         <option value="">اختر قيمة الضريبة ...</option>
                                         @foreach ($taxes as $key)
                                             <option value="{{ $key->id }}">{{ $key->tax_name }} ({{ $key->tax_ratio }}%)</option>
@@ -66,7 +66,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div hidden class="col-md-3">
                                 <div class="form-group">
                                     <label for="">الضريبة الثانية</label>
                                     <select required name="tax_id2" id="tax_id2" class="form-control select2bs4">

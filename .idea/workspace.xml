@@ -2,9 +2,39 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dc0963de-5d4a-497e-a864-4d74efffd831" name="Changes" comment="edit">
+      <change afterPath="$PROJECT_DIR$/public/assets/fonts/Traditional_Arabic/Traditional-Arabic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/production/production_line/ajax/production_inputs_table.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/production/production_line/ajax/production_lines_table.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/production/production_line/ajax/summery_production_inputs_table.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/sales/price_offer_sales/ajax/price_offer_sales_table.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/sales/price_offer_sales/edit.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/sales/price_offer_sales/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/sales/price_offer_sales/modals/create_price_offer_sales.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/sales/price_offer_sales/price_offer_sales_items/ajax/price_offer_sales_items_table.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/sales/price_offer_sales/price_offer_sales_items/ajax/product_list_search.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/sales/price_offer_sales/price_offer_sales_items/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/sales/price_offer_sales/price_offer_sales_items/modals/product_search.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/sales/price_offer_sales/price_offer_sales_items/pdf/price_offer_sales_items.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/bank/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/bank/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/shipping_methods/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/shipping_methods/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SystemSettingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SystemSettingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/production/ProducationLineController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/production/ProducationLineController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/purchase_invoices/new_invoice/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/purchase_invoices/new_invoice/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/category/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/category/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/category/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/category/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/product/ajax/search_product.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/product/ajax/search_product.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/product/details.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/product/details.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/product/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/product/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/product/home_menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/product/home_menu.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/product/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/product/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/production/production_line/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/production/production_line/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/production/production_line/production_inputs.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/production/production_line/production_inputs.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/setting/system_setting/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/setting/system_setting/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/units/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/units/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/units/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/units/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/users/supplier/details.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/users/supplier/details.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/navbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/navbar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,7 +212,7 @@
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
     &quot;ts.external.directory.path&quot;: &quot;/Applications/PhpStorm.app/Contents/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -196,16 +226,25 @@
       <recent name="$PROJECT_DIR$/resources/views/admin/orders/procurement_officer/clearance" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/assets/fonts/Traditional_Arabic" />
       <recent name="$PROJECT_DIR$/resources/views/admin/orders/procurement_officer" />
       <recent name="$PROJECT_DIR$/resources/views/admin/orders" />
       <recent name="$PROJECT_DIR$/public/img" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="PHPUnit.re">
+    <configuration name="price_offer_sales_items.blade.php" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://ftp.talabati.ps/resources/views/admin/sales/price_offer_sales/price_offer_sales_items/pdf/price_offer_sales_items.blade.php">
+      <method v="2" />
+    </configuration>
     <configuration name="re" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner scope="XML" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.price_offer_sales_items.blade.php" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -258,6 +297,9 @@
       <workItem from="1705997636900" duration="2015000" />
       <workItem from="1706000861689" duration="1093000" />
       <workItem from="1706010800601" duration="23000" />
+      <workItem from="1706446088391" duration="604000" />
+      <workItem from="1706448136070" duration="22000" />
+      <workItem from="1706527040846" duration="1240000" />
     </task>
     <task id="LOCAL-00001" summary="edit">
       <created>1692272515017</created>

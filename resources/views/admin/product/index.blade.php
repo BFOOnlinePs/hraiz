@@ -147,6 +147,54 @@
     </style>
 @endsection
 @section('content')
+    <div class="row">
+        <div class="col-md-10">
+            <div class="col-md-12 mb-4">
+                <input onkeyup="fetchAdditionalData()" id="input_search" name="product_search" type="text" placeholder="بحث" class="form-control mb-2">
+            </div>
+            <div class="card">
+
+{{--                <div class="card-header">--}}
+{{--                    <h3 class="text-center">قائمة الأصناف</h3>--}}
+{{--                </div>--}}
+
+                <div class="card-body">
+                    <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                        <div class="row">
+                            <div id="search_table" style="width: 100%">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="loader-container" id="loaderContainer" style="display: none;">
+                    <div class="loader"></div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-2">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mb-2">
+                        <button type="button" class="btn btn-sm form-control btn-dark" data-toggle="modal" data-target="#modal-xl">
+                            <span class="fa fa-plus"></span> اضافة صنف
+
+                        </button>
+                        <button type="button" class="btn mt-2 btn-sm form-control btn-success" data-toggle="modal" data-target="#modal-default">
+                            <span class="fa fa-file-import"></span> استيراد من اكسيل
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    @include('admin.product.home_menu')
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     <div class="modal fade" id="modal-default">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -182,9 +230,6 @@
             </div>
         </div>
     </div>
-
-
-
     <div class="modal fade" id="modal-xl">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
@@ -196,185 +241,159 @@
                 </div>
                 <form action="{{ route('product.create') }}" method="post" enctype="multipart/form-data">
                     @csrf
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-9">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="">اسم الصنف عربي</label>
-                                        <input name="product_name_ar" type="text" class="form-control" placeholder="اسم الصنف عربي">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">اسم الصنف عربي</label>
+                                            <input name="product_name_ar" type="text" class="form-control" placeholder="اسم الصنف عربي">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="">اسم الصنف انجليزي</label>
-                                        <input name="product_name_en" type="text" class="form-control" placeholder="اسم الصنف انجليزي">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">اسم الصنف انجليزي</label>
+                                            <input name="product_name_en" type="text" class="form-control" placeholder="اسم الصنف انجليزي">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group" data-select2-id="41">
-                                        <label>تصنيف المنتج</label>
-                                        <select name="category_id" class="form-control select2bs4 select2-hidden-accessible" style="width: 100%;"
-                                                data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                            @foreach($category as $key)
-                                                <option value="{{ $key->id }}">{{ $key->cat_name }}</option>
-                                            @endforeach
-                                        </select>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">اسم الصنف عبري</label>
+                                            <input name="product_name_he" type="text" class="form-control" placeholder="اسم الصنف عبري">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group" data-select2-id="41">
-                                        <label>الوحدة</label>
-                                        <select name="unit_id" class="form-control select2bs4 select2-hidden-accessible" style="width: 100%;"
-                                                data-select2-id="2" tabindex="-1" aria-hidden="true">
-                                            @foreach($unit as $key)
-                                                <option value="{{ $key->id }}">{{ $key->unit_name }}</option>
-                                            @endforeach
-                                        </select>
+                                    <div class="col-md-4">
+                                        <div class="form-group" data-select2-id="41">
+                                            <label>تصنيف المنتج</label>
+                                            <select name="category_id" class="form-control select2bs4 select2-hidden-accessible" style="width: 100%;"
+                                                    data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                                @foreach($category as $key)
+                                                    <option value="{{ $key->id }}">{{ $key->cat_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="">باركود المنتج</label>
-                                        <input name="barcode" class="form-control" type="text" placeholder="باركود المنتج">
+                                    <div class="col-md-4">
+                                        <div class="form-group" data-select2-id="41">
+                                            <label>الوحدة</label>
+                                            <select name="unit_id" class="form-control select2bs4 select2-hidden-accessible" style="width: 100%;"
+                                                    data-select2-id="2" tabindex="-1" aria-hidden="true">
+                                                @foreach($unit as $key)
+                                                    <option value="{{ $key->id }}">{{ $key->unit_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group" data-select2-id="41">
-                                        <label>اقل كمية</label>
-                                        <input type="text" name="less_qty" placeholder="اقل كمية" class="form-control">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">باركود المنتج</label>
+                                            <input name="barcode" class="form-control" type="text" placeholder="باركود المنتج">
+                                        </div>
                                     </div>
-                                </div>
-                                <div hidden class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="">معتمد / غير معتمد</label><br>
-                                        <select name="certified" class="form-control w-25 ml-2" style="float: right" id="">
-                                            <option value="1">معتمد</option>
-                                            <option value="0">غير معتمد</option>
-                                        </select>
-                                        <b class="">(معتمد بحاجة الى عرض سعر واحد فقط اما الغير معتمد بحاجة الى 3 عروض اسعار)</b>
+                                    <div class="col-md-4">
+                                        <div class="form-group" data-select2-id="41">
+                                            <label>اقل كمية</label>
+                                            <input type="text" name="less_qty" placeholder="اقل كمية" class="form-control">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="">سعر المنتج</label>
-                                        <input name="product_price" height="50" class="form-control" type="text" placeholder="سعر المتنج">
+                                    <div hidden class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">معتمد / غير معتمد</label><br>
+                                            <select name="certified" class="form-control w-25 ml-2" style="float: right" id="">
+                                                <option value="1">معتمد</option>
+                                                <option value="0">غير معتمد</option>
+                                            </select>
+                                            <b class="">(معتمد بحاجة الى عرض سعر واحد فقط اما الغير معتمد بحاجة الى 3 عروض اسعار)</b>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="">الوزن</label>
-                                        <input name="weight" height="50" class="form-control" type="text" placeholder="الوزن">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">سعر المنتج</label>
+                                            <input name="product_price" height="50" class="form-control" type="text" placeholder="سعر المتنج">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="">الطول</label>
-                                        <input name="height" height="50" class="form-control" type="text" placeholder="الطول">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">الوزن</label>
+                                            <input name="weight" height="50" class="form-control" type="text" placeholder="الوزن">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="">سعر التكلفة</label>
-                                        <input name="cost_price" height="50" class="form-control" type="text" placeholder="سعر التكلفة">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">الطول</label>
+                                            <input name="height" height="50" class="form-control" type="text" placeholder="الطول">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="">اقل سعر للبيع</label>
-                                        <input name="min_sale_price" height="50" class="form-control" type="text" placeholder="اقل سعر للبيع">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">سعر التكلفة</label>
+                                            <input name="cost_price" height="50" class="form-control" type="text" placeholder="سعر التكلفة">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="">اللون</label>
-                                        <input name="color" class="form-control" type="color">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">اقل سعر للبيع</label>
+                                            <input name="min_sale_price" height="50" class="form-control" type="text" placeholder="اقل سعر للبيع">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="assembled_product">هل هذا المنتج مجمع ام لا</label>
-                                        <input class="" id="assembled_product" name="assembled_product" type="checkbox"
-                                               value="1"
-                                               placeholder="سعر المنتج">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">اللون</label>
+                                            <input name="color" class="form-control" type="color">
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <row>
-                                <div class="col-md-12">
-                                    <div class="form-group text-center">
-                                        <span style="font-size: 150px;text-align: center" class="fa fa-image text-secondary"></span>
-                                        <br>
-                                        <label for="">صورة المنتج</label>
-                                        <div class="custom-file">
-                                            <input name="product_photo" type="file" class="custom-file-input" id="customFile">
-                                            <label class="custom-file-label" for="customFile">اختر ملف</label>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="assembled_product">هل هذا المنتج مجمع ام لا</label>
+                                            <input class="" id="assembled_product" name="assembled_product" type="checkbox"
+                                                   value="1"
+                                                   placeholder="سعر المنتج">
                                         </div>
                                     </div>
                                 </div>
-                            </row>
+                            </div>
+                            <div class="col-md-3">
+                                <row>
+                                    <div class="col-md-12">
+                                        <div class="form-group text-center">
+                                            <span style="font-size: 150px;text-align: center" class="fa fa-image text-secondary"></span>
+                                            <br>
+                                            <label for="">صورة المنتج</label>
+                                            <div class="custom-file">
+                                                <input name="product_photo" type="file" class="custom-file-input" id="customFile">
+                                                <label class="custom-file-label" for="customFile">اختر ملف</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </row>
+                            </div>
+                        </div>
+
+                        <div style="display: none" id="assembled_form" class="row">
+                            <div class="col-md-12">
+                                <select class="form-control select2bs4 " name="" id="select_value">
+                                    @foreach($products as $key)
+                                        <option value="{{ $key->id }}" data-product-name="{{ $key->product_name_ar }}">{{ $key->product_name_ar }}</option>
+                                    @endforeach
+                                </select>
+                                <button class="btn btn-success btn-sm mt-1 mb-2" type="button" onclick="get_data()">اضافة</button>
+                                <div id="assembled_product_table">
+
+                                </div>
+                                <div id="add_input">
+
+                                </div>
+                                {{--                            <input onchange="" id="assembled_product" type="text">--}}
+                            </div>
                         </div>
                     </div>
-
-                    <div style="display: none" id="assembled_form" class="row">
-                        <div class="col-md-12">
-                            <select class="form-control select2bs4 " name="" id="select_value">
-                                @foreach($products as $key)
-                                    <option value="{{ $key->id }}" data-product-name="{{ $key->product_name_ar }}">{{ $key->product_name_ar }}</option>
-                                @endforeach
-                            </select>
-                            <button class="btn btn-success btn-sm mt-1 mb-2" type="button" onclick="get_data()">اضافة</button>
-                            <div id="assembled_product_table">
-
-                            </div>
-                            <div id="add_input">
-
-                            </div>
-{{--                            <input onchange="" id="assembled_product" type="text">--}}
-                        </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-dark">حفظ</button>
                     </div>
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-dark">حفظ</button>
-                </div>
                 </form>
             </div>
-        </div>
-    </div>
-    @include('admin.product.home_menu')
-    <div class="mb-2">
-        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modal-xl">
-            <span class="fa fa-plus"></span> اضافة صنف
-
-        </button>
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default">
-            <span class="fa fa-file-import"></span> استيراد من اكسيل
-        </button>
-
-    </div>
-
-    <div class="card">
-
-        <div class="card-header">
-            <h3 class="text-center">قائمة الأصناف</h3>
-        </div>
-
-        <div class="card-body">
-            <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                <div class="row">
-                    <input onkeyup="fetchAdditionalData()" id="input_search" name="product_search" type="text" placeholder="بحث" class="form-control mb-2">
-                    <div id="search_table" style="width: 100%">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="loader-container" id="loaderContainer" style="display: none;">
-            <div class="loader"></div>
         </div>
     </div>
 
