@@ -473,6 +473,12 @@ Route::group(['middleware' => 'auth',], function () {
             Route::post('update',[App\Http\Controllers\MachineController::class, 'update'])->name('setting.machine.update');
             Route::get('delete/{id}',[App\Http\Controllers\MachineController::class, 'delete'])->name('setting.machine.delete');
         });
+        Route::group(['prefix'=>'vacations_types'],function(){
+            Route::get('index',[App\Http\Controllers\VacationsTypesController::class, 'index'])->name('setting.vacations_types.index');
+            Route::post('create',[App\Http\Controllers\VacationsTypesController::class, 'create'])->name('setting.vacations_types.create');
+            Route::post('edit',[App\Http\Controllers\VacationsTypesController::class, 'edit'])->name('setting.vacations_types.edit');
+        });
+
     });
     Route::group(['prefix'=>'hr'],function(){
         Route::group(['prefix'=>'employees'],function(){
@@ -485,15 +491,31 @@ Route::group(['middleware' => 'auth',], function () {
             Route::group(['prefix'=>'rewards'],function(){
                 Route::post('create',[App\Http\Controllers\hr\DiscountRewardController::class, 'create_reward'])->name('hr.employees.rewards.create');
                 Route::post('edit',[App\Http\Controllers\hr\DiscountRewardController::class, 'create_reward'])->name('hr.employees.rewards.edit');
-            }); 
+                Route::post('reward_change_date_by_ajax',[App\Http\Controllers\hr\DiscountRewardController::class, 'reward_change_date_by_ajax'])->name('hr.employees.rewards.reward_change_date_by_ajax');
+            });
             Route::group(['prefix'=>'discounts'],function(){
                 Route::post('create',[App\Http\Controllers\hr\DiscountRewardController::class, 'create_discount'])->name('hr.employees.discounts.create');
                 Route::post('edit',[App\Http\Controllers\hr\DiscountRewardController::class, 'edit_discount'])->name('hr.employees.discounts.edit');
-            }); 
+                Route::post('discount_change_date_by_ajax',[App\Http\Controllers\hr\DiscountRewardController::class, 'discount_change_date_by_ajax'])->name('hr.employees.discounts.discount_change_date_by_ajax');
+            });
             Route::group(['prefix'=>'advances'],function(){
                 Route::post('create',[App\Http\Controllers\hr\DiscountRewardController::class, 'create_advance'])->name('hr.employees.advances.create');
                 Route::post('edit',[App\Http\Controllers\hr\DiscountRewardController::class, 'edit_advance'])->name('hr.employees.advances.edit');
-            }); 
+                Route::post('advance_change_date_by_ajax',[App\Http\Controllers\hr\DiscountRewardController::class, 'advance_change_date_by_ajax'])->name('hr.employees.advances.advance_change_date_by_ajax');
+            });
+            Route::group(['prefix'=>'vacations'],function(){
+                Route::post('create',[App\Http\Controllers\hr\VacationsController::class, 'create'])->name('hr.employees.vacations.create');
+                Route::post('vacations_change_date_by_ajax',[App\Http\Controllers\hr\VacationsController::class, 'vacations_change_date_by_ajax'])->name('hr.employees.vacations.vacations_change_date_by_ajax');
+                Route::post('edit',[App\Http\Controllers\hr\VacationsController::class, 'edit'])->name('hr.employees.vacations.edit');
+            });
+            Route::group(['prefix'=>'bonuses'],function(){
+                Route::post('create',[App\Http\Controllers\hr\BonusesController::class, 'create'])->name('hr.employees.bonuses.create');
+                Route::post('edit',[App\Http\Controllers\hr\BonusesController::class, 'edit'])->name('hr.employees.bonuses.edit');
+            });
+            Route::group(['prefix'=>'evaluations'],function(){
+                Route::post('create',[App\Http\Controllers\hr\EvaluationsController::class, 'create'])->name('hr.employees.evaluations.create');
+                Route::post('edit',[App\Http\Controllers\hr\EvaluationsController::class, 'edit'])->name('hr.employees.evaluations.edit');
+            });
         });
         Route::group(['prefix'=>'attendance'],function(){
             Route::post('create',[App\Http\Controllers\hr\AttendanceController::class, 'create'])->name('hr.attendance.create');

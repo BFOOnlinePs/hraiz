@@ -27,6 +27,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-12">
+                    <input type="hidden" id="employee_id" value="{{$data->id}}">
                     <h3 class="pb-3">{{ $data->name }}</h3>
                     <ul class="nav nav-tabs alert-info text-white" style="" id="custom-content-below-tab"
                             role="tablist">
@@ -74,6 +75,24 @@
                                     id="custom-content-below-advances-tab" data-toggle="pill"
                                     href="#custom-content-below-advances" role="tab"
                                     aria-controls="custom-content-below-advances" aria-selected="false">السُلف</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white @if(session('tab_id') == 8) active @endif"
+                                    id="custom-content-below-vacations-tab" data-toggle="pill"
+                                    href="#custom-content-below-vacations" role="tab"
+                                    aria-controls="custom-content-below-vacations" aria-selected="false">الإجازات</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white @if(session('tab_id') == 9) active @endif"
+                                    id="custom-content-below-bonuses-tab" data-toggle="pill"
+                                    href="#custom-content-below-bonuses" role="tab"
+                                    aria-controls="custom-content-below-bonuses" aria-selected="false">العلاوات</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white @if(session('tab_id') == 10) active @endif"
+                                    id="custom-content-below-evaluations-tab" data-toggle="pill"
+                                    href="#custom-content-below-evaluations" role="tab"
+                                    aria-controls="custom-content-below-evaluations" aria-selected="false">التقييمات</a>
                             </li>
                     </ul>
                 </div>
@@ -185,45 +204,17 @@
                                 <div class="row">
                                     <button onclick="add_reward()" class="btn btn-dark mb-2">إضافة مكافأة</button>
                                 </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <input type="date" onkeyup="reward_change_date_by_ajax()" class="form-control" id="from_reward" value="{{date('Y-m-01')}}" >
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="date" onkeyup="reward_change_date_by_ajax()" class="form-control" id="to_reward" value="{{date('Y-m-d')}}">
+                                    </div>
+                                </div>
+                                <div id="reward_table">
 
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending">#
-                                            </th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">القيمة</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">العملة</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">تمت عملية الإضافة بواسطة</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">الملاحظات</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">الملف المرفق</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">العمليات</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @if ($rewards->isEmpty())
-                                            <tr>
-                                                <td colspan="7" class="text-center">لا توجد نتائج</td>
-                                            </tr>
-                                        @endif
-                                        @foreach ($rewards as $key)
-                                            <tr>
-                                                <td>{{ $loop->index + 1 }}</td>
-                                                <td>{{ $key->value }}</td>
-                                                <td>{{ $key->currency->currency_name }}</td>
-                                                <td>{{ $key->user->name}}</td>
-                                                <td>{{$key->notes}}</td>
-                                                <td>
-                                                <a target="_blank" href="{{ asset('storage/discounts_rewards_attachment/'.$key->attached_file) }}" download="attachment">تحميل الملف</a>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-success btn-sm" onclick="edit_reward({{$key->id}} , '{{$key->value}}' , {{$key->currency_id}} , '{{$key->currency->currency_name}}' , '{{$key->notes}}' , '{{$key->attached_file}}')"><span class="fa fa-edit pt-1"></span></button>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                                {{$rewards->links()}}
-
+                                </div>
                             </div>
                         </div>
                         <div class="tab-pane fade @if(session('tab_id') == 6) active show @endif" id="custom-content-below-discounts" role="tabpanel" aria-labelledby="custom-content-below-discounts-tab">
@@ -231,45 +222,16 @@
                                 <div class="row">
                                     <button onclick="add_discount()" class="btn btn-dark mb-2">إضافة حسم</button>
                                 </div>
-
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending">#
-                                            </th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">القيمة</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">العملة</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">تمت عملية الإضافة بواسطة</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">الملاحظات</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">الملف المرفق</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">العمليات</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @if ($discounts->isEmpty())
-                                            <tr>
-                                                <td colspan="7" class="text-center">لا توجد نتائج</td>
-                                            </tr>
-                                        @endif
-                                        @foreach ($discounts as $key)
-                                            <tr>
-                                                <td>{{ $loop->index + 1 }}</td>
-                                                <td>{{ $key->value }}</td>
-                                                <td>{{ $key->currency->currency_name}}</td>
-                                                <td>{{ $key->user->name}}</td>
-                                                <td>{{$key->notes}}</td>
-                                                <td>
-                                                <a target="_blank" href="{{ asset('storage/discounts_rewards_attachment/'.$key->attached_file) }}" download="attachment">تحميل الملف</a>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-success btn-sm" onclick="edit_discount({{$key->id}} , '{{$key->value}}' , {{$key->currency_id}} , '{{$key->currency->currency_name}}' , '{{$key->notes}}' , '{{$key->attached_file}}')"><span class="fa fa-edit pt-1"></span></button>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                                {{$rewards->links()}}
-
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <input type="date" onkeyup="discount_change_date_by_ajax()" class="form-control" id="from_discount" value="{{date('Y-m-01')}}">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="date" onkeyup="discount_change_date_by_ajax()" class="form-control" id="to_discount" value="{{date('Y-m-d')}}">
+                                    </div>
+                                </div>
+                                <div id="discount_table">
+                                </div>
                             </div>
                         </div>
                         <div class="tab-pane fade @if(session('tab_id') == 7) active show @endif" id="custom-content-below-advances" role="tabpanel" aria-labelledby="custom-content-below-advances-tab">
@@ -277,45 +239,118 @@
                                 <div class="row">
                                     <button onclick="add_advance()" class="btn btn-dark mb-2">إضافة سُلفة</button>
                                 </div>
-
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending">#
-                                            </th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">القيمة</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">العملة</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">تمت عملية الإضافة بواسطة</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">الملاحظات</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">الملف المرفق</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">العمليات</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @if ($advances->isEmpty())
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <input type="date" onkeyup="advance_change_date_by_ajax()" class="form-control" id="from_advance" value="{{date('Y-m-01')}}">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="date" onkeyup="advance_change_date_by_ajax()" class="form-control" id="to_advance" value="{{date('Y-m-d')}}">
+                                    </div>
+                                </div>
+                                <div id="advance_table">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade @if(session('tab_id') == 8) active show @endif" id="custom-content-below-vacations" role="tabpanel" aria-labelledby="custom-content-below-vacations-tab">
+                            <div class="p-2">
+                                <div class="row">
+                                    <button onclick="add_vacations()" class="btn btn-dark mb-2">إضافة إجازة</button>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <input type="date" onkeyup="vacations_change_date_by_ajax()" class="form-control" id="from_vacations" value="{{date('Y-01-01')}}">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="date" onkeyup="vacations_change_date_by_ajax()" class="form-control" id="to_vacations" value="{{date('Y-m-d')}}">
+                                    </div>
+                                </div>
+                                <div id="vacations_table">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade @if(session('tab_id') == 9) active show @endif" id="custom-content-below-bonuses" role="tabpanel" aria-labelledby="custom-content-below-bonuses-tab">
+                            <div class="p-2">
+                                <div class="row">
+                                    <button onclick="add_bonuses()" class="btn btn-dark mb-2">إضافة علاوة</button>
+                                </div>
+                                <div id="bonuses_table">
+                                    <table class="table table-bordered">
+                                        <thead>
                                             <tr>
-                                                <td colspan="7" class="text-center">لا توجد نتائج</td>
+                                                <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending">#
+                                                </th>
+                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">القيمة</th>
+                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">النوع</th>
+                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">العمليات
+                                                </th>
                                             </tr>
-                                        @endif
-                                        @foreach ($advances as $key)
+                                        </thead>
+                                        <tbody>
+                                            @if ($employees_bonuses->isEmpty())
+                                                <tr>
+                                                    <td colspan="4" class="text-center">لا توجد نتائج</td>
+                                                </tr>
+                                            @endif
+                                            @foreach ($employees_bonuses as $key)
+                                                <tr>
+                                                    <td>{{ $loop->index + 1 }}</td>
+                                                    <td>{{ $key->value }}</td>
+                                                    <td>
+                                                        @if ($key->type == 0)
+                                                            نسبة
+                                                        @elseif($key->type == 1)
+                                                            عدد (مبلغ محدد)
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-success btn-sm" onclick="edit_bonus({{$key->id}} , {{$key->value}} , {{$key->type}} , '{{$key->notes}}')"><span class="fa fa-edit pt-1"></span></button>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade @if(session('tab_id') == 10) active show @endif" id="custom-content-below-evaluations" role="tabpanel" aria-labelledby="custom-content-below-evaluations-tab">
+                            <div class="p-2">
+                                <div class="row">
+                                    <button onclick="add_evaluations()" class="btn btn-dark mb-2">إضافة تقييم</button>
+                                </div>
+                                <div id="evaluations_table">
+                                    <table class="table table-bordered">
+                                        <thead>
                                             <tr>
-                                                <td>{{ $loop->index + 1 }}</td>
-                                                <td>{{ $key->value }}</td>
-                                                <td>{{ $key->currency->currency_name}}</td>
-                                                <td>{{ $key->user->name}}</td>
-                                                <td>{{$key->notes}}</td>
+                                                <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending">#
+                                                </th>
+                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">التقييم</th>
+                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">الملف المرفق</th>
+                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">العمليات</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if ($employees_evaluations->isEmpty())
+                                                <tr>
+                                                    <td colspan="4" class="text-center">لا توجد نتائج</td>
+                                                </tr>
+                                            @endif
+                                            @foreach ($employees_evaluations  as $key)
+                                            <tr>
+                                                <td>{{$loop->index + 1}}</td>
+                                                <td>{{$key->notes }}</td>
                                                 <td>
-                                                <a target="_blank" href="{{ asset('storage/discounts_rewards_attachment/'.$key->attached_file) }}" download="attachment">تحميل الملف</a>
+                                                    <a target="_blank" href="{{ asset('storage/employees_evaluations/'.$key->attachment) }}" download="attachment">تحميل الملف</a>
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-success btn-sm" onclick="edit_advance({{$key->id}} , '{{$key->value}}' , {{$key->currency_id}} , '{{$key->currency->currency_name}}' , '{{$key->notes}}' , '{{$key->attached_file}}')"><span class="fa fa-edit pt-1"></span></button>
+                                                    <button class="btn btn-success btn-sm" onclick="edit_evaluations({{$key->id}} , '{{$key->notes}}' , '{{$key->attachment}}')"><span class="fa fa-edit pt-1"></span></button>
                                                 </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                                {{$rewards->links()}}
+                                                </tr>
 
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -330,15 +365,206 @@
                 @include('admin.hr.employees.modals.discountEdit')
                 @include('admin.hr.employees.modals.advanceCreate')
                 @include('admin.hr.employees.modals.advanceEdit')
+                @include('admin.hr.employees.modals.vacationsCreate')
+                @include('admin.hr.employees.modals.vacationsEdit')
+                @include('admin.hr.employees.modals.bonusesCreate')
+                @include('admin.hr.employees.modals.bonusesEdit')
+                @include('admin.hr.employees.modals.evaluationsCreate')
+                @include('admin.hr.employees.modals.evaluationsEdit')
             </div>
         </div>
     </div>
 @endsection
 @section('script')
     <script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
-
     <script>
-        function edit_advance(id , value , currency_id , currency_name , notes , attached_file) 
+        function edit_evaluations(id , notes , attachment) {
+            document.getElementById('id_evaluationsEdit').value = id;
+            document.getElementById('notes_evaluationsEdit').value = notes;
+            document.getElementById('attachment_evaluationsEdit').href = `{{asset('storage/employees_evaluations/${attachment}') }}`;
+            $('#edit_evaluations_modal').modal('show');
+        }
+        function add_evaluations()
+        {
+            $('#create_evaluations_modal').modal('show');
+        }
+        function edit_bonus(id , value , type , notes) {
+            document.getElementById('id_bonusesEdit').value = id;
+            document.getElementById('value_bonusesEdit').value = value;
+            let select = document.getElementById('type_bonusesEdit');
+            select.innerHTML = '';
+            if(type == 0) {
+                {
+                    let option = document.createElement('option');
+                    option.value = 0;
+                    option.text = 'نسبة';
+                    select.appendChild(option);
+                }
+                {
+                    let option = document.createElement('option');
+                    option.value = 1;
+                    option.text = 'عدد (مبلغ محدد)';
+                    select.appendChild(option);
+                }
+            }
+            else if(type == 1) {
+                {
+                    let option = document.createElement('option');
+                    option.value = 1;
+                    option.text = 'عدد (مبلغ محدد)';
+                    select.appendChild(option);
+                }
+                {
+                    let option = document.createElement('option');
+                    option.value = 0;
+                    option.text = 'نسبة';
+                    select.appendChild(option);
+                }
+            }
+            document.getElementById('notes_bonusesEdit').value = notes;
+            $('#edit_bonuses_modal').modal('show');
+        }
+        function add_bonuses()
+        {
+            $('#create_bonuses_modal').modal('show');
+        }
+        function edit_vacation(id , v_date , vacations_type_name , vacations_type_id , notes , attachement)
+        {
+            document.getElementById('id_vacationsEdit').value = id;
+            document.getElementById('v_date_vacationsEdit').value = v_date;
+            let selectElement = document.getElementById('vacations_type_id_vacationsEdit');
+            selectElement.innerHTML = '';
+            let option = document.createElement('option');
+            option.value = vacations_type_id;
+            option.text = vacations_type_name;
+            selectElement.appendChild(option);
+            let vacations_types = <?php echo json_encode($vacations_types) ?>;
+            for(let i = 0; i < vacations_types.length; i++) {
+                if(vacations_types[i].id !== vacations_type_id) {
+                    option = document.createElement('option');
+                    option.value = vacations_types[i].id;
+                    option.text = vacations_types[i].type_name;
+                    selectElement.appendChild(option);
+                }
+            }
+            document.getElementById('notes_vacationsEdit').value = notes;
+            document.getElementById('attachement_vacationsEdit').href = `{{asset('storage/vacations/${attachement}') }}`;
+            $('#edit_vacations_modal').modal('show');
+        }
+        function vacations_change_date_by_ajax()
+        {
+            let from = document.getElementById('from_vacations').value;
+            let to = document.getElementById('to_vacations').value;
+            let employee_id = document.getElementById('employee_id').value;
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            var headers = {
+                "X-CSRF-Token": csrfToken
+            };
+            $.ajax({
+                url: "{{route('hr.employees.vacations.vacations_change_date_by_ajax')}}",
+                method: 'post',
+                headers: headers,
+                data: {
+                    'from': from ,
+                    'to': to ,
+                    'employee_id':employee_id
+                },
+                success: function(data) {
+                    $('#vacations_table').html(data.html);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                }
+            });
+        }
+        function add_vacations()
+        {
+            $('#create_vacations_modal').modal('show');
+        }
+        $(document).ready(function() {
+            reward_change_date_by_ajax();
+            discount_change_date_by_ajax();
+            advance_change_date_by_ajax();
+            vacations_change_date_by_ajax();
+        });
+        function advance_change_date_by_ajax()
+        {
+            let employee_id = document.getElementById('employee_id').value;
+            let from = document.getElementById('from_advance').value;
+            let to = document.getElementById('to_advance').value;
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            var headers = {
+                "X-CSRF-Token": csrfToken
+            };
+            $.ajax({
+                url: "{{ route('hr.employees.advances.advance_change_date_by_ajax') }}",
+                method: 'post',
+                headers: headers,
+                data: {
+                    'from': from ,
+                    'to': to ,
+                    'employee_id':employee_id
+                },
+                success: function(data) {
+                    $('#advance_table').html(data.html);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    // alert(jqXHR.responseText);
+                }
+            });
+        }
+        function discount_change_date_by_ajax()
+        {
+            let employee_id = document.getElementById('employee_id').value;
+            let from = document.getElementById('from_discount').value;
+            let to = document.getElementById('to_discount').value;
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            var headers = {
+                "X-CSRF-Token": csrfToken
+            };
+            $.ajax({
+                url: "{{ route('hr.employees.discounts.discount_change_date_by_ajax') }}",
+                method: 'post',
+                headers: headers,
+                data: {
+                    'from': from ,
+                    'to': to ,
+                    'employee_id':employee_id
+                },
+                success: function(data) {
+                    $('#discount_table').html(data.html);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    // alert(jqXHR.responseText);
+                }
+            });
+        }
+        function reward_change_date_by_ajax()
+        {
+            let employee_id = document.getElementById('employee_id').value;
+            let from = document.getElementById('from_reward').value;
+            let to = document.getElementById('to_reward').value;
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            var headers = {
+                "X-CSRF-Token": csrfToken
+            };
+            $.ajax({
+                url: "{{ route('hr.employees.rewards.reward_change_date_by_ajax') }}",
+                method: 'post',
+                headers: headers,
+                data: {
+                    'from': from ,
+                    'to': to ,
+                    'employee_id':employee_id
+                },
+                success: function(data) {
+                    $('#reward_table').html(data.html);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    // alert(jqXHR.responseText);
+                }
+            });
+        }
+        function edit_advance(id , value , currency_id , currency_name , notes , attached_file)
         {
             document.getElementById('id_advanceEdit').value = id;
             document.getElementById('value_advanceEdit').value = value;
@@ -357,7 +583,7 @@
         {
             $('#create_advance_modal').modal('show');
         }
-        function edit_discount(id , value , currency_id , currency_name , notes , attached_file) 
+        function edit_discount(id , value , currency_id , currency_name , notes , attached_file)
         {
             document.getElementById('id_discountEdit').value = id;
             document.getElementById('value_discountEdit').value = value;
@@ -376,7 +602,7 @@
         {
             $('#create_discount_modal').modal('show');
         }
-        function edit_reward(id , value , currency_id , currency_name , notes , attached_file) 
+        function edit_reward(id , value , currency_id , currency_name , notes , attached_file)
         {
             document.getElementById('id_rewardEdit').value = id;
             document.getElementById('value_rewardEdit').value = value;
