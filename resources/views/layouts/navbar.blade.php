@@ -134,6 +134,7 @@
                         <li><a href="{{ route('setting.system_setting.index') }}" class="dropdown-item">اعدادات النظام</a></li>
                         <li><a href="{{ route('accounting.texes.index') }}" class="dropdown-item">الضرائب</a></li>
                         <li><a href="{{ route('setting.machine.setting_index') }}" class="dropdown-item">الآلات</a></li>
+                        <li><a href="{{ route('setting.vacations_types.index') }}" class="dropdown-item">أنواع الإجازات</a></li>
                     </ul>
                 </li>
             </ul>

@@ -6,9 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\BfoAttendance;
 use App\Models\Currency;
 use App\Models\DiscountReward;
+use App\Models\EmployeeBonus;
+use App\Models\EmployeeEvaluation;
 use App\Models\User;
 use App\Models\UserLevels;
 use App\Models\UserRole;
+use App\Models\VacationType;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -41,34 +44,10 @@ class EmployeesController extends Controller
         ->where('deleted', 0)
         ->paginate(10);
         $currencies = Currency::get();
-        $rewards = DiscountReward::where('user_id' , $id)
-        ->where('type' , 1)
-        ->paginate(10);
-        foreach($rewards as $key){
-            $key->user = User::find($key->inserted_by);
-        }
-        foreach($rewards as $key){
-            $key->currency = Currency::find($key->currency_id);
-        }
-        $discounts = DiscountReward::where('user_id' , $id)
-        ->where('type' , 0)
-        ->paginate(10);
-        foreach($discounts as $key){
-            $key->user = User::find($key->inserted_by);
-        }
-        foreach($discounts as $key){
-            $key->currency = Currency::find($key->currency_id);
-        }
-        $advances = DiscountReward::where('user_id' , $id)
-        ->where('type' , 2)
-        ->paginate(10);
-        foreach($advances as $key){
-            $key->user = User::find($key->inserted_by);
-        }
-        foreach($advances as $key){
-            $key->currency = Currency::find($key->currency_id);
-        }
-        return view('admin.hr.employees.details' , ['advances' => $advances , 'discounts' => $discounts , 'rewards' => $rewards , 'data' => $data , 'bfo_attendances' => $bfo_attendances , 'currencies' => $currencies]);
+        $vacations_types = VacationType::get();
+        $employees_bonuses = EmployeeBonus::where('employee_id' , $id)->get();
+        $employees_evaluations = EmployeeEvaluation::where('employee_id' , $id)->get();
+        return view('admin.hr.employees.details' , ['employees_evaluations' => $employees_evaluations ,'employees_bonuses' => $employees_bonuses  , 'vacations_types'=> $vacations_types , 'data' => $data , 'bfo_attendances' => $bfo_attendances , 'currencies' => $currencies]);
     }
     public function edit($id)
     {

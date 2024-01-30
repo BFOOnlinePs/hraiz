@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\hr;
 
 use App\Http\Controllers\Controller;
+use App\Models\Currency;
 use App\Models\DiscountReward;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DiscountRewardController extends Controller
@@ -140,5 +142,50 @@ class DiscountRewardController extends Controller
         else {
             return redirect()->route('hr.employees.details' , ['id' => $request->employee_id,'tab_id'=>5])->with(['fail'=>'لم يتم تعديل السُلفة ، هناك خلل ما']);
         }
+    }
+    public function reward_change_date_by_ajax(Request $request)
+    {
+        $rewards = DiscountReward::where('user_id' , $request->employee_id)
+        ->whereBetween('created_at', [$request->from, $request->to])
+        ->where('type' , 1)
+        ->paginate(10);
+        foreach($rewards as $key){
+            $key->user = User::find($key->inserted_by);
+        }
+        foreach($rewards as $key){
+            $key->currency = Currency::find($key->currency_id);
+        }
+        $html = view('admin.hr.employees.ajax.reward_table' , ['rewards' => $rewards])->render();
+        return response()->json(['html' => $html]);
+    }
+    public function discount_change_date_by_ajax(Request $request)
+    {
+        $discounts = DiscountReward::where('user_id' , $request->employee_id)
+        ->whereBetween('created_at', [$request->from, $request->to])
+        ->where('type' , 0)
+        ->paginate(10);
+        foreach($discounts as $key){
+            $key->user = User::find($key->inserted_by);
+        }
+        foreach($discounts as $key){
+            $key->currency = Currency::find($key->currency_id);
+        }
+        $html = view('admin.hr.employees.ajax.discount_table' , ['discounts' => $discounts])->render();
+        return response()->json(['html' => $html]);
+    }
+    public function advance_change_date_by_ajax(Request $request)
+    {
+        $advances = DiscountReward::where('user_id' , $request->employee_id)
+        ->whereBetween('created_at', [$request->from, $request->to])
+        ->where('type' , 2)
+        ->paginate(10);
+        foreach($advances as $key){
+            $key->user = User::find($key->inserted_by);
+        }
+        foreach($advances as $key){
+            $key->currency = Currency::find($key->currency_id);
+        }
+        $html = view('admin.hr.employees.ajax.advance_table' , ['advances' => $advances])->render();
+        return response()->json(['html' => $html]);
     }
 }
