@@ -27,7 +27,7 @@
                     @if($key->product_id == -1)
                         <input type="text" onchange="update_product_line_inputs_ajax({{$key->id}},'estimated_cost',this.value)" class="form-control" value="{{ $key->estimated_cost }}">
                     @else
-                        <input type="text" readonly class="form-control" value="{{ $key->product->cost_price }}">
+                        <input type="text" readonly class="form-control" value="{{ $key->estimated_cost }}">
                     @endif
                 </td>
                 <td>

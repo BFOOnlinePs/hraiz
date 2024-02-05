@@ -79,13 +79,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">عدد المخرجات</label>
-                                    <input onchange="update_product_and_qty_for_production_lines_ajax(this.value,'qty')" type="text" value="{{ $production_lines->production_output_count }}" class="form-control" placeholder="عدد المخرجات">
+                                    <input onchange="update_product_and_qty_for_production_lines_ajax(this.value,'qty')" id="production_output_count" type="text" value="{{ $production_lines->production_output_count }}" class="form-control" placeholder="عدد المخرجات">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">طول الصنف المخرج</label>
-                                    <input readonly type="text" id="the_length_of_the_output_item" class="form-control" placeholder="عدد المخرجات">
+                                    <input readonly type="text" id="the_length_of_the_output_item" class="form-control" placeholder="طول الصنف المخرج">
                                 </div>
                             </div>
                         </div>
@@ -601,32 +601,38 @@
         }
 
         function update_product_and_qty_for_production_lines_ajax(value,operation) {
-            var csrfToken = $('meta[name="csrf-token"]').attr('content');
-            var headers = {
-                "X-CSRF-Token": csrfToken
-            };
-            $.ajax({
-                url: '{{ route('production.production_inputs.update_product_and_qty_for_production_lines_ajax') }}',
-                method: 'post',
-                headers: headers,
-                data: {
-                    'value': value,
-                    'production_line_id':{{ $production_lines->id }},
-                    'operation': operation
-                },
-                success: function (data) {
-                    if(data.success == 'true'){
-                        if(operation == 'product'){
-                            the_length_of_the_output_item_ajax();
+            if(operation == 'qty' && value == ''){
+                alert('لا يجب ان يكون هذا الحقل فارغ');
+                document.getElementById('production_output_count').value = 0;
+            }
+            else{
+                var csrfToken = $('meta[name="csrf-token"]').attr('content');
+                var headers = {
+                    "X-CSRF-Token": csrfToken
+                };
+                $.ajax({
+                    url: '{{ route('production.production_inputs.update_product_and_qty_for_production_lines_ajax') }}',
+                    method: 'post',
+                    headers: headers,
+                    data: {
+                        'value': value,
+                        'production_line_id':{{ $production_lines->id }},
+                        'operation': operation
+                    },
+                    success: function (data) {
+                        if(data.success == 'true'){
+                            if(operation == 'product'){
+                                the_length_of_the_output_item_ajax();
+                            }
+                            toastr.success(data.message);
+                            summery_production_inputs_table();
                         }
-                        toastr.success(data.message);
-                        summery_production_inputs_table();
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert('error');
                     }
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert('error');
-                }
-            });
+                });
+            }
         }
 
         function production_setting_list() {

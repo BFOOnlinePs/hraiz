@@ -141,6 +141,7 @@
                 @csrf
                 <input type="hidden" name="order_id" id="order_input">
                 <input type="hidden" name="supplier_user_id" id="supplier_input">
+                <input type="hidden" name="invoice_type" value="purchases">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">فاتورة من طلبية</h4>
@@ -191,7 +192,7 @@
         </div>
     </div>
 
-@endsection()
+@endsection
 
 @section('script')
 <script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>

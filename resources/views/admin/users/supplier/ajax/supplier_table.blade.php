@@ -33,7 +33,7 @@
                 <td>
                     <select id="follow_by_{{ $key->id }}" onchange="update_follow_by('{{ $key->id }}')" style="width: 100%" class="form-control select2bs4" multiple="multiple">
                         @php
-                        $followByArray = json_decode(($key['follow_by']));
+                            $followByArray = json_decode(($key['follow_by']));
                         @endphp
                         @foreach ($officer as $item)
                             <option value="{{ $item->id }}" @if (!empty($key['follow_by'])) {{ in_array($item->id, $followByArray) ? 'selected' : '' }} @endif>

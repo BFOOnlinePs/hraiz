@@ -70,7 +70,7 @@
                                     @php
                                         $total_sum +=  ((($key->qty) * (($key->product_id == -1)?$key->estimated_cost:$key->product->cost_price)) / ($production_lines->production_output_count));
                                     @endphp
-                                    {{ (($key->qty) * (($key->product_id == -1)?$key->estimated_cost:$key->product->cost_price)) / ($production_lines->production_output_count) }}
+                                    {!! number_format((float)(($key->qty) * (($key->product_id == -1)?$key->estimated_cost:$key->product->cost_price)) / ($production_lines->production_output_count),3) !!}
                                 @endif
                             </td>
                         </tr>

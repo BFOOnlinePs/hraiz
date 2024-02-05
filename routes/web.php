@@ -17,7 +17,7 @@ Route::get('/', function () {
     if (\Illuminate\Support\Facades\Auth::check()) {
         return redirect()->route('home');
     } else {
-        return view('auth.login');
+        return redirect('login');
     }
 });
 
@@ -513,6 +513,30 @@ Route::group(['prefix'=>'accounting','middleware'=>'auth'],function(){
             Route::post('update_tax_id_ratio',[App\Http\Controllers\accounting\PurchaseInvoicesController::class , 'update_tax_id_ratio'])->name('accounting.purchase_invoices.update_tax_id_ratio');
         });
     });
+
+    Route::group(['prefix'=>'sales_invoices'],function(){
+        Route::get('index',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'index'])->name('accounting.sales_invoices.index');
+        Route::post('invoice_table_index_ajax',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'invoice_table_index_ajax'])->name('accounting.sales_invoices.invoice_table_index_ajax');
+        Route::get('new_invoices_index',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'new_invoices_index'])->name('accounting.sales_invoices.new_invoices_index');
+        Route::post('create_new_invoices',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'create_new_invoices'])->name('accounting.sales_invoices.create_new_invoices');
+        Route::get('edit_invoices/{id}',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'edit_invoices'])->name('accounting.sales_invoices.edit_invoices');
+        Route::post('update_invoices',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'update_invoices'])->name('accounting.sales_invoices.update_invoices');
+        Route::get('delete_invoices/{id}',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'delete_invoices'])->name('accounting.sales_invoices.delete_invoices');
+        Route::post('create_purchase_invoices_from_order',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'create_purchase_invoices_from_order'])->name('accounting.sales_invoices.create_purchase_invoices_from_order');
+        Route::post('update_purchase_invoices_from_ajax',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'update_purchase_invoices_from_ajax'])->name('accounting.sales_invoices.update_purchase_invoices_from_ajax');
+        Route::post('search_order_ajax',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'search_order_ajax'])->name('accounting.sales_invoices.search_order_ajax');
+        Route::post('invoice_table_index_ajax',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'invoice_table_index_ajax'])->name('accounting.sales_invoices.invoice_table_index_ajax');
+        Route::group(['prefix'=>'invoices'],function(){
+            Route::get('view/{id}',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'invoice_view'])->name('accounting.sales_invoices.invoice_view');
+            Route::post('search_product_ajax',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'search_product_ajax'])->name('accounting.sales_invoices.search_product_ajax');
+            Route::post('invoice_table',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'invoice_table'])->name('accounting.sales_invoices.invoice_table');
+            Route::post('create_product_ajax',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'create_product_ajax'])->name('accounting.sales_invoices.create_product_ajax');
+            Route::post('edit_inputs_from_invoice',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'edit_inputs_from_invoice'])->name('accounting.sales_invoices.edit_inputs_from_invoice');
+            Route::post('delete_item',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'delete_item'])->name('accounting.sales_invoices.delete_item');
+            Route::post('update_invoice_reference_number_ajax',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'update_invoice_reference_number_ajax'])->name('accounting.sales_invoices.update_invoice_reference_number_ajax');
+            Route::post('update_tax_id_ratio',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'update_tax_id_ratio'])->name('accounting.sales_invoices.update_tax_id_ratio');
+        });
+    });
 });
 
 Route::group(['prefix'=>'production'],function (){
@@ -521,6 +545,12 @@ Route::group(['prefix'=>'production'],function (){
     Route::get('edit/{id}',[App\Http\Controllers\production\ProducationLineController::class,'edit'])->name('production.edit');
     Route::post('update',[App\Http\Controllers\production\ProducationLineController::class,'update'])->name('production.update');
     Route::post('get_product_name_for_add_production_name_ajax',[App\Http\Controllers\production\ProducationLineController::class,'get_product_name_for_add_production_name_ajax'])->name('production.get_product_name_for_add_production_name_ajax');
+    Route::post('create_production_line_ajax',[App\Http\Controllers\production\ProducationLineController::class,'create_production_line_ajax'])->name('production.create_production_line_ajax');
+    Route::post('production_line_input_table',[App\Http\Controllers\production\ProducationLineController::class,'production_line_input_table'])->name('production.production_line_input_table');
+    Route::post('create_production_input_ajax',[App\Http\Controllers\production\ProducationLineController::class,'create_production_input_ajax'])->name('production.create_production_input_ajax');
+    Route::post('cost_of_production_output_table_ajax',[App\Http\Controllers\production\ProducationLineController::class,'cost_of_production_output_table_ajax'])->name('production.cost_of_production_output_table_ajax');
+    Route::post('update_estimated_cost_ajax',[App\Http\Controllers\production\ProducationLineController::class,'update_estimated_cost_ajax'])->name('production.update_estimated_cost_ajax');
+    Route::post('update_height_for_product_ajax',[App\Http\Controllers\production\ProducationLineController::class,'update_height_for_product_ajax'])->name('production.update_height_for_product_ajax');
     Route::group(['prefix'=>'production_inputs'],function (){
         Route::get('index/{id}',[App\Http\Controllers\production\ProducationLineController::class,'production_input'])->name('production.production_inputs.index');
         Route::post('create',[App\Http\Controllers\production\ProducationLineController::class,'production_input_create'])->name('production.production_inputs.create');

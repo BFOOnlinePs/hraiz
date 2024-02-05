@@ -37,11 +37,14 @@
 
     <div class="card card-outline card-primary">
         <div class="card-header text-center">
-            <a href="{{ asset('assets/index2.html') }}" class="h1"><b>Jelanco</b></a>
+            <a href="{{ asset('assets/index2.h  tml') }}" class="h1"><b>{{ $system_setting->company_name ?? 'اسم الشركة هنا' }}</b></a>
         </div>
         <div class="card-body">
-            <p class="login-box-msg">ابدا بتسجيل الدخول من هنا</p>
-            <form action="{{ route('login') }}" method="post">
+{{--            <p class="login-box-msg">ابدا بتسجيل الدخول من هنا</p>--}}
+            <div class="text-center">
+                <img class="text-center" src="{{ asset('storage/setting/'.$system_setting->company_logo) }}" style="width: 100px" alt="">
+            </div>
+            <form action="{{ route('login') }}" method="post" class="mt-2">
                 @csrf
                 <div class="input-group ">
                     <input name="email" type="email" id="email" class="form-control" placeholder="Email">
@@ -70,15 +73,15 @@
                     <div class="div p-1 ">
                         <button onclick="login('admin@admin.com','123456789')" type="button" class="btn btn-dark btn-sm form-control">ادمن</button>
                     </div>
-                    <div class="div p-1">
-                        <button onclick="login('salesman@mail.com','123456789')"  type="button" class="btn btn-dark btn-sm form-control">موظف مشتريات</button>
-                    </div>
-                    <div class="div p-1">
-                        <button onclick="login('storekeeper@mail.com','123456789')"  type="button" class="btn btn-dark btn-sm form-control">امين مستودع</button>
-                    </div>
-                    <div class="div p-1">
-                        <button onclick="login('secretarial@mail.com','123456789')"  type="button" class="btn btn-dark btn-sm form-control">سكرتيريا</button>
-                    </div>
+{{--                    <div class="div p-1">--}}
+{{--                        <button onclick="login('salesman@mail.com','123456789')"  type="button" class="btn btn-dark btn-sm form-control">موظف مشتريات</button>--}}
+{{--                    </div>--}}
+{{--                    <div class="div p-1">--}}
+{{--                        <button onclick="login('storekeeper@mail.com','123456789')"  type="button" class="btn btn-dark btn-sm form-control">امين مستودع</button>--}}
+{{--                    </div>--}}
+{{--                    <div class="div p-1">--}}
+{{--                        <button onclick="login('secretarial@mail.com','123456789')"  type="button" class="btn btn-dark btn-sm form-control">سكرتيريا</button>--}}
+{{--                    </div>--}}
                 </div>
                 <div class="row mt-3">
 {{--                    <div class="col-8">--}}

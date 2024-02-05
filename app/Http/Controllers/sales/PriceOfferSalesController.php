@@ -245,6 +245,5 @@ class PriceOfferSalesController extends Controller
             'success'=>'true',
             'view'=>view('admin.sales.price_offer_sales.ajax.price_offer_sales_table',['data'=>$data,'clients'=>$clients,'currency'=>$currency])->render()
         ]);
-
     }
 }
