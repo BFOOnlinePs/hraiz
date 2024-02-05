@@ -19,11 +19,10 @@
                        @if(!$key->production_input_name == 'عامل') readonly @endif
                        type="text"
                        onchange="update_estimated_cost_ajax({{ $key->id }}, this.value, 'product')"
-                       value="{{ ($key->production_lines->production_output_count != 0) ? ($key->estimated_cost) / ($key->production_lines->production_output_count) : '' }}">
+                       value="{{ ($key->production_lines->production_output_count != 0) ? number_format((float)($key->estimated_cost) / ($key->production_lines->production_output_count),2) : '' }}">
                 <div id="cost_per_unit_worker_loader_{{$key->id}}" style="display: none;font-size: 7px" class="col text-center p-5"><i class="fas fa-3x fa-sync-alt fa-spin"></i></div>
             </td>
         </tr>
     @endforeach
-
     </tbody>
 </table>

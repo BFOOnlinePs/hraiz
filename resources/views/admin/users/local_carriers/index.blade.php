@@ -11,10 +11,13 @@
 @section('header_title_link')
     شركات النقل المحلي
 @endsection
-@section('content')
-
+@section('style')
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+
+@endsection
+@section('content')
+
     <a href="{{ route('users.local_carriers.add') }}" class="btn btn-primary mb-2">اضافة شركة نقل محلي</a>
     <div class="card">
         <div class="card-header">
@@ -72,7 +75,7 @@
 
     </div>
 
-@endsection()
+@endsection
 
     @section('script')
         <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>

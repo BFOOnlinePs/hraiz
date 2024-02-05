@@ -23,7 +23,19 @@
     @include('admin.messge_alert.fail')
     <div class="row">
         <div class="col-md-10">
-            <input onkeyup="production_lines_table_ajax()" type="text" id="search_production_line" class="form-control" placeholder="البحث عن خط انتاج">
+            <div class="row">
+                <div class="col-md-6">
+                    <input onkeyup="production_lines_table_ajax()" type="text" id="search_production_line" class="form-control" placeholder="البحث عن خط انتاج">
+                </div>
+                <div class="col-md-6">
+                    <select onchange="production_lines_table_ajax()" class="form-control select2bs4" name="" id="product_id_selected">
+                        <option value="">جميع المنتجات</option>
+                        @foreach($products as $key)
+                            <option value="{{ $key->id }}">{{ $key->product_name_ar }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
             <div class="card mt-3">
                 {{--        <div class="card-header">--}}
                 {{--            <h3 class="text-center">قائمة خطوط الانتاج</h3>--}}
@@ -165,52 +177,61 @@
                                             <div class="bs-stepper-content">
                                                 <div id="product-line-part" class="content active dstepper-block" role="tabpanel" aria-labelledby="product-line-part-trigger">
                                                     <div class="row">
-                                                        <div class="col-md-8">
-                                                            <div class="col-md-12">
-                                                                <div class="form-group">
-                                                                    <label for="">المنتج</label>
-                                                                    <select onchange="get_product_name_for_add_production_name_ajax()" class="form-control select2bs4" required name="product_id" id="selected_product">
-                                                                        <option value="">اختر منتج ...</option>
-                                                                        @foreach($products as $key)
-                                                                            <option value="{{ $key->id }}">{{ $key->product_name_ar }}</option>
-                                                                        @endforeach
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-12">
-                                                                <div class="form-group">
-                                                                    <label for="">اسم خط الانتاج</label>
-                                                                    <input id="production_name" name="production_name" class="form-control" type="text"
-                                                                           placeholder="اكتب اسم خط الانتاج" required>
-                                                                </div>
-                                                            </div>
-                                                            <div hidden class="col-md-12">
-                                                                <div class="form-group">
-                                                                    <label for="">صورة المنتج</label>
-                                                                    <div class="input-group">
-                                                                        <div class="custom-file">
-                                                                            <input type="file" name="production_image" class="custom-file-input"
-                                                                                   id="exampleInputFile">
-                                                                            <label class="custom-file-label" for="exampleInputFile">اختر ملف</label>
+                                                        <div class="col-md-6">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="col-md-12">
+                                                                        <div class="form-group">
+                                                                            <label for="">المنتج</label>
+                                                                            <select onchange="get_product_name_for_add_production_name_ajax()" class="form-control select2bs4" required name="product_id" id="selected_product">
+                                                                                <option value="">اختر منتج ...</option>
+                                                                                @foreach($products as $key)
+                                                                                    <option value="{{ $key->id }}">{{ $key->product_name_ar }}</option>
+                                                                                @endforeach
+                                                                            </select>
                                                                         </div>
-                                                                        <div class="input-group-append">
-                                                                            <span class="input-group-text">رفع الصورة</span>
+                                                                    </div>
+                                                                    <div class="col-md-12">
+                                                                        <div class="form-group">
+                                                                            <label for="">اسم خط الانتاج</label>
+                                                                            <input id="production_name" name="production_name" class="form-control" type="text"
+                                                                                   placeholder="اكتب اسم خط الانتاج" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div hidden class="col-md-12">
+                                                                        <div class="form-group">
+                                                                            <label for="">صورة المنتج</label>
+                                                                            <div class="input-group">
+                                                                                <div class="custom-file">
+                                                                                    <input type="file" name="production_image" class="custom-file-input"
+                                                                                           id="exampleInputFile">
+                                                                                    <label class="custom-file-label" for="exampleInputFile">اختر ملف</label>
+                                                                                </div>
+                                                                                <div class="input-group-append">
+                                                                                    <span class="input-group-text">رفع الصورة</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-12">
+                                                                        <div class="form-group">
+                                                                            <label for="">ملاحظات</label>
+                                                                            <textarea class="form-control" name="production_notes" id="production_notes" cols="30" rows="3"></textarea>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-12">
-                                                                <div class="form-group">
-                                                                    <label for="">ملاحظات</label>
-                                                                    <textarea class="form-control" name="production_notes" id="production_notes" cols="30" rows="3"></textarea>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div id="product_production_line_table">
+
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-4 text-center">
-                                                            <span class="fa fa-image" style="font-size: 100px"></span>
-                                                        </div>
                                                     </div>
-
                                                     <button class="btn btn-primary" id="submit-create-button" onclick="create_production_line_ajax()">التالي</button>
                                                 </div>
                                                 <div id="production-input-part" class="content" role="tabpanel" aria-labelledby="production-input-part-trigger">
@@ -247,7 +268,7 @@
                                                                         <div class="input-group-prepend">
                                                                             <button onclick="create_production_input_ajax('worker')" type="button" class="btn btn-success btn-sm"><span class="fa fa-plus"></span></button>
                                                                         </div>
-                                                                        <input readonly type="text" value="عامل" class="form-control">
+                                                                        <input readonly type="text" value="عمال" class="form-control">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -329,7 +350,7 @@
         $(document).ready(function () {
             production_lines_table_ajax();
         });
-        function production_lines_table_ajax(){
+        function production_lines_table_ajax(page){
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
             var headers = {
                 "X-CSRF-Token": csrfToken
@@ -340,6 +361,8 @@
                 headers: headers,
                 data: {
                     'search_production_line': document.getElementById('search_production_line').value,
+                    'product_id': document.getElementById('product_id_selected').value,
+                    'page': page,
                 },
                 success: function (data) {
                     if(data.success == 'true'){
@@ -562,10 +585,10 @@
                     document.getElementById('cost_per_unit_worker_loader_'+id).style.display = 'inline';
                 }
                 if(operation === 'estimated_cost'){
-                    $(`#cost_per_unit_worker_${id}`).val(value/$('#production_output_count').val());
+                    $(`#cost_per_unit_worker_${id}`).val(numberFormat((value/$('#production_output_count').val())));
                 }
                 else {
-                    $(`#estimated_cost_worker_${id}`).val(value * ($('#production_output_count').val()));
+                    $(`#estimated_cost_worker_${id}`).val(numberFormat(value * ($('#production_output_count').val())));
                 }
                 $.ajax({
                     url: '{{ route('production.update_estimated_cost_ajax') }}',
@@ -578,10 +601,10 @@
                     success: function (data) {
                         if(data.success == 'true'){
                             if(operation === 'estimated_cost'){
-                                $(`#cost_per_unit_worker_${id}`).val(value/$('#production_output_count').val());
+                                $(`#cost_per_unit_worker_${id}`).val(numberFormat((value/$('#production_output_count').val())));
                             }
                             else {
-                                $(`#estimated_cost_worker_${id}`).val(value * ($('#production_output_count').val()));
+                                $(`#estimated_cost_worker_${id}`).val(numberFormat(value * ($('#production_output_count').val())));
                             }
                             if(operation === 'estimated_cost'){
                                 document.getElementById('estimated_cost_worker_loader_'+id).style.display = 'none';
@@ -623,6 +646,33 @@
                 });
         }
 
+        function product_production_line_table_ajax() {
+                var csrfToken = $('meta[name="csrf-token"]').attr('content');
+                var headers = {
+                    "X-CSRF-Token": csrfToken
+                };
+                $.ajax({
+                    url: '{{ route('production.product_production_line_table_ajax') }}',
+                    method: 'post',
+                    headers: headers,
+                    data: {
+                        'product_id':$('#selected_product').val(),
+                    },
+                    success: function (data) {
+                        if(data.success === 'true'){
+                            $('#product_production_line_table').html(data.view);
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(jqXHR.responseText);
+                    }
+                });
+        }
+
+        $('#selected_product').on('change',function () {
+            product_production_line_table_ajax();
+        })
+
         function production_output_part_button(){
             cost_of_production_output_table_ajax();
             stepper.next();
@@ -636,6 +686,12 @@
                 $(`#estimated_cost_worker_${id}`).val(value * ($('#production_output_count').val()));
             }
         }
+        var page = 1;
+        $(document).on('click', '.pagination a', function(e) {
+            e.preventDefault();
+            page = $(this).attr('href').split('page=')[1];
+            production_lines_table_ajax(page);
+        });
 
         function redirect_if_save(){
             var productionLinesId = $('#production_lines_id').val();

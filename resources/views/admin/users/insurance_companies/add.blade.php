@@ -1,15 +1,15 @@
 @extends('home')
 @section('title')
-    اضافة شركة شحن
+    اضافة شركة تأمين
 @endsection
 @section('header_title')
-    اضافة شركة شحن
+    اضافة شركة تأمين
 @endsection
 @section('header_link')
     المستخدمين
 @endsection
 @section('header_title_link')
-    اضافة شركة شحن
+    اضافة شركة تأمين
 @endsection
 @section('content')
 

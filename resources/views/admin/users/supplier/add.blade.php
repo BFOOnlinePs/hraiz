@@ -21,8 +21,6 @@
 <link rel="stylesheet" href="{{ asset('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 @endsection
 @section('content')
-    <div class="">
-        <div class="">
             <form action="{{ route('users.supplier.create') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
@@ -108,7 +106,7 @@
                                         <div class="card-body">
                                             <div class="row text-center">
                                                 <div class="col-md-12">
-                                                    <h5>معلومات المورد الاساسية</h5>
+                                                    <h5>معلومات المورد الفرعية</h5>
                                                 </div>
                                             </div>
                                             <hr>
@@ -237,10 +235,6 @@
 {{--                    </div>--}}
 
             </form>
-
-        </div>
-
-    </div>
 
 @endsection
 
