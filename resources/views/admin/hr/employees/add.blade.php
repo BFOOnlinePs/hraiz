@@ -18,7 +18,7 @@
             <h5 class="text-bold">إضافة موظف</h5>
         </div>
         <div class="card-body">
-            <form action="{{ route('hr.employees.create') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('users.employees.create') }}" method="post" enctype="multipart/form-data">
                 <div class="row">
                     @csrf
                     <div class="col-md-12">

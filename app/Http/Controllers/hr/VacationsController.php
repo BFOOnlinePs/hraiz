@@ -30,11 +30,11 @@ class VacationsController extends Controller
                 $vacation->attachement = $filename;
             }
             if(!($vacation->save())) {
-                return redirect()->route('hr.employees.details' , ['id' => $request->employee_id])->with(['fail'=>'لم يتم تسجيل إجازة للموظف ، هناك خلل ما']);
+                return redirect()->route('users.employees.details' , ['id' => $request->employee_id])->with(['fail'=>'لم يتم تسجيل إجازة للموظف ، هناك خلل ما']);
             }
             $currentDate->addDay();
         }
-        return redirect()->route('hr.employees.details' , ['id' => $request->employee_id])->with(['success'=>'تم إضافة إجازة للموظف بنجاح']);
+        return redirect()->route('users.employees.details' , ['id' => $request->employee_id])->with(['success'=>'تم إضافة إجازة للموظف بنجاح']);
     }
     public function vacations_change_date_by_ajax(Request $request)
     {
@@ -61,10 +61,10 @@ class VacationsController extends Controller
             $vacation->attachement = $filename;
         }
             if($vacation->save()) {
-                return redirect()->route('hr.employees.details' , ['id' => $request->employee_id])->with(['success'=>'تم تعديل إجازة للموظف بنجاح']);
+                return redirect()->route('users.employees.details' , ['id' => $request->employee_id])->with(['success'=>'تم تعديل إجازة للموظف بنجاح']);
             }
             else {
-                return redirect()->route('hr.employees.details' , ['id' => $request->employee_id])->with(['fail'=>'لم يتم تعديل إجازة الموظف ، هناك خلل ما']);
+                return redirect()->route('users.employees.details' , ['id' => $request->employee_id])->with(['fail'=>'لم يتم تعديل إجازة الموظف ، هناك خلل ما']);
             }
     }
 }

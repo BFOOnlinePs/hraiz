@@ -31,7 +31,7 @@ class EmployeesController extends Controller
         $data->user_notes = $request->user_notes;
         $data->user_address = $request->user_address;
         if ($data->save()){
-            return redirect()->route('hr.employees.index')->with(['success'=>'تم اضافة البيانات بنجاح','tab_id'=>1]);
+            return redirect()->route('users.employees.index')->with(['success'=>'تم اضافة البيانات بنجاح','tab_id'=>1]);
         }
         else{
             return redirect()->back()->withInput();

@@ -1,6 +1,6 @@
 <div class="modal fade" id="create_vacations_modal">
     <div class="modal-dialog modal-lg">
-        <form action="{{ route('hr.employees.vacations.create') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('users.employees.vacations.create') }}" method="post" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="employee_id" value="{{$data->id}}">
             <div class="modal-content">

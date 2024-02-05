@@ -35,7 +35,7 @@
                     </div>
                 </td>
                 <td>
-                    <a class="btn btn-dark btn-sm" href="{{ route('hr.employees.details', ['id' => $key->id]) }}"><span class="fa fa-search"></span></a>
+                    <a class="btn btn-dark btn-sm" href="{{ route('users.employees.details', ['id' => $key->id]) }}"><span class="fa fa-search"></span></a>
                 </td>
             </tr>
         @endforeach

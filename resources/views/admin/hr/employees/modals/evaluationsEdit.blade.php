@@ -1,6 +1,6 @@
 <div class="modal fade" id="edit_evaluations_modal">
     <div class="modal-dialog modal-lg">
-        <form action="{{ route('hr.employees.evaluations.edit') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('users.employees.evaluations.edit') }}" method="post" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="id" id="id_evaluationsEdit">
             <input type="hidden" name="employee_id" value="{{$data->id}}">

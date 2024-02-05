@@ -149,7 +149,7 @@
                                             <h4 class="text-center">{{ $data->name }}</h4>
                                             <hr>
                                             <p>يحتوي هذا القسم على المعلومات الأساسية للموظف</p>
-                                            <a href="{{ route('hr.employees.edit',['id'=>$data->id]) }}" class="btn btn-info">تعديل بيانات الموظف</a>
+                                            <a href="{{ route('users.employees.edit',['id'=>$data->id]) }}" class="btn btn-info">تعديل بيانات الموظف</a>
                                         </div>
                                     </div>
                                 </div>
@@ -189,7 +189,7 @@
                                                     <button class="btn btn-dark mb-2" onclick="edit_out_time_attendance('{{$key->note}}' , {{$key->id}} , '{{$key->activity_type}}')">تسجيل مغادرة</button>
                                                     <button class="btn btn-danger btn-sm" onclick="delete_bfo_attendance({{$key->id}})"><span class="fa fa-trash pt-1"></span></button>
                                                     <button class="btn btn-success btn-sm" onclick="edit_attendance({{$key->id}} , '{{$key->activity_type}}' , '{{$key->note}}' , '{{$key->in_time}}' , '{{$key->out_time}}')"><span class="fa fa-edit pt-1"></span></button>
-                                                    {{-- <a class="btn btn-dark btn-sm" href="{{ route('hr.employees.details', ['id' => $key->id]) }}"><span class="fa fa-search"></span></a> --}}
+                                                    {{-- <a class="btn btn-dark btn-sm" href="{{ route('users.employees.details', ['id' => $key->id]) }}"><span class="fa fa-search"></span></a> --}}
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -461,7 +461,7 @@
                 "X-CSRF-Token": csrfToken
             };
             $.ajax({
-                url: "{{route('hr.employees.vacations.vacations_change_date_by_ajax')}}",
+                url: "{{route('users.employees.vacations.vacations_change_date_by_ajax')}}",
                 method: 'post',
                 headers: headers,
                 data: {
@@ -496,7 +496,7 @@
                 "X-CSRF-Token": csrfToken
             };
             $.ajax({
-                url: "{{ route('hr.employees.advances.advance_change_date_by_ajax') }}",
+                url: "{{ route('users.employees.advances.advance_change_date_by_ajax') }}",
                 method: 'post',
                 headers: headers,
                 data: {
@@ -522,7 +522,7 @@
                 "X-CSRF-Token": csrfToken
             };
             $.ajax({
-                url: "{{ route('hr.employees.discounts.discount_change_date_by_ajax') }}",
+                url: "{{ route('users.employees.discounts.discount_change_date_by_ajax') }}",
                 method: 'post',
                 headers: headers,
                 data: {
@@ -548,7 +548,7 @@
                 "X-CSRF-Token": csrfToken
             };
             $.ajax({
-                url: "{{ route('hr.employees.rewards.reward_change_date_by_ajax') }}",
+                url: "{{ route('users.employees.rewards.reward_change_date_by_ajax') }}",
                 method: 'post',
                 headers: headers,
                 data: {

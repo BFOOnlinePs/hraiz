@@ -1,6 +1,6 @@
 <div class="modal fade" id="create_advance_modal">
     <div class="modal-dialog modal-xl">
-        <form action="{{ route('hr.employees.advances.create') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('users.employees.advances.create') }}" method="post" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="employee_id" value="{{$data->id}}">
             <div class="modal-content">
