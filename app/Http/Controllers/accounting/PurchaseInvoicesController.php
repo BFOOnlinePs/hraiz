@@ -60,6 +60,7 @@ class PurchaseInvoicesController extends Controller
         $data->repeat_every = $request->repeat_every;
         $data->repeat_type = $request->repeat_type;
         $data->no_of_cycles	= $request->no_of_cycles;
+        $data->invoice_type	= 'purchases';
         if($data->save()){
             return redirect()->route('accounting.purchase_invoices.invoice_view',['id'=>$data->id])->with(['success'=>'تم انشاء البيانات بنجاح']);
         }
@@ -197,10 +198,16 @@ class PurchaseInvoicesController extends Controller
         $data = new PurchaseInvoicesModel();
 //        $order = OrderModel::where('id',$request->order_id)->first();
         $data->invoice_reference_number = $request->order_id;
-        $data->order_id = $request->order_id;
         $data->bill_date = Carbon::now()->toDateString();
         $data->due_date = Carbon::now()->toDateString();
         $data->client_id = $request->supplier_user_id;
+        $data->invoice_type = $request->invoice_type;
+        if ($request->invoice_type == 'purchases'){
+            $data->order_id = $request->order_id;
+        }
+        else if ($request->invoice_type == 'sales'){
+            $data->price_offer_sales_id = $request->order_id;
+        }
         $order_itmes = OrderItemsModel::where('order_id',$request->order_id)->get();
         if($data->save()){
             foreach($order_itmes as $key){

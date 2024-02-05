@@ -2,6 +2,7 @@
   <table class="table table-bordered search_table table-hover table-sm">
     <thead>
         <tr>
+            <th></th>
             <th style="width: 250px">الصنف</th>
             <th>الكمية</th>
             <th>السعر</th>

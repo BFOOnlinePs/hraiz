@@ -249,7 +249,6 @@ class ProcurmentOfficerController extends Controller
         $referenceNumber = $request->reference_number;
         $from = Carbon::parse($request->from)->subMonth();
         $to = $request->to;
-
         $data = OrderModel::query()
             ->when(!empty($supplierId), function ($query) use ($supplierId) {
                 $query->whereIn('id', function ($query) use ($supplierId) {

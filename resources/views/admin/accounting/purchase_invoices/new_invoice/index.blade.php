@@ -36,7 +36,7 @@
                 <div class="row">
                     <div class="col-md-8">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <?php
                                     $month = date('m');
@@ -49,16 +49,16 @@
                                            value="{{ $today }}">
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="">تاريخ التسليم</label>
-                                    <input required type="date" name="due_date" class="form-control text-center">
+                                    <input required type="date" value="{{ date('Y-m-d') }}" name="due_date" class="form-control text-center">
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="">الضريبة الاولى</label>
-                                    <select required name="tax_id" id="tax_id" class="form-control select2bs4">
+                                    <select name="tax_id" id="tax_id" class="form-control select2bs4">
                                         <option value="">اختر قيمة الضريبة ...</option>
                                         @foreach ($taxes as $key)
                                             <option value="{{ $key->id }}">{{ $key->tax_name }} ({{ $key->tax_ratio }}%)</option>
@@ -66,17 +66,17 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="">الضريبة الثانية</label>
-                                    <select required name="tax_id2" id="tax_id2" class="form-control select2bs4">
-                                        <option value="">اختر قيمة الضريبة ...</option>
-                                        @foreach ($taxes as $key)
-                                            <option value="{{ $key->id }}">{{ $key->tax_name }} ({{ $key->tax_ratio }}%)</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
+{{--                            <div hidden class="col-md-3">--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label for="">الضريبة الثانية</label>--}}
+{{--                                    <select required name="tax_id2" id="tax_id2" class="form-control select2bs4">--}}
+{{--                                        <option value="">اختر قيمة الضريبة ...</option>--}}
+{{--                                        @foreach ($taxes as $key)--}}
+{{--                                            <option value="{{ $key->id }}">{{ $key->tax_name }} ({{ $key->tax_ratio }}%)</option>--}}
+{{--                                        @endforeach--}}
+{{--                                    </select>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="checkbox">التكرار</label>
@@ -139,10 +139,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
                 </div>
                 <button type="submit" class="btn btn-success">حفظ البيانات</button>
             </form>
@@ -192,24 +188,24 @@
     <script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
 
     <script>
-        $(document).ready(function () {
-        $('#tax_id').on('change', function () {
-            var selectedValue = $(this).val();
+        {{--$(document).ready(function () {--}}
+        {{--$('#tax_id').on('change', function () {--}}
+        {{--    var selectedValue = $(this).val();--}}
 
-            // Clear the options in tax_id2
-            $('#tax_id2').empty();
+        {{--    // Clear the options in tax_id2--}}
+        {{--    $('#tax_id2').empty();--}}
 
-            // Add default option to tax_id2
-            $('#tax_id2').append('<option value="">اختر قيمة الضريبة ...</option>');
+        {{--    // Add default option to tax_id2--}}
+        {{--    $('#tax_id2').append('<option value="">اختر قيمة الضريبة ...</option>');--}}
 
-            // Add formatted options to tax_id2 based on the selected value in tax_id
-            @foreach ($taxes as $key)
-                if ('{{ $key->id }}' !== selectedValue) {
-                    $('#tax_id2').append('<option value="{{ $key->id }}">{{ $key->tax_name }} ({{ $key->tax_ratio }}%)</option>');
-                }
-            @endforeach
-        });
-        });
+        {{--    // Add formatted options to tax_id2 based on the selected value in tax_id--}}
+        {{--    @foreach ($taxes as $key)--}}
+        {{--        if ('{{ $key->id }}' !== selectedValue) {--}}
+        {{--            $('#tax_id2').append('<option value="{{ $key->id }}">{{ $key->tax_name }} ({{ $key->tax_ratio }}%)</option>');--}}
+        {{--        }--}}
+        {{--    @endforeach--}}
+        {{--});--}}
+        {{--});--}}
 
 
         function if_checked() {

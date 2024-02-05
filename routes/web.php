@@ -17,7 +17,7 @@ Route::get('/', function () {
     if (\Illuminate\Support\Facades\Auth::check()) {
         return redirect()->route('home');
     } else {
-        return view('auth.login');
+        return redirect('login');
     }
 });
 
@@ -566,6 +566,30 @@ Route::group(['prefix'=>'accounting','middleware'=>'auth'],function(){
             Route::post('update_tax_id_ratio',[App\Http\Controllers\accounting\PurchaseInvoicesController::class , 'update_tax_id_ratio'])->name('accounting.purchase_invoices.update_tax_id_ratio');
         });
     });
+
+    Route::group(['prefix'=>'sales_invoices'],function(){
+        Route::get('index',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'index'])->name('accounting.sales_invoices.index');
+        Route::post('invoice_table_index_ajax',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'invoice_table_index_ajax'])->name('accounting.sales_invoices.invoice_table_index_ajax');
+        Route::get('new_invoices_index',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'new_invoices_index'])->name('accounting.sales_invoices.new_invoices_index');
+        Route::post('create_new_invoices',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'create_new_invoices'])->name('accounting.sales_invoices.create_new_invoices');
+        Route::get('edit_invoices/{id}',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'edit_invoices'])->name('accounting.sales_invoices.edit_invoices');
+        Route::post('update_invoices',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'update_invoices'])->name('accounting.sales_invoices.update_invoices');
+        Route::get('delete_invoices/{id}',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'delete_invoices'])->name('accounting.sales_invoices.delete_invoices');
+        Route::post('create_purchase_invoices_from_order',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'create_purchase_invoices_from_order'])->name('accounting.sales_invoices.create_purchase_invoices_from_order');
+        Route::post('update_purchase_invoices_from_ajax',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'update_purchase_invoices_from_ajax'])->name('accounting.sales_invoices.update_purchase_invoices_from_ajax');
+        Route::post('search_order_ajax',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'search_order_ajax'])->name('accounting.sales_invoices.search_order_ajax');
+        Route::post('invoice_table_index_ajax',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'invoice_table_index_ajax'])->name('accounting.sales_invoices.invoice_table_index_ajax');
+        Route::group(['prefix'=>'invoices'],function(){
+            Route::get('view/{id}',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'invoice_view'])->name('accounting.sales_invoices.invoice_view');
+            Route::post('search_product_ajax',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'search_product_ajax'])->name('accounting.sales_invoices.search_product_ajax');
+            Route::post('invoice_table',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'invoice_table'])->name('accounting.sales_invoices.invoice_table');
+            Route::post('create_product_ajax',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'create_product_ajax'])->name('accounting.sales_invoices.create_product_ajax');
+            Route::post('edit_inputs_from_invoice',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'edit_inputs_from_invoice'])->name('accounting.sales_invoices.edit_inputs_from_invoice');
+            Route::post('delete_item',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'delete_item'])->name('accounting.sales_invoices.delete_item');
+            Route::post('update_invoice_reference_number_ajax',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'update_invoice_reference_number_ajax'])->name('accounting.sales_invoices.update_invoice_reference_number_ajax');
+            Route::post('update_tax_id_ratio',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'update_tax_id_ratio'])->name('accounting.sales_invoices.update_tax_id_ratio');
+        });
+    });
 });
 
 Route::group(['prefix'=>'production'],function (){
@@ -573,6 +597,13 @@ Route::group(['prefix'=>'production'],function (){
     Route::post('create',[App\Http\Controllers\production\ProducationLineController::class,'create'])->name('production.create');
     Route::get('edit/{id}',[App\Http\Controllers\production\ProducationLineController::class,'edit'])->name('production.edit');
     Route::post('update',[App\Http\Controllers\production\ProducationLineController::class,'update'])->name('production.update');
+    Route::post('get_product_name_for_add_production_name_ajax',[App\Http\Controllers\production\ProducationLineController::class,'get_product_name_for_add_production_name_ajax'])->name('production.get_product_name_for_add_production_name_ajax');
+    Route::post('create_production_line_ajax',[App\Http\Controllers\production\ProducationLineController::class,'create_production_line_ajax'])->name('production.create_production_line_ajax');
+    Route::post('production_line_input_table',[App\Http\Controllers\production\ProducationLineController::class,'production_line_input_table'])->name('production.production_line_input_table');
+    Route::post('create_production_input_ajax',[App\Http\Controllers\production\ProducationLineController::class,'create_production_input_ajax'])->name('production.create_production_input_ajax');
+    Route::post('cost_of_production_output_table_ajax',[App\Http\Controllers\production\ProducationLineController::class,'cost_of_production_output_table_ajax'])->name('production.cost_of_production_output_table_ajax');
+    Route::post('update_estimated_cost_ajax',[App\Http\Controllers\production\ProducationLineController::class,'update_estimated_cost_ajax'])->name('production.update_estimated_cost_ajax');
+    Route::post('update_height_for_product_ajax',[App\Http\Controllers\production\ProducationLineController::class,'update_height_for_product_ajax'])->name('production.update_height_for_product_ajax');
     Route::group(['prefix'=>'production_inputs'],function (){
         Route::get('index/{id}',[App\Http\Controllers\production\ProducationLineController::class,'production_input'])->name('production.production_inputs.index');
         Route::post('create',[App\Http\Controllers\production\ProducationLineController::class,'production_input_create'])->name('production.production_inputs.create');
@@ -588,6 +619,12 @@ Route::group(['prefix'=>'production'],function (){
         Route::post('update_product_and_qty_for_production_lines_ajax',[App\Http\Controllers\production\ProducationLineController::class,'update_product_and_qty_for_production_lines_ajax'])->name('production.production_inputs.update_product_and_qty_for_production_lines_ajax');
         Route::post('update_production_order_status',[App\Http\Controllers\production\ProducationLineController::class,'update_production_order_status'])->name('production.production_inputs.update_production_order_status');
         Route::post('production_order_table_ajax',[App\Http\Controllers\production\ProducationLineController::class,'production_order_table_ajax'])->name('production.production_inputs.production_order_table_ajax');
+        Route::post('update_product_line_inputs_ajax',[App\Http\Controllers\production\ProducationLineController::class,'update_product_line_inputs_ajax'])->name('production.production_inputs.update_product_line_inputs_ajax');
+        Route::post('production_input_table_ajax',[App\Http\Controllers\production\ProducationLineController::class,'production_input_table_ajax'])->name('production.production_inputs.production_input_table_ajax');
+        Route::post('delete_production_input_ajax',[App\Http\Controllers\production\ProducationLineController::class,'delete_production_input_ajax'])->name('production.production_inputs.delete_production_input_ajax');
+        Route::post('summery_production_inputs_table_ajax',[App\Http\Controllers\production\ProducationLineController::class,'summery_production_inputs_table_ajax'])->name('production.production_inputs.summery_production_inputs_table_ajax');
+        Route::post('the_length_of_the_output_item_ajax',[App\Http\Controllers\production\ProducationLineController::class,'the_length_of_the_output_item_ajax'])->name('production.production_inputs.the_length_of_the_output_item_ajax');
+        Route::post('production_lines_table_ajax',[App\Http\Controllers\production\ProducationLineController::class,'production_lines_table_ajax'])->name('production.production_inputs.production_lines_table_ajax');
         Route::group(['prefix'=>'settings'],function (){
             Route::post('production_setting_list',[App\Http\Controllers\production\SettingController::class , 'production_setting_list'])->name('production.production_inputs.settings.production_setting_list');
             Route::post('create',[App\Http\Controllers\production\SettingController::class , 'create'])->name('production.production_inputs.settings.create');
@@ -600,3 +637,23 @@ Route::group(['prefix'=>'production'],function (){
         Route::get('index',[App\Http\Controllers\production\ProductionOrderController::class,'index'])->name('production.production_orders.index');
     });
 });
+
+Route::group(['prefix'=>'price_offer_sales'],function (){
+    Route::get('index',[App\Http\Controllers\sales\PriceOfferSalesController::class,'index'])->name('price_offer_sales.index');
+    Route::post('create',[App\Http\Controllers\sales\PriceOfferSalesController::class,'create'])->name('price_offer_sales.create');
+    Route::get('edit/{id}',[App\Http\Controllers\sales\PriceOfferSalesController::class,'edit'])->name('price_offer_sales.edit');
+    Route::post('update',[App\Http\Controllers\sales\PriceOfferSalesController::class,'update'])->name('price_offer_sales.update');
+    Route::post('price_offer_sales_table_ajax',[App\Http\Controllers\sales\PriceOfferSalesController::class,'price_offer_sales_table_ajax'])->name('price_offer_sales.price_offer_sales_table_ajax');
+    Route::group(['prefix'=>'price_offer_sales_items'],function (){
+        Route::get('price_offer_sales_items_index/{id}',[App\Http\Controllers\sales\PriceOfferSalesController::class,'price_offer_sales_items_index'])->name('price_offer_sales.price_offer_sales_items.price_offer_sales_items_index');
+        Route::post('price_offer_sales_items_table_ajax',[App\Http\Controllers\sales\PriceOfferSalesController::class,'price_offer_sales_items_table_ajax'])->name('price_offer_sales.price_offer_sales_items.price_offer_sales_items_table_ajax');
+        Route::post('product_list_search',[App\Http\Controllers\sales\PriceOfferSalesController::class,'product_list_search'])->name('price_offer_sales.price_offer_sales_items.product_list_search');
+        Route::post('create_price_offer_sales_items_ajax',[App\Http\Controllers\sales\PriceOfferSalesController::class,'create_price_offer_sales_items_ajax'])->name('price_offer_sales.price_offer_sales_items.create_price_offer_sales_items_ajax');
+        Route::post('delete_price_offer_sales_items',[App\Http\Controllers\sales\PriceOfferSalesController::class,'delete_price_offer_sales_items'])->name('price_offer_sales.price_offer_sales_items.delete_price_offer_sales_items');
+        Route::post('update_qty_price_price_offer_sales_items_ajax',[App\Http\Controllers\sales\PriceOfferSalesController::class,'update_qty_price_price_offer_sales_items_ajax'])->name('price_offer_sales.price_offer_sales_items.update_qty_price_price_offer_sales_items_ajax');
+        Route::post('price_offer_sales_items_pdf',[App\Http\Controllers\sales\PriceOfferSalesController::class,'price_offer_sales_items_pdf'])->name('price_offer_sales.price_offer_sales_items.price_offer_sales_items_pdf');
+        Route::post('update_currency_notes_customer_for_price_offer_sales_items_ajax',[App\Http\Controllers\sales\PriceOfferSalesController::class,'update_currency_notes_customer_for_price_offer_sales_items_ajax'])->name('price_offer_sales.price_offer_sales_items.update_currency_notes_customer_for_price_offer_sales_items_ajax');
+        Route::post('get_sum_price_offer_sales_items_ajax',[App\Http\Controllers\sales\PriceOfferSalesController::class,'get_sum_price_offer_sales_items_ajax'])->name('price_offer_sales.price_offer_sales_items.get_sum_price_offer_sales_items_ajax');
+    });
+});
+

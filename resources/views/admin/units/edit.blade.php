@@ -39,7 +39,7 @@
                     <label for="">اسم الوحدة باللغة الانجليزية</label>
                     <input value="{{ $data->unit_name_en }}" class="form-control" required type="text" name="unit_name_en" placeholder="اكتب اسم الوحدة باللغة الانجليزية">
                 </div>
-                <button type="submit" class="btn btn-primary">تعديل</button>
+                <button type="submit" class="btn btn-success">تعديل</button>
             </form>
         </div>
 

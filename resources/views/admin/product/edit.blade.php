@@ -77,6 +77,11 @@
                                    placeholder="اسم الصنف بالانجليزي">
                         </div>
                         <div class="form-group">
+                            <label for="">اسم الصنف بالعبرية / Product name Hebrew</label>
+                            <input name="product_name_he" class="form-control" type="text" value="{{ old('product_id',$data->product_name_he) }}"
+                                   placeholder="اسم الصنف بالعبرية">
+                        </div>
+                        <div class="form-group">
                             <label for="">تصنيف المنتج / Category</label>
                             <select class="form-control select2bs4" style="width: 100%;" tabindex="-1" aria-hidden="true"
                                     data-select2-id="1" name="category_id" id="">

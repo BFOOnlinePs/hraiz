@@ -44,14 +44,24 @@ class SupplierController extends Controller
         $data->password = Hash::make($request->password);
         $data->user_phone1 = $request->user_phone1;
         $data->user_phone2 = $request->user_phone2;
-        // $data->user_role = 4;
+        $data->user_role = '["4"]';
 
         $data->user_status = 1;
         if(in_array('1',json_decode(auth()->user()->user_role))){
-            $data->follow_by = json_encode($request->follow_by);
+            if ($request->follow_by == null){
+                $data->follow_by = null;
+            }
+            else{
+                $data->follow_by = json_encode($request->follow_by);
+            }
         }
         if(in_array('2',json_decode(auth()->user()->user_role))){
-            $data->follow_by = '["'.auth()->user()->id.'"]';
+            if ($request->follow_by == null){
+                $data->follow_by = null;
+            }
+            else{
+                $data->follow_by = '["'.auth()->user()->id.'"]';
+            }
         }
         $data->user_reg_date = Carbon::now();
         if ($request->hasFile('user_photo')) {
@@ -71,10 +81,10 @@ class SupplierController extends Controller
         $data->user_swift_code = $request->user_swift_code;
         $data->user_iban_number = $request->user_iban_number;
         if ($data->save()){
-            $user_levels = new UserLevels();
-            $user_levels->user_id = $data->id;
-            $user_levels->role_id = $request->role_id;
-            $user_levels->save();
+//            $user_levels = new UserLevels();
+//            $user_levels->user_id = $data->id;
+//            $user_levels->role_id = $request->role_id;
+//            $user_levels->save();
             return redirect()->route('users.supplier.index')->with(['success'=>'تم اضافة البيانات بنجاح','tab_id'=>1]);
         }
         else{
