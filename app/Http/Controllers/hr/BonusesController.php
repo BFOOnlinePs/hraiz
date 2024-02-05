@@ -17,10 +17,10 @@ class BonusesController extends Controller
         $employee_bonus->notes = $request->notes;
         $employee_bonus->inserted_by = auth()->user()->id;
         if($employee_bonus->save()) {
-            return redirect()->route('hr.employees.details' , ['id' => $request->employee_id])->with(['success'=>'تم إضافة علاوة للموظف بنجاح']);
+            return redirect()->route('users.employees.details' , ['id' => $request->employee_id])->with(['success'=>'تم إضافة علاوة للموظف بنجاح']);
         }
         else {
-            return redirect()->route('hr.employees.details' , ['id' => $request->employee_id])->with(['fail'=>'لم تتم إضافة العلاوة ، هناك خلل ما']);
+            return redirect()->route('users.employees.details' , ['id' => $request->employee_id])->with(['fail'=>'لم تتم إضافة العلاوة ، هناك خلل ما']);
         }
     }
     public function edit(Request $request)
@@ -30,10 +30,10 @@ class BonusesController extends Controller
         $employee_bonus->type = $request->type;
         $employee_bonus->notes = $request->notes;
         if($employee_bonus->save()) {
-            return redirect()->route('hr.employees.details' , ['id' => $request->employee_id])->with(['success'=>'تم تعديل علاوة للموظف بنجاح']);
+            return redirect()->route('users.employees.details' , ['id' => $request->employee_id])->with(['success'=>'تم تعديل علاوة للموظف بنجاح']);
         }
         else {
-            return redirect()->route('hr.employees.details' , ['id' => $request->employee_id])->with(['fail'=>'لم تتم تعديل العلاوة ، هناك خلل ما']);
+            return redirect()->route('users.employees.details' , ['id' => $request->employee_id])->with(['fail'=>'لم تتم تعديل العلاوة ، هناك خلل ما']);
         }
 
     }

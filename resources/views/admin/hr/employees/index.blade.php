@@ -16,7 +16,7 @@
 @section('content')
     @include('admin.messge_alert.success')
     @include('admin.messge_alert.fail')
-    <a href="{{ route('hr.employees.add') }}" class="btn btn-dark mb-2">إضافة موظف</a>
+    <a href="{{ route('users.employees.add') }}" class="btn btn-dark mb-2">إضافة موظف</a>
     <div class="card">
         <div class="card-header">
             <h3 class="text-center">قائمة الموظفين</h3>
@@ -71,7 +71,7 @@
                 "X-CSRF-Token": csrfToken
             };
             $.ajax({
-                url: "{{ route('hr.employees.employee_table') }}",
+                url: "{{ route('users.employees.employee_table') }}",
                 method: 'post',
                 headers: headers,
                 data: {

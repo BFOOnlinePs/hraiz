@@ -299,6 +299,42 @@ Route::group(['middleware' => 'auth',], function () {
             Route::post('update/{id}', [App\Http\Controllers\users\ClientsController::class, 'update'])->name('users.clients.update');
             Route::get('details/{id}', [App\Http\Controllers\users\ClientsController::class, 'details'])->name('users.clients.details');
         });
+        Route::group(['prefix'=>'employees'],function(){
+            Route::get('index',[App\Http\Controllers\hr\EmployeesController::class, 'index'])->name('users.employees.index');
+            Route::get('add',[App\Http\Controllers\hr\EmployeesController::class, 'add'])->name('users.employees.add');
+            Route::post('create',[App\Http\Controllers\users\EmployeesController::class, 'create'])->name('users.employees.create');
+            Route::post('employee_table',[App\Http\Controllers\hr\EmployeesController::class, 'employee_table'])->name('users.employees.employee_table');
+            Route::get('details/{id}',[App\Http\Controllers\hr\EmployeesController::class, 'details'])->name('users.employees.details');
+            Route::get('edit/{id}',[App\Http\Controllers\hr\EmployeesController::class, 'edit'])->name('users.employees.edit');
+            Route::group(['prefix'=>'rewards'],function(){
+                Route::post('create',[App\Http\Controllers\hr\DiscountRewardController::class, 'create_reward'])->name('users.employees.rewards.create');
+                Route::post('edit',[App\Http\Controllers\hr\DiscountRewardController::class, 'create_reward'])->name('users.employees.rewards.edit');
+                Route::post('reward_change_date_by_ajax',[App\Http\Controllers\hr\DiscountRewardController::class, 'reward_change_date_by_ajax'])->name('users.employees.rewards.reward_change_date_by_ajax');
+            });
+            Route::group(['prefix'=>'discounts'],function(){
+                Route::post('create',[App\Http\Controllers\hr\DiscountRewardController::class, 'create_discount'])->name('users.employees.discounts.create');
+                Route::post('edit',[App\Http\Controllers\hr\DiscountRewardController::class, 'edit_discount'])->name('users.employees.discounts.edit');
+                Route::post('discount_change_date_by_ajax',[App\Http\Controllers\hr\DiscountRewardController::class, 'discount_change_date_by_ajax'])->name('users.employees.discounts.discount_change_date_by_ajax');
+            });
+            Route::group(['prefix'=>'advances'],function(){
+                Route::post('create',[App\Http\Controllers\hr\DiscountRewardController::class, 'create_advance'])->name('users.employees.advances.create');
+                Route::post('edit',[App\Http\Controllers\hr\DiscountRewardController::class, 'edit_advance'])->name('users.employees.advances.edit');
+                Route::post('advance_change_date_by_ajax',[App\Http\Controllers\hr\DiscountRewardController::class, 'advance_change_date_by_ajax'])->name('users.employees.advances.advance_change_date_by_ajax');
+            });
+            Route::group(['prefix'=>'vacations'],function(){
+                Route::post('create',[App\Http\Controllers\hr\VacationsController::class, 'create'])->name('users.employees.vacations.create');
+                Route::post('vacations_change_date_by_ajax',[App\Http\Controllers\hr\VacationsController::class, 'vacations_change_date_by_ajax'])->name('users.employees.vacations.vacations_change_date_by_ajax');
+                Route::post('edit',[App\Http\Controllers\hr\VacationsController::class, 'edit'])->name('users.employees.vacations.edit');
+            });
+            Route::group(['prefix'=>'bonuses'],function(){
+                Route::post('create',[App\Http\Controllers\hr\BonusesController::class, 'create'])->name('users.employees.bonuses.create');
+                Route::post('edit',[App\Http\Controllers\hr\BonusesController::class, 'edit'])->name('users.employees.bonuses.edit');
+            });
+            Route::group(['prefix'=>'evaluations'],function(){
+                Route::post('create',[App\Http\Controllers\hr\EvaluationsController::class, 'create'])->name('users.employees.evaluations.create');
+                Route::post('edit',[App\Http\Controllers\hr\EvaluationsController::class, 'edit'])->name('users.employees.evaluations.edit');
+            });
+        });
     });
 
     Route::group(['prefix' => 'company_contact_person'], function () {
@@ -481,42 +517,6 @@ Route::group(['middleware' => 'auth',], function () {
 
     });
     Route::group(['prefix'=>'hr'],function(){
-        Route::group(['prefix'=>'employees'],function(){
-            Route::get('index',[App\Http\Controllers\hr\EmployeesController::class, 'index'])->name('hr.employees.index');
-            Route::get('add',[App\Http\Controllers\hr\EmployeesController::class, 'add'])->name('hr.employees.add');
-            Route::post('create',[App\Http\Controllers\users\EmployeesController::class, 'create'])->name('hr.employees.create');
-            Route::post('employee_table',[App\Http\Controllers\hr\EmployeesController::class, 'employee_table'])->name('hr.employees.employee_table');
-            Route::get('details/{id}',[App\Http\Controllers\hr\EmployeesController::class, 'details'])->name('hr.employees.details');
-            Route::get('edit/{id}',[App\Http\Controllers\hr\EmployeesController::class, 'edit'])->name('hr.employees.edit');
-            Route::group(['prefix'=>'rewards'],function(){
-                Route::post('create',[App\Http\Controllers\hr\DiscountRewardController::class, 'create_reward'])->name('hr.employees.rewards.create');
-                Route::post('edit',[App\Http\Controllers\hr\DiscountRewardController::class, 'create_reward'])->name('hr.employees.rewards.edit');
-                Route::post('reward_change_date_by_ajax',[App\Http\Controllers\hr\DiscountRewardController::class, 'reward_change_date_by_ajax'])->name('hr.employees.rewards.reward_change_date_by_ajax');
-            });
-            Route::group(['prefix'=>'discounts'],function(){
-                Route::post('create',[App\Http\Controllers\hr\DiscountRewardController::class, 'create_discount'])->name('hr.employees.discounts.create');
-                Route::post('edit',[App\Http\Controllers\hr\DiscountRewardController::class, 'edit_discount'])->name('hr.employees.discounts.edit');
-                Route::post('discount_change_date_by_ajax',[App\Http\Controllers\hr\DiscountRewardController::class, 'discount_change_date_by_ajax'])->name('hr.employees.discounts.discount_change_date_by_ajax');
-            });
-            Route::group(['prefix'=>'advances'],function(){
-                Route::post('create',[App\Http\Controllers\hr\DiscountRewardController::class, 'create_advance'])->name('hr.employees.advances.create');
-                Route::post('edit',[App\Http\Controllers\hr\DiscountRewardController::class, 'edit_advance'])->name('hr.employees.advances.edit');
-                Route::post('advance_change_date_by_ajax',[App\Http\Controllers\hr\DiscountRewardController::class, 'advance_change_date_by_ajax'])->name('hr.employees.advances.advance_change_date_by_ajax');
-            });
-            Route::group(['prefix'=>'vacations'],function(){
-                Route::post('create',[App\Http\Controllers\hr\VacationsController::class, 'create'])->name('hr.employees.vacations.create');
-                Route::post('vacations_change_date_by_ajax',[App\Http\Controllers\hr\VacationsController::class, 'vacations_change_date_by_ajax'])->name('hr.employees.vacations.vacations_change_date_by_ajax');
-                Route::post('edit',[App\Http\Controllers\hr\VacationsController::class, 'edit'])->name('hr.employees.vacations.edit');
-            });
-            Route::group(['prefix'=>'bonuses'],function(){
-                Route::post('create',[App\Http\Controllers\hr\BonusesController::class, 'create'])->name('hr.employees.bonuses.create');
-                Route::post('edit',[App\Http\Controllers\hr\BonusesController::class, 'edit'])->name('hr.employees.bonuses.edit');
-            });
-            Route::group(['prefix'=>'evaluations'],function(){
-                Route::post('create',[App\Http\Controllers\hr\EvaluationsController::class, 'create'])->name('hr.employees.evaluations.create');
-                Route::post('edit',[App\Http\Controllers\hr\EvaluationsController::class, 'edit'])->name('hr.employees.evaluations.edit');
-            });
-        });
         Route::group(['prefix'=>'attendance'],function(){
             Route::post('create',[App\Http\Controllers\hr\AttendanceController::class, 'create'])->name('hr.attendance.create');
             Route::post('editOutTime',[App\Http\Controllers\hr\AttendanceController::class, 'editOutTime'])->name('hr.attendance.editOutTime');

@@ -22,10 +22,10 @@ class EvaluationsController extends Controller
             $employee_evaluation->attachment = $filename;
         }
         if($employee_evaluation->save()) {
-            return redirect()->route('hr.employees.details' , ['id' => $request->employee_id])->with(['success'=>'تم إضافة تقييم للموظف بنجاح']);
+            return redirect()->route('users.employees.details' , ['id' => $request->employee_id])->with(['success'=>'تم إضافة تقييم للموظف بنجاح']);
         }
         else {
-            return redirect()->route('hr.employees.details' , ['id' => $request->employee_id])->with(['fail'=>'لم تتم إضافة التقييم ، هناك خلل ما']);
+            return redirect()->route('users.employees.details' , ['id' => $request->employee_id])->with(['fail'=>'لم تتم إضافة التقييم ، هناك خلل ما']);
         }
     }
     public function edit(Request $request)
@@ -40,10 +40,10 @@ class EvaluationsController extends Controller
             $employee_evaluation->attachment = $filename;
         }
         if($employee_evaluation->save()) {
-            return redirect()->route('hr.employees.details' , ['id' => $request->employee_id])->with(['success'=>'تم تعديل تقييم الموظف بنجاح']);
+            return redirect()->route('users.employees.details' , ['id' => $request->employee_id])->with(['success'=>'تم تعديل تقييم الموظف بنجاح']);
         }
         else {
-            return redirect()->route('hr.employees.details' , ['id' => $request->employee_id])->with(['fail'=>'لم تتم تعديل التقييم ، هناك خلل ما']);
+            return redirect()->route('users.employees.details' , ['id' => $request->employee_id])->with(['fail'=>'لم تتم تعديل التقييم ، هناك خلل ما']);
         }
     }
 }
