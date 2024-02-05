@@ -111,24 +111,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
             document.getElementById('view_attachment_result').src = url;
         }
 
-        // function formatAllDateInputs() {
-        //     alert('asd');
-        //     const dateInputs = document.querySelectorAll('input[type="date"]');
-        //     dateInputs.forEach(input => {
-        //         const inputValue = input.value;
-        //         const datePattern = /^\d{4}-\d{2}-\d{2}$/; // Default format for type="date"
-        //         if (datePattern.test(inputValue)) {
-        //             const formattedValue = inputValue.split('-').reverse().join('/');
-        //             input.value = formattedValue;
-        //         }
-        //     });
-        // }
-        //
-        // document.addEventListener('DOMContentLoaded', function () {
-        //     formatAllDateInputs();
-        // });
+        function numberFormat(value, decimals = 2) {
+            // Convert the value to a float with specified decimals
+            const floatValue = parseFloat(value);
 
-        // Use datepicker on the date inputs
+            // Check if the conversion was successful
+            if (isNaN(floatValue)) {
+                throw new Error('Invalid value provided');
+            }
+
+            // Use toFixed to round to the specified number of decimals
+            const roundedValue = floatValue.toFixed(decimals);
+
+            // Use Number() to convert back to a number (removes trailing zeros)
+            return Number(roundedValue);
+        }
+
     </script>
 </body>
 
