@@ -104,9 +104,10 @@
                     <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false" class="nav-link text-white dropdown-toggle">الموارد البشرية</a>
                     <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                        <li><a href="#" class="dropdown-item">الموظفين</a></li>
-                        <li><a href="#" class="dropdown-item">الرواتب</a></li>
+                        <li><a href="{{route('hr.employees.index')}}" class="dropdown-item">الموظفين</a></li>
+                        <li><a href="{{route('hr.salaries.index')}}" class="dropdown-item">الرواتب</a></li>
                         <li><a href="#" class="dropdown-item">الدوام</a></li>
+                        <li><a href="#" class="dropdown-item">الحضور و المغادرة</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -134,6 +135,7 @@
                         <li><a href="{{ route('setting.system_setting.index') }}" class="dropdown-item">اعدادات النظام</a></li>
                         <li><a href="{{ route('accounting.texes.index') }}" class="dropdown-item">الضرائب</a></li>
                         <li><a href="{{ route('setting.machine.setting_index') }}" class="dropdown-item">الآلات</a></li>
+                        <li><a href="{{ route('setting.vacations_types.index') }}" class="dropdown-item">أنواع الإجازات</a></li>
                     </ul>
                 </li>
             </ul>
