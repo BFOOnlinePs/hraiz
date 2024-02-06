@@ -149,8 +149,30 @@
 @section('content')
     <div class="row">
         <div class="col-md-10">
-            <div class="col-md-12 mb-4">
-                <input onkeyup="fetchAdditionalData()" id="input_search" name="product_search" type="text" placeholder="بحث" class="form-control mb-2">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <input onkeyup="fetchAdditionalData()" id="input_search" name="product_search" type="text" placeholder="بحث" class="form-control mb-2">
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <select onchange="fetchAdditionalData()" class="form-control select2bs4" name="" id="category_selected_id">
+                            <option value="">جميع المجموعات</option>
+                            @foreach($category as $key)
+                                <option value="{{ $key->id }}">{{ $key->cat_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <select onchange="fetchAdditionalData()" class="form-control select2bs4" name="" id="units_selected_id">
+                            <option value="">جميع الوحدات</option>
+                            @foreach($unit as $key)
+                                <option value="{{ $key->id }}">{{ $key->unit_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
             </div>
             <div class="card">
 
@@ -445,6 +467,8 @@
                 type: 'get',
                 data:{
                     'product_search':document.getElementById('input_search').value,
+                    'category_selected_id':document.getElementById('category_selected_id').value,
+                    'units_selected_id':document.getElementById('units_selected_id').value,
                     'page': page
                 },
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
