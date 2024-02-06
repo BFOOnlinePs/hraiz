@@ -24,9 +24,11 @@
                 <td>
                     <a class="btn btn-success btn-sm" href="{{ route('production.edit',['id'=>$key->id]) }}"><span class="fa fa-edit"></span></a>
                     <a class="btn btn-dark btn-sm" href="{{ route('production.production_inputs.index',['id'=>$key->id]) }}"><span class="fa fa-search"></span></a>
+                    <a onclick="return confirm('هل انت متاكد من حذف البيانات ؟')" class="btn btn-danger btn-sm" href="{{ route('production.delete',['id'=>$key->id]) }}"><span class="fa fa-trash"></span></a>
                 </td>
             </tr>
         @endforeach
     @endif
     </tbody>
 </table>
+{{ $data->links() }}

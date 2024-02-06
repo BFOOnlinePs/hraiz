@@ -72,6 +72,16 @@ class ProducationLineController extends Controller
         }
     }
 
+    public function delete($id){
+        $data = ProducationLinesModel::where('id',$id)->first();
+        if ($data->delete()){
+            return redirect()->route('production.index')->with(['success'=>'تم حذف البيانات بنجاح']);
+        }
+        else{
+            return redirect()->route('production.index')->with(['fail'=>'هناك خطا ما لم يتم حذف البيانات']);
+        }
+    }
+
     public function production_input($id){
         $production_lines = ProducationLinesModel::where('id',$id)->first();
         $production_lines['product'] = ProductModel::where('id',$production_lines->product_id)->first();
@@ -352,7 +362,7 @@ class ProducationLineController extends Controller
     }
 
     public function production_lines_table_ajax(Request $request){
-        $data = ProducationLinesModel::where('production_name','like','%'.$request->search_production_line.'%')->get();
+        $data = ProducationLinesModel::where('production_name','like','%'.$request->search_production_line.'%')->where('product_id','like','%'.$request->product_id.'%')->paginate(10);
         foreach ($data as $key){
             $key->product = ProductModel::where('id',$key->product_id)->first();
         }
@@ -476,5 +486,12 @@ class ProducationLineController extends Controller
         else{
             return redirect()->route('production.production_inputs.index',['id'=>$id]);
         }
+      
+    public function product_production_line_table_ajax(Request $request){
+        $data = ProducationLinesModel::where('product_id',$request->product_id)->get();
+        return response()->json([
+            'success'=>'true',
+            'view'=>view('admin.production.production_line.ajax.product_production_line_table',['data'=>$data])->render()
+        ]);
     }
 }

@@ -521,11 +521,6 @@
             e.preventDefault();
             page = $(this).attr('href').split('page=')[1];
 
-            var checkboxStates = {};
-            $('input[name="checkbox[]"]:checked').each(function() {
-                checkboxStates[$(this).val()] = true;
-            });
-
             search_product('', page, checkboxStates);
         });
 

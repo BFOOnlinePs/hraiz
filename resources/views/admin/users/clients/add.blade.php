@@ -12,7 +12,6 @@
 اضافة زبون
 @endsection
 @section('content')
-
     <form action="{{ route('users.clients.create') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="row">

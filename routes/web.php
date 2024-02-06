@@ -597,6 +597,7 @@ Route::group(['prefix'=>'production'],function (){
     Route::post('create',[App\Http\Controllers\production\ProducationLineController::class,'create'])->name('production.create');
     Route::get('edit/{id}',[App\Http\Controllers\production\ProducationLineController::class,'edit'])->name('production.edit');
     Route::post('update',[App\Http\Controllers\production\ProducationLineController::class,'update'])->name('production.update');
+    Route::get('delete/{id}',[App\Http\Controllers\production\ProducationLineController::class,'delete'])->name('production.delete');
     Route::post('get_product_name_for_add_production_name_ajax',[App\Http\Controllers\production\ProducationLineController::class,'get_product_name_for_add_production_name_ajax'])->name('production.get_product_name_for_add_production_name_ajax');
     Route::post('create_production_line_ajax',[App\Http\Controllers\production\ProducationLineController::class,'create_production_line_ajax'])->name('production.create_production_line_ajax');
     Route::post('production_line_input_table',[App\Http\Controllers\production\ProducationLineController::class,'production_line_input_table'])->name('production.production_line_input_table');
@@ -605,6 +606,7 @@ Route::group(['prefix'=>'production'],function (){
     Route::post('update_estimated_cost_ajax',[App\Http\Controllers\production\ProducationLineController::class,'update_estimated_cost_ajax'])->name('production.update_estimated_cost_ajax');
     Route::post('update_height_for_product_ajax',[App\Http\Controllers\production\ProducationLineController::class,'update_height_for_product_ajax'])->name('production.update_height_for_product_ajax');
     Route::get('redirect_with_update_status_production_line/{id}',[App\Http\Controllers\production\ProducationLineController::class,'redirect_with_update_status_production_line'])->name('production.redirect_with_update_status_production_line');
+    Route::post('product_production_line_table_ajax',[App\Http\Controllers\production\ProducationLineController::class,'product_production_line_table_ajax'])->name('production.product_production_line_table_ajax');
     Route::group(['prefix'=>'production_inputs'],function (){
         Route::get('index/{id}',[App\Http\Controllers\production\ProducationLineController::class,'production_input'])->name('production.production_inputs.index');
         Route::post('create',[App\Http\Controllers\production\ProducationLineController::class,'production_input_create'])->name('production.production_inputs.create');

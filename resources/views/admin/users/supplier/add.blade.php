@@ -21,8 +21,6 @@
 <link rel="stylesheet" href="{{ asset('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 @endsection
 @section('content')
-    <div class="">
-        <div class="">
             <form action="{{ route('users.supplier.create') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
@@ -237,10 +235,6 @@
 {{--                    </div>--}}
 
             </form>
-
-        </div>
-
-    </div>
 
 @endsection
 
