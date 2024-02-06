@@ -11,71 +11,119 @@
 @section('header_title_link')
     موظف المشتريات
 @endsection
-@section('content')
-
+@section('style')
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/toastr/toastr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free/css/all.min.css') }}">
-
-    <a href="{{ route('users.procurement_officer.add') }}" class="btn btn-dark mb-2">اضافة موظف مشتريات</a>
-    <div class="card">
-        <div class="card-header">
-            <h3 class="text-center">قائمة موظفي المشتريات</h3>
-        </div>
-
-        <div class="card-body">
-            <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <table id="example1" class="table table-bordered table-striped dataTable dtr-inline"
-                               aria-describedby="example1_info">
-                            <thead>
-                            <tr>
-                                <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1"
-                                    colspan="1" aria-sort="ascending">#
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">الاسم
-                                </th>
-                                <th>
-                                    رقم الهاتف
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">البريد الالكتروني
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">حالة الحساب
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">العمليات
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($data as $key)
-                                    <tr>
-                                        <td>{{ $key->id }}</td>
-                                        <td>{{ $key->name }}</td>
-                                        <td>{{ $key->user_phone1 }}</td>
-                                        <td>{{ $key->email }}</td>
-                                        <td>
-                                            <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
-                                                <input @if($key->user_status == 1) checked @endif onchange="updateStatus({{ $key->id }})" type="checkbox" class="custom-control-input" id="customSwitch{{$key->id}}">
-                                                <label class="custom-control-label" for="customSwitch{{$key->id}}"></label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-success btn-sm" href="{{ route('users.procurement_officer.edit',['id'=>$key->id]) }}"><span class="fa fa-edit"></span></a>
-                                            <a class="btn btn-dark btn-sm" href="{{ route('users.procurement_officer.details',['id'=>$key->id]) }}"><span class="fa fa-search"></span></a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+@endsection
+@section('content')
+<div class="row">
+    <div class="col-md-10">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="text-center">قائمة موظفي المشتريات</h3>
                     </div>
+
+                    <div class="card-body">
+                        <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table id="example1" class="table table-bordered table-striped dataTable dtr-inline"
+                                           aria-describedby="example1_info">
+                                        <thead>
+                                        <tr>
+                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1"
+                                                colspan="1" aria-sort="ascending">#
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">الاسم
+                                            </th>
+                                            <th>
+                                                رقم الهاتف
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">البريد الالكتروني
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">حالة الحساب
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">العمليات
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($data as $key)
+                                            <tr>
+                                                <td>{{ $key->id }}</td>
+                                                <td>{{ $key->name }}</td>
+                                                <td>{{ $key->user_phone1 }}</td>
+                                                <td>{{ $key->email }}</td>
+                                                <td>
+                                                    <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                                                        <input @if($key->user_status == 1) checked @endif onchange="updateStatus({{ $key->id }})" type="checkbox" class="custom-control-input" id="customSwitch{{$key->id}}">
+                                                        <label class="custom-control-label" for="customSwitch{{$key->id}}"></label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-success btn-sm" href="{{ route('users.procurement_officer.edit',['id'=>$key->id]) }}"><span class="fa fa-edit"></span></a>
+                                                    <a class="btn btn-dark btn-sm" href="{{ route('users.procurement_officer.details',['id'=>$key->id]) }}"><span class="fa fa-search"></span></a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="{{ route('users.procurement_officer.add') }}" class="btn form-control btn-dark mb-2">اضافة موظف مشتريات</a>
+            </div>
+            <div class="col-md-12 mt-4">
+                <div class="form-group">
+                    <a href="{{ route('users.procurement_officer.index') }}" class="btn btn-sm btn-warning form-control">موظف المشتريات</a>
+                </div>
+                <div class="form-group">
+                    <a href="{{ route('users.storekeeper.index') }}" class="btn btn-sm btn-warning form-control">أمين المستودع</a>
+                </div>
+                <div class="form-group">
+                    <a href="{{ route('users.secretarial.index') }}" class="btn btn-sm btn-warning form-control">سكرتيريا</a>
+                </div>
+                <div class="form-group">
+                    <a href="{{ route('users.supplier.index') }}" class="btn btn-sm btn-warning form-control">الموردين</a>
+                </div>
+                <div class="form-group">
+                    <a href="{{ route('users.delivery_company.index') }}" class="btn btn-sm btn-warning form-control">شركات الشحن</a>
+                </div>
+                <div class="form-group">
+                    <a href="{{ route('users.clearance_companies.index') }}" class="btn btn-sm btn-warning form-control">شركات التخليص</a>
+                </div>
+                <div class="form-group">
+                    <a href="{{ route('users.local_carriers.index') }}" class="btn btn-sm btn-warning form-control">شركات النقل المحلي</a>
+                </div>
+                <div class="form-group">
+                    <a href="{{ route('users.insurance_companies.index') }}" class="btn btn-sm btn-warning form-control">شركات التأمين</a>
+                </div>
+                <div class="form-group">
+                    <a href="{{ route('users.clients.index') }}" class="btn btn-sm btn-warning form-control">زبائن</a>
+                </div>
+                <div class="form-group">
+                    <a href="{{ route('users.employees.index') }}" class="btn btn-sm btn-warning form-control">موظفين</a>
                 </div>
             </div>
         </div>
-
     </div>
+</div>
 
 @endsection()
 

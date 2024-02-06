@@ -291,7 +291,7 @@ Route::group(['middleware' => 'auth',], function () {
             Route::get('details/{id}', [App\Http\Controllers\users\InsuranceCompaniesController::class, 'details'])->name('users.insurance_companies.details');
         });
 
-        Route::group(['prefix' => 'client'], function () {
+        Route::group(['prefix' => 'clients'], function () {
             Route::get('/index', [App\Http\Controllers\users\ClientsController::class, 'index'])->name('users.clients.index');
             Route::get('/add', [App\Http\Controllers\users\ClientsController::class, 'add'])->name('users.clients.add');
             Route::post('create', [App\Http\Controllers\users\ClientsController::class, 'create'])->name('users.clients.create');
