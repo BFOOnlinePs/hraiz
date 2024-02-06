@@ -25,42 +25,46 @@
                 @csrf
                 <input type="hidden" name="id" value="{{ $data->id }}">
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="">اسم خط الانتاج</label>
-                            <input class="form-control" name="production_name" type="text" value="{{ $data->production_name }}">
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="">المنتج</label>
-                            <select class="form-control select2bs4" name="product_id" id="">
-                                <option value="">اختر منتج ...</option>
-                                @foreach($products as $key)
-                                    <option @if($data->product_id == $key->id) selected @endif value="{{ $key->id }}">{{ $key->product_name_ar }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    @if(!empty($data->production_image))
+                    <div class="col-md-8">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="">صورة المنتج</label>
-                                <br>
-                                <img src="{{ asset('storage/production/'.$data->production_image) }}" alt="">
+                                <label for="">اسم خط الانتاج</label>
+                                <input class="form-control" name="production_name" type="text" value="{{ $data->production_name }}">
                             </div>
                         </div>
-                    @endif
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="">اضافة صورة</label>
-                            <input type="file" name="production_image" class="form-control">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="">المنتج</label>
+                                <select class="form-control select2bs4" name="product_id" id="">
+                                    <option value="">اختر منتج ...</option>
+                                    @foreach($products as $key)
+                                        <option @if($data->product_id == $key->id) selected @endif value="{{ $key->id }}">{{ $key->product_name_ar }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="">الملاحظات</label>
+                                <textarea name="production_notes" class="form-control" id="" cols="30" rows="3">{{ $data->production_notes }}</textarea>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="">الملاحظات</label>
-                            <textarea name="production_notes" class="form-control" id="" cols="30" rows="3">{{ $data->production_notes }}</textarea>
+                    <div class="col-md-4 text-center">
+                        @if(!empty($data->production_image))
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="">صورة المنتج</label>
+                                    <br>
+                                    <img src="{{ asset('storage/production/'.$data->production_image) }}" alt="">
+                                </div>
+                            </div>
+                        @endif
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="">اضافة صورة</label>
+                                <input type="file" name="production_image" class="form-control">
+                            </div>
                         </div>
                     </div>
                 </div>

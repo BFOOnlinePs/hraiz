@@ -298,7 +298,7 @@
                                                             <div class="col-md-7">
                                                                 <div class="form-group">
                                                                     <label for="">عدد وحدات المخرجات</label>
-                                                                    <input id="" value="0" onchange="update_product_and_qty_for_production_lines_ajax(this.value,'qty')" type="text" class="form-control">
+                                                                    <input id="" value="0" onkeyup="update_product_and_qty_for_production_lines_ajax(this.value,'qty')" type="text" class="form-control">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -538,9 +538,9 @@
                     },
                     success: function (data) {
                         if(data.success == 'true'){
-                            $('#the_length_of_the_output_item').val((data.product.height / data.data.production_output_count));
-                            $('#production_output_count').val(data.data.production_output_count);
-                            toastr.success(data.message);
+                            $('#the_length_of_the_output_item').val(numberFormat(data.product.height / data.data.production_output_count));
+                            $('#production_output_count').val(numberFormat(data.data.production_output_count));
+                            // toastr.success(data.message);
                         }
                     },
                     error: function (jqXHR, textStatus, errorThrown) {

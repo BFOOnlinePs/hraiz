@@ -1,4 +1,4 @@
-<table class="table table-bordered">
+<table style="width: 100%" class="table table-bordered">
     <thead>
         <tr>
             <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"

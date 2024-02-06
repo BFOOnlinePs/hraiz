@@ -21,33 +21,76 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 @endsection
 @section('content')
-    <a href="{{ route('users.supplier.add') }}" class="btn btn-dark mb-2">اضافة مورد</a>
-    <div class="card">
-        <div class="card-header">
-            <h3 class="text-center">قائمة الموردين</h3>
-        </div>
-        <div class="card-body">
-            <div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="row mb-3">
-                            <div class="col-md-8">
-                                <input type="text" onkeyup="supplier_table()" class="form-control" id="search"
-                                    placeholder="بحث">
-                            </div>
-                            <div class="col-md-4">
-                                <select onchange="supplier_table()" required class="form-control select2bs4"
-                                    name="follow_by" id="follow_by">
-                                    <option value="">جميع موظفين المشتريات</option>
-                                    @foreach ($officer as $key)
-                                        <option value="{{ $key->id }}">{{ $key->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div id="supplier_table">
+    <div class="row">
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="row mb-3">
+                                            <div class="col-md-8">
+                                                <input type="text" onkeyup="supplier_table()" class="form-control" id="search"
+                                                       placeholder="بحث">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <select onchange="supplier_table()" required class="form-control select2bs4"
+                                                        name="follow_by" id="follow_by">
+                                                    <option value="">جميع موظفين المشتريات</option>
+                                                    @foreach ($officer as $key)
+                                                        <option value="{{ $key->id }}">{{ $key->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div style="width: 100%" id="supplier_table">
 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="{{ route('users.supplier.add') }}" class="btn btn-dark form-control mb-2">اضافة مورد</a>
+                </div>
+                <div class="col-md-12 mt-4">
+                    <div class="form-group">
+                        <a href="" class="btn btn-sm btn-warning form-control">موظف المشتريات</a>
+                    </div>
+                    <div class="form-group">
+                        <a href="" class="btn btn-sm btn-warning form-control">أمين المستودع</a>
+                    </div>
+                    <div class="form-group">
+                        <a href="" class="btn btn-sm btn-warning form-control">سكرتيريا</a>
+                    </div>
+                    <div class="form-group">
+                        <a href="" class="btn btn-sm btn-warning form-control">الموردين</a>
+                    </div>
+                    <div class="form-group">
+                        <a href="" class="btn btn-sm btn-warning form-control">شركات الشحن</a>
+                    </div>
+                    <div class="form-group">
+                        <a href="" class="btn btn-sm btn-warning form-control">شركات التخليص</a>
+                    </div>
+                    <div class="form-group">
+                        <a href="" class="btn btn-sm btn-warning form-control">شركات النقل المحلي</a>
+                    </div>
+                    <div class="form-group">
+                        <a href="" class="btn btn-sm btn-warning form-control">شركات التأمين</a>
+                    </div>
+                    <div class="form-group">
+                        <a href="" class="btn btn-sm btn-warning form-control">زبائن</a>
+                    </div>
+                    <div class="form-group">
+                        <a href="" class="btn btn-sm btn-warning form-control">موظفين</a>
                     </div>
                 </div>
             </div>
