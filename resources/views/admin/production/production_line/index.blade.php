@@ -639,7 +639,7 @@
 
         function redirect_if_save(){
             var productionLinesId = $('#production_lines_id').val();
-            var redirectUrl = "{{ route('production.production_inputs.index', ['id' => ':id']) }}";
+            var redirectUrl = "{{ route('production.redirect_with_update_status_production_line', ['id' => ':id']) }}";
             redirectUrl = redirectUrl.replace(':id', productionLinesId);
             window.location.href = redirectUrl;
         }

@@ -108,7 +108,7 @@
                                         <div class="card-body">
                                             <div class="row text-center">
                                                 <div class="col-md-12">
-                                                    <h5>معلومات المورد الاساسية</h5>
+                                                    <h5>معلومات المورد الفرعية</h5>
                                                 </div>
                                             </div>
                                             <hr>
