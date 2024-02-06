@@ -8,15 +8,17 @@
     <style>
 
         @page{
-            background-image: url("{{ asset('img/background/jelanco-background.jpg') }}");
-            background-image-resize:6;
+            @if(!empty($system_setting))
+background-image: url("{{ asset('storage/setting/'.$system_setting->letter_head_image) }}");
+            @endif background-image-resize:6;
             margin-top:220px;
             margin-bottom:50px;
         }
 
         @page :first{
-            background-image: url("{{ asset('img/background/jelanco-background.jpg') }}");
-            background-image-resize:6;
+            @if(!empty($system_setting))
+background-image: url("{{ asset('storage/setting/'.$system_setting->letter_head_image) }}");
+            @endif background-image-resize:6;
             margin-bottom:50px;
             margin-top:220px;
         }

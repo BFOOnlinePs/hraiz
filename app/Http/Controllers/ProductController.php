@@ -40,19 +40,30 @@ class ProductController extends Controller
     }
 
     public function search_table(Request $request){
-        $data = ProductModel::where('product_name_ar','like',"%{$request->product_search}%")->orWhere('product_name_en','like',"%{$request->product_search}%")->orWhere('barcode','like',"%{$request->product_search}%")->paginate(8);
+        $data = ProductModel::where(function ($query) use ($request) {
+            $query->where('product_name_ar', 'like', "%{$request->product_search}%")
+                ->orWhere('product_name_en', 'like', "%{$request->product_search}%")
+                ->orWhere('barcode', 'like', "%{$request->product_search}%");
+        })
+            ->when($request->filled('category_selected_id'), function ($query) use ($request) {
+                $query->where('category_id', $request->category_selected_id);
+            })
+            ->when($request->filled('units_selected_id'), function ($query) use ($request) {
+                $query->where('unit_id', $request->units_selected_id);
+            })
+            ->paginate(8);
         foreach ($data as $key){
             $key->category = CategoryProductModel::where('id',$key->category_id)->first();
             $key->unit = UnitsModel::where('id',$key->unit_id)->first();
         }
-        if ($request->ajax()) {
-            $data = ProductModel::where('product_name_ar','like',"%{$request->product_search}%")->orWhere('product_name_en','like',"%{$request->product_search}%")->orWhere('barcode','like',"%{$request->product_search}%")->paginate(8);
-            foreach ($data as $key){
-                $key->category = CategoryProductModel::where('id',$key->category_id)->first();
-                $key->unit = UnitsModel::where('id',$key->unit_id)->first();
-            }
-            return response()->view('admin.product.ajax.search_product',['data'=>$data]);
-        }
+//        if ($request->ajax()) {
+//            $data = ProductModel::where('product_name_ar','like',"%{$request->product_search}%")->orWhere('product_name_en','like',"%{$request->product_search}%")->orWhere('barcode','like',"%{$request->product_search}%")->paginate(8);
+//            foreach ($data as $key){
+//                $key->category = CategoryProductModel::where('id',$key->category_id)->first();
+//                $key->unit = UnitsModel::where('id',$key->unit_id)->first();
+//            }
+//            return response()->view('admin.product.ajax.search_product',['data'=>$data]);
+//        }
         return response()->view('admin.product.ajax.search_product',['data'=>$data]);
     }
 

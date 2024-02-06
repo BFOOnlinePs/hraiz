@@ -11,7 +11,7 @@
 @section('header_title_link')
 @endsection
 @section('content')
-    <form action="{{ route('users.supplier.create') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('users.employees.create') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-md-12">

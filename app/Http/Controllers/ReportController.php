@@ -13,6 +13,7 @@ use App\Models\PriceOfferItemsModel;
 use App\Models\PriceOffersModel;
 use App\Models\ProductModel;
 use App\Models\ProductSupplierModel;
+use App\Models\SystemSettingModel;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -22,13 +23,15 @@ class ReportController extends Controller
 {
     public function index()
     {
+        $system_setting = SystemSettingModel::first();
         $supplier = User::whereJsonContains('user_role', ['4'])->get();
         $order_status = OrderStatusModel::get();
-        return view('admin.reports.index', ['supplier' => $supplier,'order_status'=>$order_status]);
+        return view('admin.reports.index', ['supplier' => $supplier,'order_status'=>$order_status,'system_setting'=>$system_setting]);
     }
 
     public function suppliers_report()
     {
+        $system_setting = SystemSettingModel::first();
         $data = User::whereJsonContains('user_role', ['4'])->where('user_status',1)
             ->select('users.*')
             ->selectSub(function ($query) {
@@ -41,7 +44,7 @@ class ReportController extends Controller
 //        foreach ($data as $key) {
 //            $key->count = PriceOffersModel::where('supplier_id', $key->id)->count();
 //        }
-        $pdf = PDF::loadView('admin.reports.supplier_report.index', ['data' => $data]);
+        $pdf = PDF::loadView('admin.reports.supplier_report.index', ['data' => $data,'system_setting'=>$system_setting]);
         return $pdf->stream('suppliers_report.pdf');
     }
 
@@ -49,7 +52,8 @@ class ReportController extends Controller
     {
         $supplier = User::where('id', $request->supplier_id)->first();
         $data = OrderModel::join('price_offers', 'price_offers.order_id', '=', 'orders.id')->where('price_offers.supplier_id', $request->supplier_id)->whereBetween('orders.inserted_at', [$request->from, $request->to])->get();
-        $pdf = PDF::loadView('admin.reports.supplier_report.supplier_report', ['data' => $data, 'supplier' => $supplier]);
+        $system_setting = SystemSettingModel::first();
+        $pdf = PDF::loadView('admin.reports.supplier_report.supplier_report', ['data' => $data, 'supplier' => $supplier,'system_setting'=>$system_setting]);
         return $pdf->stream('supplier_report.pdf');
     }
 
