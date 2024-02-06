@@ -385,6 +385,7 @@ class ProducationLineController extends Controller
         $data->production_name = $request->production_name;
         $data->product_id = $request->product_id;
         $data->production_notes = $request->production_notes;
+        $data->status = 'incomplete';
         if ($data->save()){
             $data->product = ProductModel::where('id',$data->product_id)->first();
             return response()->json([
@@ -476,6 +477,16 @@ class ProducationLineController extends Controller
         }
     }
 
+    public function redirect_with_update_status_production_line($id){
+        $data = ProducationLinesModel::where('id',$id)->first();
+        $data->status = 'complete';
+        if ($data->save()){
+            return redirect()->route('production.production_inputs.index',['id'=>$id]);
+        }
+        else{
+            return redirect()->route('production.production_inputs.index',['id'=>$id]);
+        }
+      
     public function product_production_line_table_ajax(Request $request){
         $data = ProducationLinesModel::where('product_id',$request->product_id)->get();
         return response()->json([

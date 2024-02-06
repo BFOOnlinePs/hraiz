@@ -2,22 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dc0963de-5d4a-497e-a864-4d74efffd831" name="Changes" comment="edit">
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/production/production_line/ajax/product_production_line_table.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/production/ProducationLineController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/production/ProducationLineController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/orders/procurement_officer/product/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/orders/procurement_officer/product/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/production/production_line/ajax/cost_of_production_output_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/production/production_line/ajax/cost_of_production_output_table.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/production/production_line/ajax/production_lines_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/production/production_line/ajax/production_lines_table.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/hr/employees/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/hr/employees/add.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/production/production_line/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/production/production_line/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/users/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/users/add.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/users/clients/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/users/clients/add.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/users/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/users/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/users/insurance_companies/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/users/insurance_companies/add.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/users/local_carriers/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/users/local_carriers/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/users/procurement_officer/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/users/procurement_officer/add.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/users/secretarial/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/users/secretarial/add.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/users/storekeeper/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/users/storekeeper/add.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/users/supplier/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/users/supplier/add.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -434,6 +426,17 @@
     </ignored-roots>
     <MESSAGE value="edit" />
     <option name="LAST_COMMIT_MESSAGE" value="edit" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/resources/views/admin/users/supplier/add.blade.php</url>
+          <line>25</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

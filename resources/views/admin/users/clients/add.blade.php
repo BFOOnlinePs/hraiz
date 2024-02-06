@@ -23,7 +23,7 @@
                                 <div class="card-body">
                                     <div class="row text-center">
                                         <div class="col-md-12">
-                                            <h5>معلومات المورد الاساسية</h5>
+                                            <h5>معلومات الزبون الاساسية</h5>
                                         </div>
                                     </div>
                                     <hr>
@@ -97,7 +97,7 @@
                                 <div class="card-body">
                                     <div class="row text-center">
                                         <div class="col-md-12">
-                                            <h5>معلومات المورد الفرعية</h5>
+                                            <h5>معلومات الزبون الفرعية</h5>
                                         </div>
                                     </div>
                                     <hr>
@@ -116,18 +116,6 @@
                                                         <label for="">تصنيف المستخدم</label>
                                                         <input class="form-control" type="text" name="user_category" placeholder="تنصيف المستخدم">
                                                     </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    @if (in_array('1',json_decode(auth()->user()->user_role)))
-                                                        <div class="form-group">
-                                                            <label for="">متابعة بواسطة</label>
-                                                            <select class="form-control select2bs4" multiple="multiple" name="follow_by[]" id="">
-                                                                @foreach ($officer as $key)
-                                                                    <option value="{{ $key->id }}">{{ $key->name }}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                    @endif
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="form-group">

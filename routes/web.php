@@ -605,6 +605,7 @@ Route::group(['prefix'=>'production'],function (){
     Route::post('cost_of_production_output_table_ajax',[App\Http\Controllers\production\ProducationLineController::class,'cost_of_production_output_table_ajax'])->name('production.cost_of_production_output_table_ajax');
     Route::post('update_estimated_cost_ajax',[App\Http\Controllers\production\ProducationLineController::class,'update_estimated_cost_ajax'])->name('production.update_estimated_cost_ajax');
     Route::post('update_height_for_product_ajax',[App\Http\Controllers\production\ProducationLineController::class,'update_height_for_product_ajax'])->name('production.update_height_for_product_ajax');
+    Route::get('redirect_with_update_status_production_line/{id}',[App\Http\Controllers\production\ProducationLineController::class,'redirect_with_update_status_production_line'])->name('production.redirect_with_update_status_production_line');
     Route::post('product_production_line_table_ajax',[App\Http\Controllers\production\ProducationLineController::class,'product_production_line_table_ajax'])->name('production.product_production_line_table_ajax');
     Route::group(['prefix'=>'production_inputs'],function (){
         Route::get('index/{id}',[App\Http\Controllers\production\ProducationLineController::class,'production_input'])->name('production.production_inputs.index');
