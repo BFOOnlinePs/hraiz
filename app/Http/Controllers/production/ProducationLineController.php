@@ -477,16 +477,16 @@ class ProducationLineController extends Controller
         }
     }
 
-    public function redirect_with_update_status_production_line($id){
-        $data = ProducationLinesModel::where('id',$id)->first();
+    public function redirect_with_update_status_production_line($id)
+    {
+        $data = ProducationLinesModel::where('id', $id)->first();
         $data->status = 'complete';
-        if ($data->save()){
-            return redirect()->route('production.production_inputs.index',['id'=>$id]);
+        if ($data->save()) {
+            return redirect()->route('production.production_inputs.index', ['id' => $id]);
+        } else {
+            return redirect()->route('production.production_inputs.index', ['id' => $id]);
         }
-        else{
-            return redirect()->route('production.production_inputs.index',['id'=>$id]);
-        }
-      
+    }
     public function product_production_line_table_ajax(Request $request){
         $data = ProducationLinesModel::where('product_id',$request->product_id)->get();
         return response()->json([

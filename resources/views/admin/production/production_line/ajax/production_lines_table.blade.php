@@ -15,7 +15,7 @@
         </tr>
     @else
         @foreach($data as $key)
-            <tr>
+            <tr class="@if($key->status == 'incomplete') bg-danger @endif">
                 <td>{{ $key->product->product_name_ar }}</td>
                 <td>{{ $key->production_name }}</td>
                 <td>

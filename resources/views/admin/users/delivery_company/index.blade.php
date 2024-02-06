@@ -15,7 +15,7 @@
 
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
-    <a href="{{ route('users.delivery_company.add') }}" class="btn btn-primary mb-2">اضافة شركة شحن</a>
+    <a href="{{ route('users.delivery_company.add') }}" class="btn btn-dark mb-2">اضافة شركة شحن</a>
     <div class="card">
         <div class="card-header">
             <h3 class="text-center">قائمة شركات الشحن</h3>

@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free/css/all.min.css') }}">
 
-    <a href="{{ route('users.secretarial.add') }}" class="btn btn-primary mb-2">اضافة سكرتيريا</a>
+    <a href="{{ route('users.secretarial.add') }}" class="btn btn-dark mb-2">اضافة سكرتيريا</a>
     <div class="card">
         <div class="card-header">
             <h3 class="text-center">قائمة السكرتيريا</h3>

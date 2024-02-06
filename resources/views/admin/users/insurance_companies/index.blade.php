@@ -15,7 +15,7 @@
 
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
-    <a href="{{ route('users.insurance_companies.add') }}" class="btn btn-primary mb-2">اضافة شركة تأمين</a>
+    <a href="{{ route('users.insurance_companies.add') }}" class="btn btn-dark mb-2">اضافة شركة تأمين</a>
     <div class="card">
         <div class="card-header">
             <h3 class="text-center">قائمة شركات التأمين</h3>

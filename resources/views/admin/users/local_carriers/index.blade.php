@@ -18,7 +18,7 @@
 @endsection
 @section('content')
 
-    <a href="{{ route('users.local_carriers.add') }}" class="btn btn-primary mb-2">اضافة شركة نقل محلي</a>
+    <a href="{{ route('users.local_carriers.add') }}" class="btn btn-dark mb-2">اضافة شركة نقل محلي</a>
     <div class="card">
         <div class="card-header">
             <h3 class="text-center">قائمة شركات النقل المحلي</h3>
