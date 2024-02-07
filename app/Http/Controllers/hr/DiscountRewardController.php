@@ -27,11 +27,11 @@ class DiscountRewardController extends Controller
         $discounts_rewards->user_id = $request->employee_id;
         $discounts_rewards->type = 1;
         if($discounts_rewards->save()) {
-            return redirect()->route('users.employees.details' , ['id' => $request->employee_id,'tab_id'=>5])->with(['success'=>'تم إضافة مكافأة للموظف بنجاح']);
+            return redirect()->route('users.employees.details' , ['id' => $request->employee_id,'tab_id'=>5])->with(['success'=>'تم إضافة مكافأة للموظف بنجاح','tab_id'=>6]);
 
         }
         else {
-            return redirect()->route('users.employees.details' , ['id' => $request->employee_id,'tab_id'=>5])->with(['fail'=>'لم تتم إضافة المكافأة ، هناك خلل ما']);
+            return redirect()->route('users.employees.details' , ['id' => $request->employee_id,'tab_id'=>5])->with(['fail'=>'لم تتم إضافة المكافأة ، هناك خلل ما','tab_id'=>6]);
         }
     }
     public function edit_reward(Request $request)

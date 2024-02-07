@@ -32,7 +32,7 @@
                     <ul class="nav nav-tabs alert-info text-white" style="" id="custom-content-below-tab"
                             role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link @if(session('tab_id') == 1) active @endif text-white"
+                                <a class="nav-link @if(session('tab_id') == null) active @endif @if(session('tab_id') == 1) active @endif text-white"
                                     id="custom-content-below-home-tab"
                                     data-toggle="pill"
                                     href="#custom-content-below-home" role="tab"
