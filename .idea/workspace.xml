@@ -2,18 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dc0963de-5d4a-497e-a864-4d74efffd831" name="Changes" comment="edit">
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/hr/employees/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/hr/employees/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/users/clearance_companies/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/users/clearance_companies/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/users/clients/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/users/clients/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/users/delivery_company/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/users/delivery_company/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/hr/AttendanceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/hr/AttendanceController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/hr/BonusesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/hr/BonusesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/hr/DiscountRewardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/hr/DiscountRewardController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/hr/EvaluationsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/hr/EvaluationsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/hr/VacationsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/hr/VacationsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/hr/employees/details.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/hr/employees/details.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/users/insurance_companies/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/users/insurance_companies/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/users/local_carriers/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/users/local_carriers/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/users/procurement_officer/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/users/procurement_officer/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/users/secretarial/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/users/secretarial/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/users/storekeeper/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/users/storekeeper/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/users/supplier/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/users/supplier/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,7 +188,7 @@
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.fileTypes&quot;,
     &quot;ts.external.directory.path&quot;: &quot;/Applications/PhpStorm.app/Contents/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -281,6 +278,7 @@
       <workItem from="1706527040846" duration="2415000" />
       <workItem from="1706532223789" duration="18957000" />
       <workItem from="1706947062710" duration="31757000" />
+      <workItem from="1707292811905" duration="1440000" />
     </task>
     <task id="LOCAL-00001" summary="edit">
       <created>1692272515017</created>

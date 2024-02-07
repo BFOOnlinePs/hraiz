@@ -25,7 +25,7 @@ class AttendanceController extends Controller
 
         }
         else {
-            return redirect()->route('users.employees.details' , ['id' => $request->employee_id])->with(['fail'=>'لم يتم تسجيل حضور الموظف ، هناك خلل ما']);
+            return redirect()->route('users.employees.details' , ['id' => $request->employee_id])->with(['fail'=>'لم يتم تسجيل حضور الموظف ، هناك خلل ما','tab_id'=>2]);
         }
     }
     public function editOutTime(Request $request)

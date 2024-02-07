@@ -17,10 +17,10 @@ class BonusesController extends Controller
         $employee_bonus->notes = $request->notes;
         $employee_bonus->inserted_by = auth()->user()->id;
         if($employee_bonus->save()) {
-            return redirect()->route('users.employees.details' , ['id' => $request->employee_id])->with(['success'=>'تم إضافة علاوة للموظف بنجاح']);
+            return redirect()->route('users.employees.details' , ['id' => $request->employee_id])->with(['success'=>'تم إضافة علاوة للموظف بنجاح','tab_id'=>9]);
         }
         else {
-            return redirect()->route('users.employees.details' , ['id' => $request->employee_id])->with(['fail'=>'لم تتم إضافة العلاوة ، هناك خلل ما']);
+            return redirect()->route('users.employees.details' , ['id' => $request->employee_id])->with(['fail'=>'لم تتم إضافة العلاوة ، هناك خلل ما','tab_id'=>9]);
         }
     }
     public function edit(Request $request)

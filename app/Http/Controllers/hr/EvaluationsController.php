@@ -22,10 +22,10 @@ class EvaluationsController extends Controller
             $employee_evaluation->attachment = $filename;
         }
         if($employee_evaluation->save()) {
-            return redirect()->route('users.employees.details' , ['id' => $request->employee_id])->with(['success'=>'تم إضافة تقييم للموظف بنجاح']);
+            return redirect()->route('users.employees.details' , ['id' => $request->employee_id])->with(['success'=>'تم إضافة تقييم للموظف بنجاح','tab_id'=>10]);
         }
         else {
-            return redirect()->route('users.employees.details' , ['id' => $request->employee_id])->with(['fail'=>'لم تتم إضافة التقييم ، هناك خلل ما']);
+            return redirect()->route('users.employees.details' , ['id' => $request->employee_id])->with(['fail'=>'لم تتم إضافة التقييم ، هناك خلل ما','tab_id'=>10]);
         }
     }
     public function edit(Request $request)

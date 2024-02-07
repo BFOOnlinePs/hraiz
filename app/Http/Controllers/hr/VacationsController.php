@@ -30,11 +30,11 @@ class VacationsController extends Controller
                 $vacation->attachement = $filename;
             }
             if(!($vacation->save())) {
-                return redirect()->route('users.employees.details' , ['id' => $request->employee_id])->with(['fail'=>'لم يتم تسجيل إجازة للموظف ، هناك خلل ما']);
+                return redirect()->route('users.employees.details' , ['id' => $request->employee_id])->with(['fail'=>'لم يتم تسجيل إجازة للموظف ، هناك خلل ما','tab_id'=>8]);
             }
             $currentDate->addDay();
         }
-        return redirect()->route('users.employees.details' , ['id' => $request->employee_id])->with(['success'=>'تم إضافة إجازة للموظف بنجاح']);
+        return redirect()->route('users.employees.details' , ['id' => $request->employee_id])->with(['success'=>'تم إضافة إجازة للموظف بنجاح','tab_id'=>8]);
     }
     public function vacations_change_date_by_ajax(Request $request)
     {
