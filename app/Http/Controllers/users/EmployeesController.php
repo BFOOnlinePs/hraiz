@@ -30,6 +30,7 @@ class EmployeesController extends Controller
         }
         $data->user_notes = $request->user_notes;
         $data->user_address = $request->user_address;
+        $data->main_salary = $request->main_salary;
         if ($data->save()){
             return redirect()->route('users.employees.index')->with(['success'=>'تم اضافة البيانات بنجاح','tab_id'=>1]);
         }

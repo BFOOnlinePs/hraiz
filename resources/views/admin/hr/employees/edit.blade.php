@@ -80,6 +80,10 @@
                                                     @enderror
                                                 </div>
                                             </div>
+                                                <div class="form-group">
+                                                    <label for="">الراتب الاساسي</label>
+                                                    <input class="form-control" type="number" name="main_salary" placeholder="الراتب الاساسي">
+                                                </div>
                                             <div class="form-group">
                                                 <label for="">العنوان الكامل</label>
                                                 <textarea class="form-control" placeholder="العنوان الكامل"

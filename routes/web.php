@@ -525,6 +525,9 @@ Route::group(['middleware' => 'auth',], function () {
         });
         Route::group(['prefix'=>'salaries'],function(){
             Route::get('index',[App\Http\Controllers\hr\SalaryController::class, 'index'])->name('hr.salaries.index');
+            Route::post('create',[App\Http\Controllers\hr\SalaryController::class, 'create'])->name('hr.salaries.create');
+            Route::get('edit/{id}',[App\Http\Controllers\hr\SalaryController::class, 'edit'])->name('hr.salaries.edit');
+            Route::post('update',[App\Http\Controllers\hr\SalaryController::class, 'update'])->name('hr.salaries.update');
         });
     });
 

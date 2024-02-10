@@ -2,15 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dc0963de-5d4a-497e-a864-4d74efffd831" name="Changes" comment="edit">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/hr/employees/modals/salariesCreate.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/hr/employees/modals/salaryEdit.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/hr/salaries/edit.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/hr/AttendanceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/hr/AttendanceController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/hr/BonusesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/hr/BonusesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/hr/DiscountRewardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/hr/DiscountRewardController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/hr/EvaluationsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/hr/EvaluationsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/hr/VacationsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/hr/VacationsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/hr/EmployeesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/hr/EmployeesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/hr/SalaryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/hr/SalaryController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/users/EmployeesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/users/EmployeesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/hr/employees/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/hr/employees/add.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/hr/employees/details.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/hr/employees/details.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/users/insurance_companies/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/users/insurance_companies/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/hr/employees/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/hr/employees/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/hr/salaries/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/hr/salaries/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/hr/salaries/modals/salaryCreate.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/hr/salaries/modals/salaryCreate.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/orders/procurement_officer/financial_file/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/orders/procurement_officer/financial_file/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/users/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/users/add.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -278,7 +284,7 @@
       <workItem from="1706527040846" duration="2415000" />
       <workItem from="1706532223789" duration="18957000" />
       <workItem from="1706947062710" duration="31757000" />
-      <workItem from="1707292811905" duration="1440000" />
+      <workItem from="1707292811905" duration="13903000" />
     </task>
     <task id="LOCAL-00001" summary="edit">
       <created>1692272515017</created>

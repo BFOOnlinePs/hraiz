@@ -118,6 +118,12 @@
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="form-group">
+                                                        <label for="">الراتب الاساسي</label>
+                                                        <input class="form-control" type="number" name="main_salary" placeholder="الراتب الاساسي">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
                                                         <label for="">العنوان الكامل</label>
                                                         <textarea class="form-control" placeholder="العنوان الكامل" name="user_address" id="" cols="30"
                                                                   rows="3"></textarea>
