@@ -102,43 +102,66 @@
                             <div class="p-2">
                                 <div class="row">
                                     <div class="col-md-8 p-5">
-                                        <div class="form-group">
-                                            <label for="">الاسم :</label>
-                                            <span class="form-control">{{ $data->name }}</span>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">الايميل :</label>
-                                            <span class="form-control">{{ $data->email }}</span>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">رقم الهاتف الاول :</label>
-                                            <span class="form-control">{{ $data->user_phone1 }}</span>
-                                        </div>
-                                        <div class="form-group">
-                                            @if($data->user_phone2 == '')
-                                                <label for="">رقم الهاتف الثاني :</label>
-                                                <span class="form-control">لا يوجد</span>
-                                            @else
-                                                <label for="">رقم الهاتف الثاني :</label>
-                                                <span class="form-control">{{ $data->user_phone2 }}</span>
-                                            @endif
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">حالة المستخدم :</label>
-                                            @if($data->user_status == 1)
-                                                <span class="form-control text-success">فعال</span>
-                                            @elseif($data->user_status == 0)
-                                                <span class="text-danger form-control">غير فعال</span>
-                                            @endif
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">ملاحظات : </label>
-                                            <textarea readonly class="form-control" name="" id="" cols="30" rows="3">{{ $data->user_notes }}</textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">العنوان :</label>
-                                            <textarea readonly class="form-control" name="" id="" cols="30"
-                                                    rows="3">{{ $data->user_address }}</textarea>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="">الاسم :</label>
+                                                    <span class="form-control">{{ $data->name }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="">الايميل :</label>
+                                                    <span class="form-control">{{ $data->email }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="">حالة المستخدم :</label>
+                                                    @if($data->user_status == 1)
+                                                        <span class="form-control text-success">فعال</span>
+                                                    @elseif($data->user_status == 0)
+                                                        <span class="text-danger form-control">غير فعال</span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="">رقم الهاتف الاول :</label>
+                                                    <span class="form-control">{{ $data->user_phone1 }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    @if($data->user_phone2 == '')
+                                                        <label for="">رقم الهاتف الثاني :</label>
+                                                        <span class="form-control">لا يوجد</span>
+                                                    @else
+                                                        <label for="">رقم الهاتف الثاني :</label>
+                                                        <span class="form-control">{{ $data->user_phone2 }}</span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="">الراتب الاساسي</label>
+                                                    <input type="text" value="{{ $data->main_salary }}" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="">ملاحظات : </label>
+                                                    <textarea readonly class="form-control" name="" id="" cols="30" rows="3">{{ $data->user_notes }}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="">العنوان :</label>
+                                                    <textarea readonly class="form-control" name="" id="" cols="30"
+                                                              rows="3">{{ $data->user_address }}</textarea>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-4 pt-5 text-center">
