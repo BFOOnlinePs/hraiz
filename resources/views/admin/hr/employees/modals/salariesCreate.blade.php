@@ -28,13 +28,18 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="">الشهر</label>
-                                <input type="number" name="month" class="form-control">
+                                <select class="form-control" name="month" id="">
+                                    @for($i = 1;$i<=12;$i++)
+                                        <option @if(\Carbon\Carbon::now()->format('m') == $i) selected @endif value="{{ $i }}">{{ $i }}</option>
+                                    @endfor
+                                </select>
+{{--                                <input type="number" value="{{ \Carbon\Carbon::now()->format('m') }}" name="month" class="form-control">--}}
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="">السنة</label>
-                                <input type="number" name="year" class="form-control">
+                                <input type="number" value="{{ \Carbon\Carbon::now()->format('Y') }}" name="year" class="form-control">
                             </div>
                         </div>
                     </div>
