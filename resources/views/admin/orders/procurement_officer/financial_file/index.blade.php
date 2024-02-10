@@ -303,13 +303,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">المبلغ</label>
-                                    <input required name="amount" class="form-control" type="text" placeholder="المبلغ">
+                                    <input required name="amount" class="form-control" type="number" placeholder="المبلغ">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">النسبة</label>
-                                    <input required name="persent" class="form-control" type="text"
+                                    <input required name="persent" class="form-control" type="number"
                                            placeholder="النسبة">
                                 </div>
                             </div>

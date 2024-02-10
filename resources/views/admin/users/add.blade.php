@@ -117,6 +117,7 @@
                                                         <input class="form-control" type="text" name="user_category" placeholder="تنصيف المستخدم">
                                                     </div>
                                                 </div>
+
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="">العنوان الكامل</label>

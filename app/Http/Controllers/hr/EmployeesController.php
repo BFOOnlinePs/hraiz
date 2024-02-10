@@ -8,6 +8,7 @@ use App\Models\Currency;
 use App\Models\DiscountReward;
 use App\Models\EmployeeBonus;
 use App\Models\EmployeeEvaluation;
+use App\Models\SalariesModel;
 use App\Models\User;
 use App\Models\UserLevels;
 use App\Models\UserRole;
@@ -47,8 +48,10 @@ class EmployeesController extends Controller
         $vacations_types = VacationType::get();
         $employees_bonuses = EmployeeBonus::where('employee_id' , $id)->get();
         $employees_evaluations = EmployeeEvaluation::where('employee_id' , $id)->get();
-        return view('admin.hr.employees.details' , ['employees_evaluations' => $employees_evaluations ,'employees_bonuses' => $employees_bonuses  , 'vacations_types'=> $vacations_types , 'data' => $data , 'bfo_attendances' => $bfo_attendances , 'currencies' => $currencies]);
+        $salaries = SalariesModel::where('employee_id', $id)->get();
+        return view('admin.hr.employees.details' , ['employees_evaluations' => $employees_evaluations ,'employees_bonuses' => $employees_bonuses  , 'vacations_types'=> $vacations_types , 'data' => $data , 'bfo_attendances' => $bfo_attendances , 'currencies' => $currencies , 'salaries' => $salaries]);
     }
+
     public function edit($id)
     {
         $data = User::find($id);

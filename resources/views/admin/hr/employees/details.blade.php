@@ -47,9 +47,9 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link @if(session('tab_id') == 3) active @endif text-white"
-                                    id="custom-content-below-messages-tab" data-toggle="pill"
-                                    href="#custom-content-below-messages" role="tab"
-                                    aria-controls="custom-content-below-messages"
+                                    id="salaries-tab" data-toggle="pill"
+                                    href="#salaries" role="tab"
+                                    aria-controls="salaries"
                                     aria-selected="@if(\Illuminate\Support\Facades\Session::has('tab_id')) @if(session('tab_id') == 2) true @else false @endif @endif">الرواتب</a>
                             </li>
                             <li class="nav-item">
@@ -190,6 +190,50 @@
                                                     <button class="btn btn-danger btn-sm" onclick="delete_bfo_attendance({{$key->id}})"><span class="fa fa-trash pt-1"></span></button>
                                                     <button class="btn btn-success btn-sm" onclick="edit_attendance({{$key->id}} , '{{$key->activity_type}}' , '{{$key->note}}' , '{{$key->in_time}}' , '{{$key->out_time}}')"><span class="fa fa-edit pt-1"></span></button>
                                                     {{-- <a class="btn btn-dark btn-sm" href="{{ route('users.employees.details', ['id' => $key->id]) }}"><span class="fa fa-search"></span></a> --}}
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                {{$bfo_attendances->links()}}
+
+                            </div>
+                        </div>
+                        <div class="tab-pane fade @if(session('tab_id') == 3) active show @endif" id="salaries" role="tabpanel" aria-labelledby="salaries-tab">
+                            <div class="p-2">
+                                <div class="row">
+                                    <button onclick="add_salary()" class="btn btn-dark mb-2">اضافة راتب</button>
+                                </div>
+
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>القيمة</th>
+                                            <th>الشهر</th>
+                                            <th>السنة</th>
+                                            <th>عدد الايام</th>
+                                            <th>وقت الاضافة</th>
+                                            <th>الحالة</th>
+                                            <th>العمليات</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if ($salaries->isEmpty())
+                                            <tr>
+                                                <td colspan="7" class="text-center">لا توجد نتائج</td>
+                                            </tr>
+                                        @endif
+                                        @foreach ($salaries as $key)
+                                            <tr>
+                                                <td>{{ $key->salary_value }}</td>
+                                                <td>{{ $key->month }}</td>
+                                                <td>{{ $key->year }}</td>
+                                                <td>{{ $key->days }}</td>
+                                                <td>{{ $key->insert_at }}</td>
+                                                <td>{{ $key->status }}</td>
+                                                <td>
+                                                    <button onclick="edit_salary({{ $key->id }},{{ $key->salary_value }},{{ $key->month }},{{ $key->year }},{{ $key->days }})" data-toggle="modal" data-target="#edit_salary_modal" class="btn btn-success btn-sm"><span class="fa fa-edit"></span></button>
+                                                    <a href="" class="btn btn-danger btn-sm"><span class="fa fa-trash"></span></a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -371,6 +415,8 @@
                 @include('admin.hr.employees.modals.bonusesEdit')
                 @include('admin.hr.employees.modals.evaluationsCreate')
                 @include('admin.hr.employees.modals.evaluationsEdit')
+                @include('admin.hr.employees.modals.salariesCreate')
+                @include('admin.hr.employees.modals.salaryEdit')
             </div>
         </div>
     </div>
@@ -383,6 +429,14 @@
             document.getElementById('notes_evaluationsEdit').value = notes;
             document.getElementById('attachment_evaluationsEdit').href = `{{asset('storage/employees_evaluations/${attachment}') }}`;
             $('#edit_evaluations_modal').modal('show');
+        }
+        function edit_salary(id , salary_value , month , year , days) {
+            document.getElementById('id_salaryEdit').value = id;
+            document.getElementById('salary_value_salaryEdit').value = salary_value;
+            document.getElementById('month_salaryEdit').value = month;
+            document.getElementById('year_salaryEdit').value = year;
+            document.getElementById('days_salaryEdit').value = days;
+            $('#edit_salary_modal').modal('show');
         }
         function add_evaluations()
         {
@@ -624,6 +678,10 @@
         function add_attendance()
         {
             $('#attendance_in_time').modal('show');
+        }
+        function add_salary()
+        {
+            $('#create_salary_modal').modal('show');
         }
         function edit_out_time_attendance(note , bfo_attendance_id , activity_type)
         {
