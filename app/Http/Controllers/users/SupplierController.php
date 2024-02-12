@@ -12,6 +12,7 @@ use App\Models\ProductModel;
 use App\Models\ProductSupplierModel;
 use App\Models\SuppliersFollowByModel;
 use App\Models\User;
+use App\Models\UserCategoryModel;
 use App\Models\UserLevels;
 use App\Models\UserRole;
 use App\Models\UsersFollowUpRecordsModel;
@@ -134,6 +135,7 @@ class SupplierController extends Controller
 
     public function details($id){
         $data = User::where('id',$id)->first();
+        $data->category = UserCategoryModel::where('id',$data->user_category)->first();
         $company_contact_person = CompanyContactPersonModel::where('company_id',$id)->get();
         $product_supplier = ProductSupplierModel::where('user_id',$id)->get();
         $order_supplier = OrderModel::join('price_offers','price_offers.order_id','=','orders.id')->where('price_offers.supplier_id',$id)->get();
@@ -151,7 +153,8 @@ class SupplierController extends Controller
             $key->added_by = User::where('id',$key->added_by)->first();
             $key->bank = BankModel::where('id',$key->bank_id)->first();
         }
-        return view('admin.users.supplier.details',['data'=>$data,'banks'=>$banks,'company_contact_person'=>$company_contact_person,'order_supplier'=>$order_supplier,'product_supplier'=>$product_supplier,'users_follow_up_records'=>$users_follow_up_records,'products'=>$products,'supplier_banks'=>$supplier_banks]);
+        $user_categories = UserCategoryModel::get();
+        return view('admin.users.supplier.details',['data'=>$data,'banks'=>$banks,'company_contact_person'=>$company_contact_person,'order_supplier'=>$order_supplier,'product_supplier'=>$product_supplier,'users_follow_up_records'=>$users_follow_up_records,'products'=>$products,'supplier_banks'=>$supplier_banks,'user_categories'=>$user_categories]);
     }
 
     public function product_list_ajax(Request $request){

@@ -124,4 +124,71 @@ class UserController extends Controller
             return redirect()->back()->withInput();
         }
     }
+
+    public function update_user_ajax(Request $request){
+        $data = User::where('id',$request->id)->first();
+
+        if ($request->has('data_type')) {
+            if ($request->data_type == 'email'){
+                $rules['value'] = 'required|email|unique:users,email,'.$request->id;
+                $validator = Validator::make($request->all(),$rules,[
+                    'required'=>'يجب تعبئة الحقول المناسبة',
+                    'email'=>'يجب اضافة حقل بريد الكتروني صالح',
+                    'unique'=>'هذا الايميل مستخدم من قبل'
+                ]);
+
+                if ($validator->fails()){
+                    return response()->json([
+                        'success' => false,
+                        'message' => $validator->errors()->first()
+                    ]);
+                }
+            }
+        }
+
+        $data->{$request->data_type} = $request->input('value');
+
+        if ($data->save()){
+            return response()->json([
+                'success'=>'true',
+                'message'=>'تم تعديل البيانات بنجاح'
+            ]);
+        }
+        else{
+            return response()->json([
+                'success'=>'false',
+                'message'=>'هناك خلل ما لم يتم تعديل البيانات'
+            ]);
+        }
+    }
+
+    public function upload_image(Request $request){
+        $data = User::where('id',$request->id)->first();
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->storeAs('user_photo', $filename, 'public');
+            $data->user_photo = $filename;
+            if ($data->save()){
+                return response()->json([
+                    'success'=>'true',
+                    'message'=>'تم رفع الصورة بنجاح'
+                ]);
+            }
+            else{
+                return response()->json([
+                    'success'=>'false',
+                    'message'=>'هناك خطا ما في رفع الصورة'
+                ]);
+            }
+        }
+        else{
+            return response()->json([
+                'success'=>'false',
+                'message'=>'لم يتم رفع الصورة'
+            ]);
+        }
+
+    }
 }

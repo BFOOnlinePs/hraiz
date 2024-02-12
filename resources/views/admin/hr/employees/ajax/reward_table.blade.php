@@ -6,6 +6,7 @@
             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">القيمة</th>
             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">العملة</th>
             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">تمت عملية الإضافة بواسطة</th>
+            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">تاريخ الاضافة</th>
             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">الملاحظات</th>
             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">الملف المرفق</th>
             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">العمليات</th>

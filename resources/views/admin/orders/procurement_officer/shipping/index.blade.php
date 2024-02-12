@@ -112,7 +112,7 @@
                                     @if(empty($key->attachment))
                                         لا يوجد ملف
                                     @else
-                                        <a class="btn btn-primary btn-sm" download="attachment"
+                                        <a class="btn btn-primary btn-sm" download="{{ $key->attachment }}"
                                            href="{{ asset('storage/attachment/'.$key->attachment) }}"><span class="fa fa-download"></span></a>
                                         <button onclick="viewAttachment('{{ asset('storage/attachment/'.$key->attachment) }}')" href="" class="btn btn-success btn-sm" data-toggle="modal"
                                                 data-target="#modal-lg-view_attachment"><span

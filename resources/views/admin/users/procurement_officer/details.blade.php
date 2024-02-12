@@ -89,69 +89,90 @@
                             <div class="tab-pane fade active show" id="custom-content-below-home" role="tabpanel"
                                  aria-labelledby="custom-content-below-home-tab">
                                 <div class="p-2">
+
                                     <div class="row">
                                         <div class="col-md-8 p-5">
-                                            <div class="form-group">
-                                                <label for="">الاسم :</label>
-                                                <span class="form-control">{{ $data->name }}</span>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="">الاسم :</label>
+                                                        <input onchange="update_user_ajax('name',this.value)" class="form-control" value="{{ $data->name }}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="">الايميل :</label>
+                                                        <input onchange="update_user_ajax('email',this.value)" class="form-control" value="{{ $data->email }}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="">رقم الهاتف الاول :</label>
+                                                        <input onchange="update_user_ajax('user_phone1',this.value)" class="form-control" value="{{ $data->user_phone1 }}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="">رقم الهاتف الثاني :</label>
+                                                        <input onchange="update_user_ajax('user_phone2',this.value)" class="form-control" value="{{ empty($data->user_phone2) ? 'لا يوجد' : $data->user_phone2}}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="">ملاحظات : </label>
+                                                        <textarea onchange="update_user_ajax('user_notes',this.value)" class="form-control" name="" id="" cols="30"
+                                                                  rows="3">{{ $data->user_notes }}</textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="">العنوان :</label>
+                                                        <textarea onchange="update_user_ajax('user_address',this.value)" class="form-control" name="" id="" cols="30"
+                                                                  rows="3">{{ $data->user_address }}</textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                                                            <input onchange="update_user_ajax('user_status',(this.checked) ?1:0)" @if($data->user_status == 1) checked @endif type="checkbox" class="custom-control-input" id="customSwitch3">
+                                                            <label class="custom-control-label" for="customSwitch3">حالة المستخدم</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {{--                                                <div class="col-md-12">--}}
+                                                {{--                                                    <div class="form-group">--}}
+                                                {{--                                                        <label for="">تصنيف المستخدم :</label>--}}
+                                                {{--                                                        <span class="form-control"></span>--}}
+                                                {{--                                                    </div>--}}
+                                                {{--                                                </div>--}}
                                             </div>
-                                            <div class="form-group">
-                                                <label for="">الايميل :</label>
-                                                <span class="form-control">{{ $data->email }}</span>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="">رقم الهاتف الاول :</label>
-                                                <span class="form-control">{{ $data->user_phone1 }}</span>
-                                            </div>
-                                            <div class="form-group">
-                                                @if($data->user_phone2 == '')
-                                                    <label for="">رقم الهاتف الثاني :</label>
-                                                    <span class="form-control">لا يوجد</span>
-                                                @else
-                                                    <label for="">رقم الهاتف الثاني :</label>
-                                                    <span class="form-control">{{ $data->user_phone2 }}</span>
-                                                @endif
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="">حالة المستخدم</label>
-                                                @if($data->status == 1)
-                                                    <span class="form-control text-success">فعال</span>
-                                                @elseif($data->status == 0)
-                                                    <span class="text-danger form-control">غير فعال</span>
-                                                @endif
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="">ملاحظات : </label>
-                                                <textarea readonly class="form-control" name="" id="" cols="30"
-                                                          rows="3">{{ $data->user_notes }}</textarea>
-                                            </div>
-{{--                                            <div class="form-group">--}}
-{{--                                                <label for="">الموقع الالكتروني : <span><a--}}
-{{--                                                            href="">{{ $data->user_website }}</a></span></label>--}}
-{{--                                            </div>--}}
-                                            <div class="form-group">
-                                                <label for="">العنوان :</label>
-                                                <textarea readonly class="form-control" name="" id="" cols="30"
-                                                          rows="3">{{ $data->user_address }}</textarea>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="">تصنيف المستخدم :</label>
-                                                <span class="form-control"></span>
-                                            </div>
-
-
                                         </div>
                                         <div class="col-md-4 pt-5 text-center">
                                             <div class="form-group text-center">
-                                                <img width="150"
-                                                     src="{{ asset('storage/user_photo/'.$data->user_photo) }}"
-                                                     alt="">
+                                                @if(empty($data->user_photo))
+                                                    <img id="image_preview_container" width="150" src="{{ asset('storage/user_photo/'.$data->user_photo) }}" alt="">
+                                                @else
+                                                    <img id="image_preview_container" width="150" src="{{ asset('storage/user_photo/'.$data->user_photo) }}" alt="">
+                                                @endif
                                             </div>
                                             <div>
                                                 <h4 class="text-center">{{ $data->name }}</h4>
                                                 <hr>
-                                                <p>يحتوي هذا القسم على المعلومات الاساسية لموظف مشتريات</p>
-                                                <a href="{{ route('users.procurement_officer.edit',['id'=>$data->id]) }}" class="btn btn-info">تعديل بيانات موظف مشتريات</a>
+                                                <form method="POST" enctype="multipart/form-data" id="upload_image_form">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <input class="form-control" type="file" name="image" placeholder="Choose image" id="image">
+                                                                <span class="text-danger">{{ $errors->first('title') }}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <button type="submit" class="btn btn-primary">رفع الصورة</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                {{--                                            <p>يحتوي هذا القسم على المعلومات الأساسية للموظف</p>--}}
+                                                {{--                                            <a href="{{ route('users.employees.edit',['id'=>$data->id]) }}" class="btn btn-info">تعديل بيانات الموظف</a>--}}
                                             </div>
                                         </div>
                                     </div>
@@ -518,10 +539,74 @@
                 });
             }
         }
+
+        function update_user_ajax(data_type,value)
+        {
+            let user_id = {{ $data->id }};
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            var headers = {
+                "X-CSRF-Token": csrfToken
+            };
+            $.ajax({
+                url: "{{ route('users.update_user_ajax') }}",
+                method: 'post',
+
+                headers: headers,
+                data: {
+                    'data_type':data_type,
+                    'value': value ,
+                    'id':user_id
+                },
+                success: function(data) {
+                    if(data.success == 'true'){
+                        toastr.success(data.message)
+                    }
+                    else{
+                        toastr.error(data.message)
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert(jqXHR.responseText);
+                    // toastr.error(jqXHR.message)
+                }
+            });
+        }
+
+        $(document).ready(function (e) {
+            $('#image').change(function (){
+                let reader = new FileReader();
+                reader.onload = (e) => {
+                    $('#image_preview_container').attr('src',e.target.result);
+                }
+                reader.readAsDataURL(this.files[0]);
+            });
+            $('#upload_image_form').submit(function (e) {
+                e.preventDefault();
+                let user_id = {{ $data->id }};
+                var formData = new FormData(this);
+                formData.append('id',user_id);
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('users.upload_image') }}",
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: (data) => {
+                        toastr.success(data.message);
+                        this.reset();
+                    },
+                    error: function(jqXHR) {
+                        console.log(jqXHR.responseText);
+                    }
+                });
+            })
+        })
+
     </script>
-
-
-
 
     <script>
         $(function () {

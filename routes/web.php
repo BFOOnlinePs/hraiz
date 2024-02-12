@@ -32,7 +32,8 @@ Route::group(['middleware' => 'auth',], function () {
         Route::get('add_form',[App\Http\Controllers\UserController::class, 'add_form'])->name('users.add_form');
         Route::post('create',[App\Http\Controllers\UserController::class, 'create'])->name('users.create');
         Route::post('update/{id}',[App\Http\Controllers\UserController::class, 'update'])->name('users.update');
-
+        Route::post('update_user_ajax',[App\Http\Controllers\UserController::class, 'update_user_ajax'])->name('users.update_user_ajax');
+        Route::post('upload_image',[App\Http\Controllers\UserController::class, 'upload_image'])->name('users.upload_image');
         Route::group(['prefix' => 'procurement_officer'], function () {
             Route::get('/index', [App\Http\Controllers\users\ProcurmentOfficerController::class, 'index'])->name('users.procurement_officer.index');
             Route::get('/add', [App\Http\Controllers\users\ProcurmentOfficerController::class, 'add'])->name('users.procurement_officer.add');

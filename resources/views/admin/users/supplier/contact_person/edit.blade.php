@@ -22,29 +22,43 @@
                 <input type="hidden" value="{{ $data->id }}" name="id">
                 <div class="row">
                     <div class="col-md-8">
-                        <div class="form-group">
-                            <label for="">الاسم</label>
-                            <input name="contact_name" class="form-control" value="{{ $data->contact_name }}" type="text" placeholder="يرجى كتابة الاسم">
-                        </div>
-                        <div class="form-group">
-                            <label for="">رقم الهاتف</label>
-                            <input name="mobile_number" class="form-control" value="{{ $data->mobile_number }}" type="text" placeholder="يرجى كتابة رقم الهاتف">
-                        </div>
-                        <div class="form-group">
-                            <label for="">الايميل</label>
-                            <input name="email" class="form-control" value="{{ $data->email }}" type="text" placeholder="يرجى كتابة البريد الالكتروني">
-                        </div>
-                        <div class="form-group">
-                            <label for="">رقم الوتس اب</label>
-                            <input name="whats_app_number" class="form-control" value="{{ $data->whats_app_number }}" type="text" placeholder="يرجى كتابة رقم الوتس اب">
-                        </div>
-                        <div class="form-group">
-                            <label for="">رقم wechat</label>
-                            <input name="wechat_number" class="form-control" value="{{ $data->wechat_number }}" type="text" placeholder="يرجى كتابة رقم الوي شات">
-                        </div>
-                        <div class="form-group">
-                            <label for="">العنوان</label>
-                            <textarea  class="form-control" placeholder="يرجى كتابة العنوان" name="address" id="" cols="30" rows="3"{{ $data->address }}></textarea>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="">الاسم</label>
+                                    <input name="contact_name" class="form-control" value="{{ $data->contact_name }}" type="text" placeholder="يرجى كتابة الاسم">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="">رقم الهاتف</label>
+                                    <input name="mobile_number" class="form-control" value="{{ $data->mobile_number }}" type="text" placeholder="يرجى كتابة رقم الهاتف">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="">الايميل</label>
+                                    <input name="email" class="form-control" value="{{ $data->email }}" type="text" placeholder="يرجى كتابة البريد الالكتروني">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">رقم الوتس اب</label>
+                                    <input name="whats_app_number" class="form-control" value="{{ $data->whats_app_number }}" type="text" placeholder="يرجى كتابة رقم الوتس اب">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">رقم wechat</label>
+                                    <input name="wechat_number" class="form-control" value="{{ $data->wechat_number }}" type="text" placeholder="يرجى كتابة رقم الوي شات">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="">العنوان</label>
+                                    <textarea  class="form-control" placeholder="يرجى كتابة العنوان" name="address" id="" cols="30" rows="3">{{ $data->address }}</textarea>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-4 text-center">
