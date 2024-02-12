@@ -1,22 +1,22 @@
 @extends('home')
 @section('title')
-    الموردين
+    شركات الشحن
 @endsection
 @section('header_title')
-    الموردين
+    شركات الشحن
 @endsection
 @section('header_link')
-    الرئيسية
+    المستخدمين
 @endsection
 @section('header_title_link')
-    الموردين
+    شركات الشحن
 @endsection
 @section('content')
     @include('admin.messge_alert.success')
     @include('admin.messge_alert.fail')
     <div class="card">
         <div class="card-header text-center">
-            <h5 class="text-bold">تفاصيل المورد ( {{ $data->name }} )</h5>
+            <h5 class="text-bold">تفاصيل شركات الشحن ( {{ $data->name }} )</h5>
         </div>
         <div class="card-body">
             {{--            <form action="{{ route('users.supplier.create') }}" method="post" enctype="multipart/form-data">--}}
@@ -340,6 +340,74 @@
     <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 
+    <script>
+        function update_user_ajax(data_type,value)
+        {
+            let user_id = {{ $data->id }};
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            var headers = {
+                "X-CSRF-Token": csrfToken
+            };
+            $.ajax({
+                url: "{{ route('users.update_user_ajax') }}",
+                method: 'post',
+
+                headers: headers,
+                data: {
+                    'data_type':data_type,
+                    'value': value ,
+                    'id':user_id
+                },
+                success: function(data) {
+                    if(data.success == 'true'){
+                        toastr.success(data.message)
+                    }
+                    else{
+                        toastr.error(data.message)
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert(jqXHR.responseText);
+                    // toastr.error(jqXHR.message)
+                }
+            });
+        }
+
+        $(document).ready(function (e) {
+            $('#image').change(function (){
+                let reader = new FileReader();
+                reader.onload = (e) => {
+                    $('#image_preview_container').attr('src',e.target.result);
+                }
+                reader.readAsDataURL(this.files[0]);
+            });
+            $('#upload_image_form').submit(function (e) {
+                e.preventDefault();
+                let user_id = {{ $data->id }};
+                var formData = new FormData(this);
+                formData.append('id',user_id);
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('users.upload_image') }}",
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: (data) => {
+                        toastr.success(data.message);
+                        this.reset();
+                    },
+                    error: function(jqXHR) {
+                        console.log(jqXHR.responseText);
+                    }
+                });
+            })
+        })
+
+    </script>
     <script>
         $(function () {
             $("#example1").DataTable({

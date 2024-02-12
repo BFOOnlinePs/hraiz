@@ -19,6 +19,7 @@
         </style>
         <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/plugins/toastr/toastr.min.css') }}">
 @endsection
 @section('content')
 @include('admin.messge_alert.success')
@@ -52,12 +53,12 @@
                                     aria-controls="salaries"
                                     aria-selected="@if(\Illuminate\Support\Facades\Session::has('tab_id')) @if(session('tab_id') == 2) true @else false @endif @endif">الرواتب</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white @if(session('tab_id') == 4) active @endif"
-                                    id="custom-content-below-orders-tab" data-toggle="pill"
-                                    href="#custom-content-below-orders" role="tab"
-                                    aria-controls="custom-content-below-orders" aria-selected="false">المهام</a>
-                            </li>
+{{--                            <li class="nav-item">--}}
+{{--                                <a class="nav-link text-white @if(session('tab_id') == 4) active @endif"--}}
+{{--                                    id="custom-content-below-orders-tab" data-toggle="pill"--}}
+{{--                                    href="#custom-content-below-orders" role="tab"--}}
+{{--                                    aria-controls="custom-content-below-orders" aria-selected="false">المهام</a>--}}
+{{--                            </li>--}}
                             <li class="nav-item">
                                 <a class="nav-link text-white @if(session('tab_id') == 5) active @endif"
                                     id="custom-content-below-rewards-tab" data-toggle="pill"
@@ -106,59 +107,62 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">الاسم :</label>
-                                                    <span class="form-control">{{ $data->name }}</span>
+                                                    <input onchange="update_user_ajax('name',this.value)" class="form-control" value="{{ $data->name }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="">الايميل :</label>
-                                                    <span class="form-control">{{ $data->email }}</span>
+                                                    <label for="">البريد الالكتروني :</label>
+                                                    <input onchange="update_user_ajax('email',this.value)" class="form-control" value="{{ $data->email }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="">حالة المستخدم :</label>
-                                                    @if($data->user_status == 1)
-                                                        <span class="form-control text-success">فعال</span>
-                                                    @elseif($data->user_status == 0)
-                                                        <span class="text-danger form-control">غير فعال</span>
-                                                    @endif
+                                                    <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                                                        <input onchange="update_user_ajax('user_status',(this.checked) ?1:0)" @if($data->user_status == 1) checked @endif type="checkbox" class="custom-control-input" id="customSwitch3">
+                                                        <label class="custom-control-label" for="customSwitch3">حالة المستخدم</label>
+                                                    </div>
                                                 </div>
                                             </div>
+{{--                                            <div class="col-md-4">--}}
+{{--                                                <div class="form-group">--}}
+{{--                                                    <label for="">حالة المستخدم :</label>--}}
+{{--                                                    @if($data->user_status == 1)--}}
+{{--                                                        <span class="form-control text-success">فعال</span>--}}
+{{--                                                    @elseif($data->user_status == 0)--}}
+{{--                                                        <span class="text-danger form-control">غير فعال</span>--}}
+{{--                                                    @endif--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">رقم الهاتف الاول :</label>
-                                                    <span class="form-control">{{ $data->user_phone1 }}</span>
+                                                    <input onchange="update_user_ajax('user_phone1',this.value)" class="form-control" value="{{ $data->user_phone1 }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    @if($data->user_phone2 == '')
                                                         <label for="">رقم الهاتف الثاني :</label>
-                                                        <span class="form-control">لا يوجد</span>
-                                                    @else
-                                                        <label for="">رقم الهاتف الثاني :</label>
-                                                        <span class="form-control">{{ $data->user_phone2 }}</span>
-                                                    @endif
+                                                        <input onchange="update_user_ajax('user_phone2',this.value)" class="form-control" value="{{ empty($data->user_phone2) ? 'لا يوجد' : $data->user_phone2}}">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">الراتب الاساسي</label>
-                                                    <input type="text" value="{{ $data->main_salary }}" class="form-control">
+                                                    <input onchange="update_user_ajax('main_salary',this.value)" type="text" value="{{ $data->main_salary }}" class="form-control">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="">ملاحظات : </label>
-                                                    <textarea readonly class="form-control" name="" id="" cols="30" rows="3">{{ $data->user_notes }}</textarea>
+                                                    <textarea onchange="update_user_ajax('user_notes',this.value)" class="form-control" name="" id="" cols="30" rows="3">{{ $data->user_notes }}</textarea>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="">العنوان :</label>
-                                                    <textarea readonly class="form-control" name="" id="" cols="30"
+                                                    <textarea onchange="update_user_ajax('user_address',this.value)" class="form-control" name="" id="" cols="30"
                                                               rows="3">{{ $data->user_address }}</textarea>
                                                 </div>
                                             </div>
@@ -166,13 +170,30 @@
                                     </div>
                                     <div class="col-md-4 pt-5 text-center">
                                         <div class="form-group text-center">
-                                            <img width="150" src="{{ asset('storage/user_photo/'.$data->user_photo) }}" alt="">
+                                            @if(empty($data->user_photo))
+                                                <img id="image_preview_container" width="150" src="{{ asset('storage/user_photo/'.$data->user_photo) }}" alt="">
+                                            @else
+                                                <img id="image_preview_container" width="150" src="{{ asset('storage/user_photo/'.$data->user_photo) }}" alt="">
+                                            @endif
                                         </div>
                                         <div>
                                             <h4 class="text-center">{{ $data->name }}</h4>
                                             <hr>
-                                            <p>يحتوي هذا القسم على المعلومات الأساسية للموظف</p>
-                                            <a href="{{ route('users.employees.edit',['id'=>$data->id]) }}" class="btn btn-info">تعديل بيانات الموظف</a>
+                                            <form method="POST" enctype="multipart/form-data" id="upload_image_form">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <input class="form-control" type="file" name="image" placeholder="Choose image" id="image">
+                                                            <span class="text-danger">{{ $errors->first('title') }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <button type="submit" class="btn btn-primary">رفع الصورة</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+{{--                                            <p>يحتوي هذا القسم على المعلومات الأساسية للموظف</p>--}}
+{{--                                            <a href="{{ route('users.employees.edit',['id'=>$data->id]) }}" class="btn btn-info">تعديل بيانات الموظف</a>--}}
                                         </div>
                                     </div>
                                 </div>
@@ -446,6 +467,8 @@
 @endsection
 @section('script')
     <script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
+
     <script>
         function edit_evaluations(id , notes , attachment) {
             document.getElementById('id_evaluationsEdit').value = id;
@@ -615,6 +638,38 @@
                 }
             });
         }
+
+            function update_user_ajax(data_type,value)
+            {
+                let employee_id = document.getElementById('employee_id').value;
+                var csrfToken = $('meta[name="csrf-token"]').attr('content');
+                var headers = {
+                    "X-CSRF-Token": csrfToken
+                };
+                $.ajax({
+                    url: "{{ route('users.update_user_ajax') }}",
+                    method: 'post',
+
+                    headers: headers,
+                    data: {
+                        'data_type':data_type,
+                        'value': value ,
+                        'id':employee_id
+                    },
+                    success: function(data) {
+                        if(data.success == 'true'){
+                            toastr.success(data.message)
+                        }
+                        else{
+                            toastr.error(data.message)
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        alert(jqXHR.responseText);
+                        // toastr.error(jqXHR.message)
+                    }
+                });
+            }
         function reward_change_date_by_ajax()
         {
             let employee_id = document.getElementById('employee_id').value;
@@ -641,6 +696,7 @@
                 }
             });
         }
+
         function edit_advance(id , value , currency_id , currency_name , notes , attached_file)
         {
             document.getElementById('id_advanceEdit').value = id;
@@ -656,10 +712,12 @@
             document.getElementById('attached_file_advanceEdit').href = `{{ asset('storage/discounts_rewards_attachment/${attached_file}') }}`;
             $('#edit_advance_modal').modal('show');
         }
+
         function add_advance()
         {
             $('#create_advance_modal').modal('show');
         }
+
         function edit_discount(id , value , currency_id , currency_name , notes , attached_file)
         {
             document.getElementById('id_discountEdit').value = id;
@@ -675,10 +733,12 @@
             document.getElementById('attached_file_discountEdit').href = `{{ asset('storage/discounts_rewards_attachment/${attached_file}') }}`;
             $('#edit_discount_modal').modal('show');
         }
+
         function add_discount()
         {
             $('#create_discount_modal').modal('show');
         }
+
         function edit_reward(id , value , currency_id , currency_name , notes , attached_file)
         {
             document.getElementById('id_rewardEdit').value = id;
@@ -694,18 +754,22 @@
             document.getElementById('attached_file_rewardEdit').href = `{{ asset('storage/discounts_rewards_attachment/${attached_file}') }}`;
             $('#edit_reward_modal').modal('show');
         }
+
         function add_reward()
         {
             $('#create_reward_modal').modal('show');
         }
+
         function add_attendance()
         {
             $('#attendance_in_time').modal('show');
         }
+
         function add_salary()
         {
             $('#create_salary_modal').modal('show');
         }
+
         function edit_out_time_attendance(note , bfo_attendance_id , activity_type)
         {
             document.getElementById('bfo_attendance_id_attendanceEditOutTimeModal').value = bfo_attendance_id;
@@ -727,10 +791,12 @@
             });
             $('#attendance_edit_out_time').modal('show');
         }
+
         function delete_bfo_attendance(id) {
             document.getElementById('bfo_attendance_id_attendanceDeleteModal').value = id;
             $('#attendance_delete').modal('show');
         }
+
         function edit_attendance(bfo_attendance_id , activity_type , notes , in_time , out_time)
         {
             let selectElement = document.getElementById('activity_type_edit_modal');
@@ -758,9 +824,47 @@
             document.getElementById('bfo_attendance_id_attendanceEdit').value = bfo_attendance_id;
             $('#edit_attendance').modal('show');
         }
+
+        $(document).ready(function (e) {
+            $('#image').change(function (){
+                let reader = new FileReader();
+                reader.onload = (e) => {
+                    $('#image_preview_container').attr('src',e.target.result);
+                }
+                reader.readAsDataURL(this.files[0]);
+            });
+            $('#upload_image_form').submit(function (e) {
+                e.preventDefault();
+                let employee_id = document.getElementById('employee_id').value;
+                var formData = new FormData(this);
+                formData.append('id',employee_id);
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('users.upload_image') }}",
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: (data) => {
+                        toastr.success(data.message);
+                        this.reset();
+                    },
+                    error: function(jqXHR) {
+                        console.log(jqXHR.responseText);
+                    }
+                });
+            })
+        })
+
         $(function(){
             $('.select2bs4').select2({
                 theme: 'bootstrap4'
+            })
+            $("input[data-bootstrap-switch]").each(function(){
+                $(this).bootstrapSwitch('state', $(this).prop('checked'));
             })
         });
     </script>
