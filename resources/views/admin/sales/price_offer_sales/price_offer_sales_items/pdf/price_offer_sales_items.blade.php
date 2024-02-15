@@ -78,6 +78,15 @@
     <tr>
         <th>
             @if($language == 'ar')
+                باركود
+            @elseif($language == 'en')
+                Barcode
+            @elseif($language == 'he')
+                ברקוד
+            @endif
+        </th>
+        <th>
+            @if($language == 'ar')
                 اسم الصنف
             @elseif($language == 'en')
                 Product name
@@ -125,6 +134,9 @@
     @foreach($data as $key)
         <tr>
             <td>
+                {{ $key->product->barcode }}
+            </td>
+            <td>
                 @if($language == 'ar')
                     {{ $key->product->product_name_ar }}
                 @elseif($language == 'en')
@@ -144,7 +156,7 @@
         </tr>
     @endforeach
     <tr>
-        <td class="sum" colspan="3">المجموع</td>
+        <td class="sum" colspan="4">المجموع</td>
         <td>{{ $sum }} <span style="text-align: left">{{ $price_offer_sales->currency->currency_symbol ?? '' }}</span></td>
         <td></td>
     </tr>

@@ -129,6 +129,65 @@
                 </form>
             </div>
         </div>
+    <div class="card">
+        <div class="card-header">
+            <h5 class="text-center">اعدادات ساعة الدوام</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="">IP</label>
+                        <input type="text" class="form-control" placeholder="يرجى ادخال ال ip الخاص بالساعة">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="">Port</label>
+                        <input type="text" class="form-control" placeholder="يرجى ادخال ال port الخاص بالساعة">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="">User Name</label>
+                        <input type="text" class="form-control" placeholder="يرجى ادخال اسم المستخدم الخاص بالساعة">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="">Password</label>
+                        <input type="text" class="form-control" placeholder="يرجى ادخال كلمة المرور الخاصة بالساعة">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="">status up</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="">status down</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="">status right</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="">status left</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('script')

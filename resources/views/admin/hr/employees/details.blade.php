@@ -95,6 +95,12 @@
                                     href="#custom-content-below-evaluations" role="tab"
                                     aria-controls="custom-content-below-evaluations" aria-selected="false">التقييمات</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white @if(session('tab_id') == 11) active @endif"
+                                   id="working-hours-tab" data-toggle="pill"
+                                   href="#working-hours" role="tab"
+                                   aria-controls="working-hours-tab" aria-selected="false">أوقات الدوام</a>
+                            </li>
                     </ul>
                 </div>
                 <div class="col-md-12">
@@ -441,6 +447,117 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="tab-pane fade @if(session('tab_id') == 11) active show @endif" id="working-hours" role="tabpanel" aria-labelledby="working-hours-tab">
+                            <div class="p-2">
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label for="">نوع الدوام</label>
+                                        <select onchange="update_permanent_type(this.value)" class="form-control" name="" id="">
+                                            <option @if($data->permanent_type == 'full_time') selected @endif value="full_time">دوام كامل</option>
+                                            <option @if($data->permanent_type == 'part_time') selected @endif value="part_time">دوام جزئي</option>
+                                            <option @if($data->permanent_type == 'hourly_work') selected @endif value="hourly_work">دوام بالساعة</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <table class="table table-sm table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>الايام</th>
+                                                <th>بداية الدوام</th>
+                                                <th>نهاية الدوام</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <input @if(!empty(\App\Models\WorkingHoursModel::where('employee_id',$data->id)->where('day','saturday')->first())) @if(\App\Models\WorkingHoursModel::where('employee_id',$data->id)->where('day','saturday')->first()->status == 'active') checked @endif @endif onchange="create_working_houre('saturday','status',(this.checked)?'active':'not_active')" id="saturday" type="checkbox">
+                                                <label for="saturday">السبت</label>
+                                            </td>
+                                            <td>
+                                                <input value="{{ \App\Models\WorkingHoursModel::where('employee_id',$data->id)->where('day','saturday')->first()->start_time ?? ''}}" onchange="create_working_houre('saturday','start_time',this.value)" class="form-control" type="time">
+                                            </td>
+                                            <td>
+                                                <input value="{{ \App\Models\WorkingHoursModel::where('employee_id',$data->id)->where('day','saturday')->first()->end_time ?? ''}}" onchange="create_working_houre('saturday','end_time',this.value)" class="form-control" type="time">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input @if(!empty(\App\Models\WorkingHoursModel::where('employee_id',$data->id)->where('day','sunday')->first())) @if(\App\Models\WorkingHoursModel::where('employee_id',$data->id)->where('day','sunday')->first()->status == 'active') checked @endif @endif  onchange="create_working_houre('sunday','status',(this.checked)?'active':'not_active')" id="sunday" type="checkbox">
+                                                <label for="sunday">الاحد</label>
+                                            </td>
+                                            <td>
+                                                <input value="{{ \App\Models\WorkingHoursModel::where('employee_id',$data->id)->where('day','sunday')->first()->start_time ?? ''}}" onchange="create_working_houre('sunday','start_time',this.value)" class="form-control" type="time">
+                                            </td>
+                                            <td>
+                                                <input value="{{ \App\Models\WorkingHoursModel::where('employee_id',$data->id)->where('day','sunday')->first()->end_time ?? ''}}" onchange="create_working_houre('sunday','end_time',this.value)" class="form-control" type="time">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input @if(!empty(\App\Models\WorkingHoursModel::where('employee_id',$data->id)->where('day','monday')->first())) @if(\App\Models\WorkingHoursModel::where('employee_id',$data->id)->where('day','monday')->first()->status == 'active') checked @endif @endif  onchange="create_working_houre('monday','status',(this.checked)?'active':'not_active')" id="monday" type="checkbox">
+                                                <label for="monday">الاثنين</label>
+                                            </td>
+                                            <td>
+                                                <input value="{{ \App\Models\WorkingHoursModel::where('employee_id',$data->id)->where('day','monday')->first()->start_time ?? ''}}" onchange="create_working_houre('monday','start_time',this.value)" class="form-control" type="time">
+                                            </td>
+                                            <td>
+                                                <input value="{{ \App\Models\WorkingHoursModel::where('employee_id',$data->id)->where('day','monday')->first()->end_time ?? ''}}" onchange="create_working_houre('monday','end_time',this.value)" class="form-control" type="time">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input @if(!empty(\App\Models\WorkingHoursModel::where('employee_id',$data->id)->where('day','tuesday')->first())) @if(\App\Models\WorkingHoursModel::where('employee_id',$data->id)->where('day','tuesday')->first()->status == 'active') checked @endif @endif onchange="create_working_houre('tuesday','status',(this.checked)?'active':'not_active')" id="tuesday" type="checkbox">
+                                                <label for="tuesday">الثلاثاء</label>
+                                            </td>
+                                            <td>
+                                                <input value="{{ \App\Models\WorkingHoursModel::where('employee_id',$data->id)->where('day','tuesday')->first()->start_time ?? ''}}" onchange="create_working_houre('tuesday','start_time',this.value)" class="form-control" type="time">
+                                            </td>
+                                            <td>
+                                                <input value="{{ \App\Models\WorkingHoursModel::where('employee_id',$data->id)->where('day','tuesday')->first()->end_time ?? ''}}" onchange="create_working_houre('tuesday','end_time',this.value)" class="form-control" type="time">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input @if(!empty(\App\Models\WorkingHoursModel::where('employee_id',$data->id)->where('day','wednesday')->first())) @if(\App\Models\WorkingHoursModel::where('employee_id',$data->id)->where('day','wednesday')->first()->status == 'active') checked @endif @endif onchange="create_working_houre('wednesday','status',(this.checked)?'active':'not_active')" id="wednesday" type="checkbox">
+                                                <label for="wednesday">الاربعاء</label>
+                                            </td>
+                                            <td>
+                                                <input value="{{ \App\Models\WorkingHoursModel::where('employee_id',$data->id)->where('day','wednesday')->first()->start_time ?? ''}}" onchange="create_working_houre('wednesday','start_time',this.value)" class="form-control" type="time">
+                                            </td>
+                                            <td>
+                                                <input value="{{ \App\Models\WorkingHoursModel::where('employee_id',$data->id)->where('day','wednesday')->first()->end_time ?? ''}}" onchange="create_working_houre('wednesday','end_time',this.value)" class="form-control" type="time">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input @if(!empty(\App\Models\WorkingHoursModel::where('employee_id',$data->id)->where('day','thursday')->first())) @if(\App\Models\WorkingHoursModel::where('employee_id',$data->id)->where('day','thursday')->first()->status == 'active') checked @endif @endif onchange="create_working_houre('thursday','status',(this.checked)?'active':'not_active')" id="thursday" type="checkbox">
+                                                <label for="thursday">الخميس</label>
+                                            </td>
+                                            <td>
+                                                <input value="{{ \App\Models\WorkingHoursModel::where('employee_id',$data->id)->where('day','thursday')->first()->start_time ?? ''}}" onchange="create_working_houre('thursday','start_time',this.value)" class="form-control" type="time">
+                                            </td>
+                                            <td>
+                                                <input value="{{ \App\Models\WorkingHoursModel::where('employee_id',$data->id)->where('day','thursday')->first()->end_time ?? ''}}" onchange="create_working_houre('thursday','end_time',this.value)" class="form-control" type="time">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input @if(!empty(\App\Models\WorkingHoursModel::where('employee_id',$data->id)->where('day','friday')->first())) @if(\App\Models\WorkingHoursModel::where('employee_id',$data->id)->where('day','friday')->first()->status == 'active') checked @endif @endif onchange="create_working_houre('friday','status',(this.checked)?'active':'not_active')" id="friday" type="checkbox">
+                                                <label for="friday">الجمعة</label>
+                                            </td>
+                                            <td>
+                                                <input value="{{ \App\Models\WorkingHoursModel::where('employee_id',$data->id)->where('day','friday')->first()->start_time ?? ''}}" onchange="create_working_houre('friday','start_time',this.value)" class="form-control" type="time">
+                                            </td>
+                                            <td>
+                                                <input value="{{ \App\Models\WorkingHoursModel::where('employee_id',$data->id)->where('day','friday')->first()->end_time ?? ''}}" onchange="create_working_houre('friday','end_time',this.value)" class="form-control" type="time">
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 @include('admin.hr.employees.modals.attendanceCreate')
@@ -670,6 +787,72 @@
                     }
                 });
             }
+
+            function update_permanent_type(value)
+            {
+                let employee_id = document.getElementById('employee_id').value;
+                var csrfToken = $('meta[name="csrf-token"]').attr('content');
+                var headers = {
+                    "X-CSRF-Token": csrfToken
+                };
+                $.ajax({
+                    url: "{{ route('users.employees.permanent_type.update_permanent_type') }}",
+                    method: 'post',
+
+                    headers: headers,
+                    data: {
+                        'employee_id': employee_id,
+                        'permanent_type':value,
+                    },
+                    success: function(data) {
+                        if(data.success == 'true'){
+                            toastr.success(data.message)
+                        }
+                        else{
+                            toastr.error(data.message)
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        alert(jqXHR.responseText);
+                        // toastr.error(jqXHR.message)
+                    }
+                });
+            }
+
+            function create_working_houre(day,operation,value)
+            {
+                let employee_id = document.getElementById('employee_id').value;
+                var csrfToken = $('meta[name="csrf-token"]').attr('content');
+                var headers = {
+                    "X-CSRF-Token": csrfToken
+                };
+                $.ajax({
+                    url: "{{ route('users.employees.permanent_type.create_working_houre') }}",
+                    method: 'post',
+
+                    headers: headers,
+                    data: {
+                        'employee_id': employee_id,
+                        'day':day,
+                        'operation':operation,
+                        'value':value
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        if(data.success == 'true'){
+                            toastr.success(data.message)
+                        }
+                        else{
+                            toastr.error(data.message)
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        alert(jqXHR.responseText);
+                        // toastr.error(jqXHR.message)
+                    }
+                });
+            }
+
         function reward_change_date_by_ajax()
         {
             let employee_id = document.getElementById('employee_id').value;

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SystemSettingModel;
+use App\Models\WorkingHoursModel;
 use Illuminate\Http\Request;
 
 class SystemSettingController extends Controller
@@ -43,5 +44,14 @@ class SystemSettingController extends Controller
         else{
             return redirect()->route('setting.system_setting.index')->with(['fail'=>'لم تتم العملية بنجاح هناك مشكلة ما']);
         }
+    }
+
+    public function create_working_time_option(Request $request){
+        $data = SystemSettingModel::findOrNew($request->id);
+        $data->ip = $request->ip;
+        $data->port = $request->port;
+        $data->user_name = $request->user_name;
+        $data->password = $request->password;
+        $data->status_right = $request->status_right;
     }
 }
