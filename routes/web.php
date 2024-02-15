@@ -335,6 +335,10 @@ Route::group(['middleware' => 'auth',], function () {
                 Route::post('create',[App\Http\Controllers\hr\EvaluationsController::class, 'create'])->name('users.employees.evaluations.create');
                 Route::post('edit',[App\Http\Controllers\hr\EvaluationsController::class, 'edit'])->name('users.employees.evaluations.edit');
             });
+            Route::group(['prefix'=>'permanent_type'],function(){
+                Route::post('update_permanent_type',[App\Http\Controllers\hr\WorkingHoursController::class, 'update_permanent_type'])->name('users.employees.permanent_type.update_permanent_type');
+                Route::post('create_working_houre',[App\Http\Controllers\hr\WorkingHoursController::class, 'create_working_houre'])->name('users.employees.permanent_type.create_working_houre');
+            });
         });
     });
 
