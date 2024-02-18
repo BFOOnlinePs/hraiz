@@ -135,55 +135,30 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="">IP</label>
-                        <input type="text" class="form-control" placeholder="يرجى ادخال ال ip الخاص بالساعة">
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="">Port</label>
-                        <input type="text" class="form-control" placeholder="يرجى ادخال ال port الخاص بالساعة">
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="">User Name</label>
-                        <input type="text" class="form-control" placeholder="يرجى ادخال اسم المستخدم الخاص بالساعة">
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="">Password</label>
-                        <input type="text" class="form-control" placeholder="يرجى ادخال كلمة المرور الخاصة بالساعة">
-                    </div>
-                </div>
+                <button class="btn btn-dark btn-sm">اضافة ساعة</button>
             </div>
             <div class="row">
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="">status up</label>
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="">status down</label>
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="">status right</label>
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="">status left</label>
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
+                <div class="table-responsive">
+                    <table class="table table-sm table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Ip</th>
+                                <th>Port</th>
+                                <th>User name</th>
+                                <th>Password</th>
+                                <th>Status right</th>
+                                <th>Status left</th>
+                                <th>Status up</th>
+                                <th>Status down</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($time_attendance_device as $key)
+
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SystemSettingModel;
+use App\Models\TimeAttendanceDevicesModel;
 use App\Models\WorkingHoursModel;
 use Illuminate\Http\Request;
 
@@ -10,7 +11,8 @@ class SystemSettingController extends Controller
 {
     public function index(){
         $data = SystemSettingModel::first();
-        return view('admin.setting.system_setting.index',['data'=>$data]);
+        $time_attendance_device = TimeAttendanceDevicesModel::get();
+        return view('admin.setting.system_setting.index',['data'=>$data,'time_attendance_device'=>$time_attendance_device]);
     }
 
     public function create(Request $request){
@@ -46,12 +48,21 @@ class SystemSettingController extends Controller
         }
     }
 
-    public function create_working_time_option(Request $request){
-        $data = SystemSettingModel::findOrNew($request->id);
+    public function create_time_attendance_device_option(Request $request){
+        $data = new TimeAttendanceDevicesModel();
         $data->ip = $request->ip;
         $data->port = $request->port;
         $data->user_name = $request->user_name;
         $data->password = $request->password;
         $data->status_right = $request->status_right;
+        $data->status_left = $request->status_left;
+        $data->status_up = $request->status_up;
+        $data->status_down = $request->status_down;
+        if ($data->save()){
+            return redirect()->route('setting.system_setting.index')->with(['success'=>'تم اضافة البيانات بنجاح']);
+        }
+        else{
+            return redirect()->route('setting.system_setting.index')->with(['fail'=>'هناك خلل ما لم يتم اضافة البيانات']);
+        }
     }
 }
