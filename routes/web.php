@@ -500,6 +500,7 @@ Route::group(['middleware' => 'auth',], function () {
         Route::group(['prefix'=>'system_setting'],function(){
             Route::get('index',[App\Http\Controllers\SystemSettingController::class, 'index'])->name('setting.system_setting.index');
             Route::post('create',[App\Http\Controllers\SystemSettingController::class, 'create'])->name('setting.system_setting.create');
+            Route::post('create_time_attendance_device_option',[App\Http\Controllers\SystemSettingController::class, 'create_time_attendance_device_option'])->name('setting.system_setting.create_time_attendance_device_option');
         });
         Route::group(['prefix'=>'user_category'],function(){
             Route::get('index',[App\Http\Controllers\UserCategoryController::class, 'index'])->name('setting.user_category.index');
