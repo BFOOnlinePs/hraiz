@@ -171,6 +171,7 @@ return [
         Mccarlosen\LaravelMpdf\LaravelMpdfServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
         App\Providers\HelperServiceProvider::class,
+        Laradevsbd\Zkteco\ZktecoServiceProvider::class,
 
     ])->toArray(),
 

@@ -339,6 +339,10 @@ Route::group(['middleware' => 'auth',], function () {
                 Route::post('update_permanent_type',[App\Http\Controllers\hr\WorkingHoursController::class, 'update_permanent_type'])->name('users.employees.permanent_type.update_permanent_type');
                 Route::post('create_working_houre',[App\Http\Controllers\hr\WorkingHoursController::class, 'create_working_houre'])->name('users.employees.permanent_type.create_working_houre');
             });
+            Route::group(['prefix'=>'expenses'],function(){
+                Route::post('create',[App\Http\Controllers\hr\ExpensesController::class, 'create'])->name('users.employees.expenses.create');
+                Route::post('update',[App\Http\Controllers\hr\ExpensesController::class, 'update'])->name('users.employees.expenses.update');
+            });
         });
     });
 
@@ -501,6 +505,12 @@ Route::group(['middleware' => 'auth',], function () {
             Route::get('index',[App\Http\Controllers\SystemSettingController::class, 'index'])->name('setting.system_setting.index');
             Route::post('create',[App\Http\Controllers\SystemSettingController::class, 'create'])->name('setting.system_setting.create');
             Route::post('create_time_attendance_device_option',[App\Http\Controllers\SystemSettingController::class, 'create_time_attendance_device_option'])->name('setting.system_setting.create_time_attendance_device_option');
+            Route::get('async_data_from_attendance_device/{id}',[App\Http\Controllers\SystemSettingController::class, 'async_data_from_attendance_device'])->name('setting.system_setting.async_data_from_attendance_device');
+            Route::post('check_connection_attendance_device_ajax',[App\Http\Controllers\SystemSettingController::class, 'check_connection_attendance_device_ajax'])->name('setting.system_setting.check_connection_attendance_device_ajax');
+        });
+        Route::group(['prefix'=>'expenses_category'],function(){
+            Route::get('index',[App\Http\Controllers\ExpensesCategoryController::class, 'index'])->name('setting.expenses_category.index');
+            Route::post('create',[App\Http\Controllers\ExpensesCategoryController::class, 'create'])->name('setting.expenses_category.create');
         });
         Route::group(['prefix'=>'user_category'],function(){
             Route::get('index',[App\Http\Controllers\UserCategoryController::class, 'index'])->name('setting.user_category.index');

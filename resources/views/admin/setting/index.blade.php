@@ -133,5 +133,16 @@
                 </div>
             </a>
         </div>
+        <div class="col-md-3 col-sm-6 col-12">
+            <a href="{{ route('setting.expenses_category.index') }}" style="text-decoration: none" class="text-dark">
+                <div class="info-box shadow-none">
+                    <span class="info-box-icon"><i class="fa fa-list"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text text-center pt-3">المصروفات</span>
+                        {{--                        <span class="info-box-number">None</span>--}}
+                    </div>
+                </div>
+            </a>
+        </div>
     </div>
 @endsection()

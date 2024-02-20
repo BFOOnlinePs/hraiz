@@ -2,11 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dc0963de-5d4a-497e-a864-4d74efffd831" name="Changes" comment="edit">
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/setting/system_setting/modals/time_attendance_devices.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/hr/employees/modals/expensesCreate.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/hr/employees/modals/expensesEdit.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/setting/expenses/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jolanko.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jolanko.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SystemSettingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SystemSettingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/hr/EmployeesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/hr/EmployeesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/hr/employees/details.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/hr/employees/details.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/setting/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/setting/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/setting/system_setting/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/setting/system_setting/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/setting/system_setting/modals/time_attendance_devices.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/setting/system_setting/modals/time_attendance_devices.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/users/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/users/add.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/navbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/navbar.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +37,11 @@
     <execution />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="workinh_houre" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -162,6 +186,8 @@
       <path value="$PROJECT_DIR$/vendor/sabberworm/php-css-parser" />
       <path value="$PROJECT_DIR$/vendor/milon/barcode" />
       <path value="$PROJECT_DIR$/vendor/carbonphp/carbon-doctrine-types" />
+      <path value="$PROJECT_DIR$/vendor/rats/zkteco" />
+      <path value="$PROJECT_DIR$/vendor/laradevsbd/zkteco-sdk" />
     </include_path>
   </component>
   <component name="ProjectId" id="2U3hswdiOwoqLCpAIp4cE1Gs9R1" />
@@ -180,7 +206,7 @@
     &quot;WebServerToolWindowPanel.toolwindow.show.date&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Applications/XAMPP/xamppfiles/htdocs/BFound/jelanco_new/jolanko/public/assets/plugins&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Applications/XAMPP/xamppfiles/htdocs/BFound/jelanco_new/jolanko/resources/views/admin/hr/employees/modals&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
@@ -191,11 +217,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/admin/hr/employees/modals" />
       <recent name="$PROJECT_DIR$/public/assets/plugins" />
       <recent name="$PROJECT_DIR$/resources/views/admin/accounting/sales_invoices" />
       <recent name="$PROJECT_DIR$/resources/views/admin/reports" />
       <recent name="$PROJECT_DIR$/resources/views/admin/product" />
-      <recent name="$PROJECT_DIR$/public/img/background" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/public/assets/fonts/Traditional_Arabic" />
@@ -204,11 +230,11 @@
       <recent name="$PROJECT_DIR$/public/img" />
     </key>
   </component>
-  <component name="RunManager" selected="PHPUnit.re">
+  <component name="RunManager" selected="PHPUnit.rere">
     <configuration name="price_offer_sales_items.blade.php" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://ftp.talabati.ps/resources/views/admin/sales/price_offer_sales/price_offer_sales_items/pdf/price_offer_sales_items.blade.php">
       <method v="2" />
     </configuration>
-    <configuration name="re" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+    <configuration name="rere" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner scope="XML" />
       <method v="2" />
     </configuration>
@@ -282,6 +308,8 @@
       <workItem from="1707750706588" duration="1946000" />
       <workItem from="1707915771594" duration="15577000" />
       <workItem from="1708011567673" duration="2087000" />
+      <workItem from="1708328560391" duration="17663000" />
+      <workItem from="1708414845943" duration="726000" />
     </task>
     <task id="LOCAL-00001" summary="edit">
       <created>1692272515017</created>

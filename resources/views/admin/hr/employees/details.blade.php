@@ -101,6 +101,12 @@
                                    href="#working-hours" role="tab"
                                    aria-controls="working-hours-tab" aria-selected="false">أوقات الدوام</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white @if(session('tab_id') == 12) active @endif"
+                                   id="expenses-tab" data-toggle="pill"
+                                   href="#expenses" role="tab"
+                                   aria-controls="expenses-tab" aria-selected="false">المصروفات</a>
+                            </li>
                     </ul>
                 </div>
                 <div class="col-md-12">
@@ -558,6 +564,66 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="tab-pane fade @if(session('tab_id') == 12) active show @endif" id="expenses" role="tabpanel" aria-labelledby="expenses-tab">
+                            <div class="p-2">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button class="btn btn-dark" data-toggle="modal" data-target="#create_expenses_modal">اضافة مصروف</button>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <table class="table table-hover table-bordered table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>التاريخ</th>
+                                                <th>القسم</th>
+                                                <th>الوصف</th>
+                                                <th>القيمة</th>
+                                                <th>الملف</th>
+                                                <th>اضافة بواسطة</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if($expenses->isEmpty())
+                                                <tr>
+                                                    <td colspan="7" class="text-center">لا توجد بيانات</td>
+                                                </tr>
+                                            @else
+                                                @foreach($expenses as $key)
+                                                    <tr>
+                                                        <td>{{ $key->expense_date }}</td>
+                                                        <td>{{ $key->expenses_category->title ?? '' }}</td>
+                                                        <td>{{ $key->description }}</td>
+                                                        <td>{{ $key->amount }}</td>
+                                                        <td>
+                                                            @if(empty($key->files))
+                                                                لا يوجد ملف
+                                                            @else
+                                                                <a type="text"
+                                                                   href="{{ asset('storage/expenses/'.$key->files) }}"
+                                                                   download="attachment" class="btn btn-primary btn-sm"><span
+                                                                        class="fa fa-download"></span></a>
+                                                                <button
+                                                                    onclick="viewAttachment('{{ asset('storage/expenses/'.$key->files) }}')"
+                                                                    href="" class="btn btn-success btn-sm" data-toggle="modal"
+                                                                    data-target="#modal-lg-view_attachment"><span
+                                                                        class="fa fa-search"></span></button>
+                                                            @endif
+                                                        </td>
+                                                        <td>{{ $key->user->name }}</td>
+                                                        <td>
+                                                            <button type="button" onclick="edit_expenses({{ $key }})" class="btn btn-success btn-sm"><span class="fa fa-edit"></span></button>
+                                                            <a href="" class="btn btn-danger btn-sm"><span class="fa fa-trash"></span></a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 @include('admin.hr.employees.modals.attendanceCreate')
@@ -578,6 +644,8 @@
                 @include('admin.hr.employees.modals.evaluationsEdit')
                 @include('admin.hr.employees.modals.salariesCreate')
                 @include('admin.hr.employees.modals.salaryEdit')
+                @include('admin.hr.employees.modals.expensesCreate')
+                @include('admin.hr.employees.modals.expensesEdit')
             </div>
         </div>
     </div>
@@ -1003,9 +1071,35 @@
             document.getElementById('out_time_time_edit_modal').value = out_time.split(' ')[1];
             document.getElementById('out_time_date_edit_modal').value = out_time.split(' ')[0];
             if(out_time !== '') {
+
             }
             document.getElementById('bfo_attendance_id_attendanceEdit').value = bfo_attendance_id;
             $('#edit_attendance').modal('show');
+        }
+
+        function edit_expenses(data)
+        {
+            if(data.files === ''){
+                $('#check_attachment').css('display','block')
+            }
+            $('#expenses_id').val(data.id);
+            $('#expense_date_edit_expenses').val(data.expense_date);
+            $('#description_edit_expenses').val(data.description);
+            $('#amount_edit_expenses').val(data.amount);
+            $('#title_edit_expenses').val(data.title);
+            $('#repeat_every_edit_expenses').val(data.repeat_every);
+            $('#repeat_type_edit_expenses').val(data.repeat_type);
+            $('#no_of_cycles_edit_expenses').val(data.no_of_cycles);
+
+            let selectCurrency = document.getElementById('category_id_edit_expenses');
+            selectCurrency.innerHTML = "";
+            let option = document.createElement('option');
+            option.value = data.category_id;
+            option.text = data.expenses_category.title;
+            selectCurrency.append(option);
+            selectCurrency.innerHTML += document.getElementById('category_id_edit_expenses').innerHTML;
+
+            $('#edit_expenses_modal').modal('show');
         }
 
         $(document).ready(function (e) {
@@ -1041,6 +1135,27 @@
                 });
             })
         })
+
+        function if_checked() {
+            var checkbox = document.getElementById("checkbox");
+            var recurring_form = document.getElementById("recurring_form");
+
+            if (checkbox.checked === true) {
+                recurring_form.style.display = "block";
+            } else {
+                recurring_form.style.display = "none";
+            }
+        }
+
+        function if_checked_for_edit(value) {
+            // var checkbox = document.getElementById("checkbox");
+            var recurring_form = document.getElementById("recurring_form_edit");
+            if (value === true) {
+                recurring_form.style.display = "block";
+            } else {
+                recurring_form.style.display = "none";
+            }
+        }
 
         $(function(){
             $('.select2bs4').select2({
