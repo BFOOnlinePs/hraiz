@@ -2,16 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BfoAttendance;
 use App\Models\SystemSettingModel;
 use App\Models\TimeAttendanceDevicesModel;
 use App\Models\WorkingHoursModel;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Rats\Zkteco\Lib\Helper\Util;
+use Rats\Zkteco\Lib\ZKTeco;
 
 class SystemSettingController extends Controller
 {
     public function index(){
         $data = SystemSettingModel::first();
         $time_attendance_device = TimeAttendanceDevicesModel::get();
+        foreach ($time_attendance_device as $key){
+//            $zk = new ZKTeco(''.$key->ip.'', $key->port);
+//            $key->status_device = (!$zk->connect() == 1)?'fail':'success';
+        }
         return view('admin.setting.system_setting.index',['data'=>$data,'time_attendance_device'=>$time_attendance_device]);
     }
 
@@ -63,6 +71,55 @@ class SystemSettingController extends Controller
         }
         else{
             return redirect()->route('setting.system_setting.index')->with(['fail'=>'هناك خلل ما لم يتم اضافة البيانات']);
+        }
+    }
+
+    public function async_data_from_attendance_device($id){
+        $attendance_device = TimeAttendanceDevicesModel::where('id',$id)->first();
+        $zk = new ZKTeco('192.168.1.201',$attendance_device->port);
+        $zk->connect();
+        $zk->enableDevice();
+        $attendances = $zk->getAttendance();
+        $data = BfoAttendance::orderBy('id','desc')->latest('attendance_id')->first();
+        foreach ($attendances as $key){
+            if (!empty($data)){
+                if ($data->attendance_id < $key['uid']){
+                    $bfo_attendance = new BfoAttendance();
+                    $bfo_attendance->activity_type = $key['type'];
+                    $bfo_attendance->user_id = $key['id'];
+                    $bfo_attendance->in_time = $key['timestamp'];
+                    $bfo_attendance->out_time = $key['timestamp'];
+                    $bfo_attendance->attendance_id = $key['uid'];
+                    $bfo_attendance->device_id = $id;
+                    $bfo_attendance->save();
+                }
+            }
+            else{
+                $bfo_attendance = new BfoAttendance();
+                $bfo_attendance->activity_type = $key['type'];
+                $bfo_attendance->user_id = $key['id'];
+                $bfo_attendance->in_time = $key['timestamp'];
+                $bfo_attendance->out_time = $key['timestamp'];
+                $bfo_attendance->attendance_id = $key['uid'];
+                $bfo_attendance->device_id = $id;
+                $bfo_attendance->save();
+            }
+        }
+    }
+
+    public function check_connection_attendance_device_ajax(Request $request){
+        $zk = new ZKTeco(''.$request->ip.'',$request->port);
+        if ($zk->connect()){
+            return response()->json([
+                'success'=>'true',
+                'message'=>'تم الاتصال بنجاح'
+            ]);
+        }
+        else{
+            return response()->json([
+                'success'=>'false',
+                'message'=>'هناك خطا بالاتصال'
+            ]);
         }
     }
 }

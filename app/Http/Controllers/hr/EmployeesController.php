@@ -4,6 +4,8 @@ namespace App\Http\Controllers\hr;
 
 use App\Http\Controllers\Controller;
 use App\Models\BfoAttendance;
+use App\Models\BfoExpenseCategoriesModel;
+use App\Models\BfoExpensesModel;
 use App\Models\Currency;
 use App\Models\DiscountReward;
 use App\Models\EmployeeBonus;
@@ -49,7 +51,13 @@ class EmployeesController extends Controller
         $employees_bonuses = EmployeeBonus::where('employee_id' , $id)->get();
         $employees_evaluations = EmployeeEvaluation::where('employee_id' , $id)->get();
         $salaries = SalariesModel::where('employee_id', $id)->get();
-        return view('admin.hr.employees.details' , ['employees_evaluations' => $employees_evaluations ,'employees_bonuses' => $employees_bonuses  , 'vacations_types'=> $vacations_types , 'data' => $data , 'bfo_attendances' => $bfo_attendances , 'currencies' => $currencies , 'salaries' => $salaries]);
+        $expenses_categories = BfoExpenseCategoriesModel::get();
+        $expenses = BfoExpensesModel::get();
+        foreach ($expenses as $key){
+            $key->user = User::where('id',$key->user_id)->first();
+            $key->expenses_category = BfoExpenseCategoriesModel::where('id',$key->category_id)->first();
+        }
+        return view('admin.hr.employees.details' , ['employees_evaluations' => $employees_evaluations ,'employees_bonuses' => $employees_bonuses  , 'vacations_types'=> $vacations_types , 'data' => $data , 'bfo_attendances' => $bfo_attendances , 'currencies' => $currencies , 'salaries' => $salaries , 'expenses_categories' => $expenses_categories , 'expenses' => $expenses]);
     }
 
     public function edit($id)

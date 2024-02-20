@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'a088afdd39d51444b6524a1d94fcb87e92f767da',
+        'reference' => '9631e012a23093e10f85b9423f37abc67735ee3f',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -451,6 +451,15 @@
                 0 => '*',
             ),
         ),
+        'laradevsbd/zkteco-sdk' => array(
+            'pretty_version' => 'v1.0.0',
+            'version' => '1.0.0.0',
+            'reference' => '0f03093e726d483dd7febba6268ca64e3dd3fac8',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../laradevsbd/zkteco-sdk',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'laravel/framework' => array(
             'pretty_version' => 'v10.39.0',
             'version' => '10.39.0.0',
@@ -463,7 +472,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'a088afdd39d51444b6524a1d94fcb87e92f767da',
+            'reference' => '9631e012a23093e10f85b9423f37abc67735ee3f',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -964,8 +973,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0|2.0|3.0',
-                1 => '3.0.0',
+                0 => '3.0.0',
+                1 => '1.0|2.0|3.0',
             ),
         ),
         'psr/simple-cache' => array(
@@ -1016,6 +1025,15 @@
             'reference' => '5f0df49ae5ad6efb7afa69e6bfab4e5b1e080d8e',
             'type' => 'library',
             'install_path' => __DIR__ . '/../ramsey/uuid',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'rats/zkteco' => array(
+            'pretty_version' => 'V002',
+            'version' => '002.0.0.0',
+            'reference' => '6e17024370ec56c89d87c85a54a1c55079304834',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../rats/zkteco',
             'aliases' => array(),
             'dev_requirement' => false,
         ),

@@ -124,6 +124,15 @@
                                                         <textarea class="form-control" placeholder="العنوان الكامل" name="user_address" id="" cols="30"
                                                                   rows="3"></textarea>
                                                     </div>
+                                                    <div class="form-group">
+                                                        <label for="">الصلاحيات</label>
+                                                        <br>
+                                                        @foreach ($user_role as $key)
+                                                            <input name="role_level[]" value="{{ $key->id }}" id="role_user_{{ $loop->index }}" type="checkbox">
+                                                            <label for="role_user_{{ $loop->index }}">{{ $key->name }}</label>
+                                                        @endforeach
+                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -148,7 +157,7 @@
                                                             </div>
                                                         </div>
                                                         @error('user_photo')
-                                                        <span class="text-danger">{{ $message }}</span>
+                                                            <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </div>
                                                 </div>
