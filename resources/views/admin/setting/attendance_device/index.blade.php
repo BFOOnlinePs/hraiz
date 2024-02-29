@@ -79,7 +79,7 @@
             </div>
         </div>
     </div>
-
+{{--test--}}
     @include('admin.setting.attendance_device.modals.time_attendance_devices')
     @include('admin.setting.attendance_device.modals.edit_time_attendance_devices')
     @include('admin.setting.attendance_device.modals.async_loader')
