@@ -339,10 +339,6 @@ Route::group(['middleware' => 'auth',], function () {
                 Route::post('update_permanent_type',[App\Http\Controllers\hr\WorkingHoursController::class, 'update_permanent_type'])->name('users.employees.permanent_type.update_permanent_type');
                 Route::post('create_working_houre',[App\Http\Controllers\hr\WorkingHoursController::class, 'create_working_houre'])->name('users.employees.permanent_type.create_working_houre');
             });
-            Route::group(['prefix'=>'expenses'],function(){
-                Route::post('create',[App\Http\Controllers\hr\ExpensesController::class, 'create'])->name('users.employees.expenses.create');
-                Route::post('update',[App\Http\Controllers\hr\ExpensesController::class, 'update'])->name('users.employees.expenses.update');
-            });
         });
     });
 
@@ -386,6 +382,7 @@ Route::group(['middleware' => 'auth',], function () {
         Route::post('create', [App\Http\Controllers\CurrencyController::class, 'create'])->name('currency.create');
         Route::get('edit/{id}', [App\Http\Controllers\CurrencyController::class, 'edit'])->name('currency.edit');
         Route::post('update/{id}', [App\Http\Controllers\CurrencyController::class, 'update'])->name('currency.update');
+        Route::get('set_default_value/{id}', [App\Http\Controllers\CurrencyController::class, 'set_default_value'])->name('currency.set_default_value');
     });
 
     Route::group(['prefix' => 'category'], function () {
@@ -504,13 +501,6 @@ Route::group(['middleware' => 'auth',], function () {
         Route::group(['prefix'=>'system_setting'],function(){
             Route::get('index',[App\Http\Controllers\SystemSettingController::class, 'index'])->name('setting.system_setting.index');
             Route::post('create',[App\Http\Controllers\SystemSettingController::class, 'create'])->name('setting.system_setting.create');
-            Route::post('create_time_attendance_device_option',[App\Http\Controllers\SystemSettingController::class, 'create_time_attendance_device_option'])->name('setting.system_setting.create_time_attendance_device_option');
-            Route::get('async_data_from_attendance_device/{id}',[App\Http\Controllers\SystemSettingController::class, 'async_data_from_attendance_device'])->name('setting.system_setting.async_data_from_attendance_device');
-            Route::post('check_connection_attendance_device_ajax',[App\Http\Controllers\SystemSettingController::class, 'check_connection_attendance_device_ajax'])->name('setting.system_setting.check_connection_attendance_device_ajax');
-        });
-        Route::group(['prefix'=>'expenses_category'],function(){
-            Route::get('index',[App\Http\Controllers\ExpensesCategoryController::class, 'index'])->name('setting.expenses_category.index');
-            Route::post('create',[App\Http\Controllers\ExpensesCategoryController::class, 'create'])->name('setting.expenses_category.create');
         });
         Route::group(['prefix'=>'user_category'],function(){
             Route::get('index',[App\Http\Controllers\UserCategoryController::class, 'index'])->name('setting.user_category.index');
@@ -530,7 +520,15 @@ Route::group(['middleware' => 'auth',], function () {
             Route::post('create',[App\Http\Controllers\VacationsTypesController::class, 'create'])->name('setting.vacations_types.create');
             Route::post('edit',[App\Http\Controllers\VacationsTypesController::class, 'edit'])->name('setting.vacations_types.edit');
         });
-
+        Route::group(['prefix'=>'attendance_device'],function(){
+            Route::get('index',[App\Http\Controllers\AttendaceDeviceController::class, 'index'])->name('setting.attendance_device.index');
+            Route::post('create_time_attendance_device_option',[App\Http\Controllers\AttendaceDeviceController::class, 'create_time_attendance_device_option'])->name('setting.attendance_device.create_time_attendance_device_option');
+            Route::post('update_time_attendance_device_option',[App\Http\Controllers\AttendaceDeviceController::class, 'update_time_attendance_device_option'])->name('setting.attendance_device.update_time_attendance_device_option');
+            Route::get('async_data_from_attendance_device/{id}',[App\Http\Controllers\AttendaceDeviceController::class, 'async_data_from_attendance_device'])->name('setting.attendance_device.async_data_from_attendance_device');
+            Route::post('async_data_from_attendance_device_ajax',[App\Http\Controllers\AttendaceDeviceController::class, 'async_data_from_attendance_device_ajax'])->name('setting.attendance_device.async_data_from_attendance_device_ajax');
+            Route::post('check_connection_attendance_device_ajax',[App\Http\Controllers\AttendaceDeviceController::class, 'check_connection_attendance_device_ajax'])->name('setting.attendance_device.check_connection_attendance_device_ajax');
+            Route::get('delete.{id}',[App\Http\Controllers\AttendaceDeviceController::class, 'delete'])->name('setting.attendance_device.delete');
+        });
     });
     Route::group(['prefix'=>'hr'],function(){
         Route::group(['prefix'=>'attendance'],function(){
@@ -607,6 +605,18 @@ Route::group(['prefix'=>'accounting','middleware'=>'auth'],function(){
             Route::post('delete_item',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'delete_item'])->name('accounting.sales_invoices.delete_item');
             Route::post('update_invoice_reference_number_ajax',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'update_invoice_reference_number_ajax'])->name('accounting.sales_invoices.update_invoice_reference_number_ajax');
             Route::post('update_tax_id_ratio',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'update_tax_id_ratio'])->name('accounting.sales_invoices.update_tax_id_ratio');
+        });
+        Route::group(['prefix'=>'expenses'],function(){
+            Route::get('index',[App\Http\Controllers\accounting\ExpensesController::class, 'index'])->name('accounting.expenses.index');
+            Route::post('expenses_table_ajax',[App\Http\Controllers\accounting\ExpensesController::class, 'expenses_table_ajax'])->name('accounting.expenses.expenses_table_ajax');
+            Route::post('create',[App\Http\Controllers\accounting\ExpensesController::class, 'create'])->name('accounting.expenses.create');
+            Route::post('update',[App\Http\Controllers\accounting\ExpensesController::class, 'update'])->name('accounting.expenses.update');
+            Route::get('delete/{id}',[App\Http\Controllers\accounting\ExpensesController::class, 'delete'])->name('accounting.expenses.delete');
+        });
+        Route::group(['prefix'=>'expenses_category'],function(){
+            Route::get('index',[App\Http\Controllers\accounting\ExpensesCategoryController::class, 'index'])->name('accounting.expenses_category.index');
+            Route::post('create',[App\Http\Controllers\accounting\ExpensesCategoryController::class, 'create'])->name('accounting.expenses_category.create');
+            Route::post('update',[App\Http\Controllers\accounting\ExpensesCategoryController::class, 'update'])->name('accounting.expenses_category.update');
         });
     });
 });

@@ -129,116 +129,76 @@
                 </form>
             </div>
         </div>
-    <div class="card">
-        <div class="card-header">
-            <h5 class="text-center">اعدادات ساعة الدوام</h5>
-        </div>
-        <div class="card-body">
-            <div class="row mb-2">
-                <button class="btn btn-dark btn-sm" data-toggle="modal" data-target="#create-attendance-device">اضافة ساعة</button>
-            </div>
-            <div class="row">
-                <div class="table-responsive">
-                    <table class="table table-sm table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>Ip</th>
-                                <th>Port</th>
-                                <th>User name</th>
-                                <th>Password</th>
-                                <th>Status right</th>
-                                <th>Status left</th>
-                                <th>Status up</th>
-                                <th>Status down</th>
-                                <th>Status</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        @if($time_attendance_device->isEmpty())
-                            <tr>
-                                <td colspan="9" class="text-center">لا توجد بيانات</td>
-                            </tr>
-                        @else
-                            @foreach($time_attendance_device as $key)
-                                <tr>
-                                    <td>{{ $key->ip }}</td>
-                                    <td>{{ $key->port }}</td>
-                                    <td>{{ $key->user_name }}</td>
-                                    <td>{{ $key->password }}</td>
-                                    <td>{{ $key->status_right }}</td>
-                                    <td>{{ $key->status_left }}</td>
-                                    <td>{{ $key->status_up }}</td>
-                                    <td>{{ $key->status_down }}</td>
-                                    <td onload="" class="text-center text-success">
-                                        <div id="check_connection">
+{{--    <div class="card">--}}
+{{--        <div class="card-header">--}}
+{{--            <h5 class="text-center">اعدادات ساعة الدوام</h5>--}}
+{{--        </div>--}}
+{{--        <div class="card-body">--}}
+{{--            <div class="row mb-2">--}}
+{{--                <button class="btn btn-dark btn-sm" data-toggle="modal" data-target="#create-attendance-device">اضافة ساعة</button>--}}
+{{--            </div>--}}
+{{--            <div class="row">--}}
+{{--                <div class="table-responsive">--}}
+{{--                    <table class="table table-sm table-bordered table-hover">--}}
+{{--                        <thead>--}}
+{{--                            <tr>--}}
+{{--                                <th>Ip</th>--}}
+{{--                                <th>Port</th>--}}
+{{--                                <th>User name</th>--}}
+{{--                                <th>Password</th>--}}
+{{--                                <th>Status right</th>--}}
+{{--                                <th>Status left</th>--}}
+{{--                                <th>Status up</th>--}}
+{{--                                <th>Status down</th>--}}
+{{--                                <th>Status</th>--}}
+{{--                                <th></th>--}}
+{{--                            </tr>--}}
+{{--                        </thead>--}}
+{{--                        <tbody>--}}
+{{--                        @if($time_attendance_device->isEmpty())--}}
+{{--                            <tr>--}}
+{{--                                <td colspan="9" class="text-center">لا توجد بيانات</td>--}}
+{{--                            </tr>--}}
+{{--                        @else--}}
+{{--                            @foreach($time_attendance_device as $key)--}}
+{{--                                <tr>--}}
+{{--                                    <td>{{ $key->ip }}</td>--}}
+{{--                                    <td>{{ $key->port }}</td>--}}
+{{--                                    <td>{{ $key->user_name }}</td>--}}
+{{--                                    <td>{{ $key->password }}</td>--}}
+{{--                                    <td>{{ $key->status_right }}</td>--}}
+{{--                                    <td>{{ $key->status_left }}</td>--}}
+{{--                                    <td>{{ $key->status_up }}</td>--}}
+{{--                                    <td>{{ $key->status_down }}</td>--}}
+{{--                                    <td class="text-center text-success" id="check_connection_td_{{ $key->id }}">--}}
+{{--                                        @if($key->status_device == 'success')--}}
+{{--                                            <span class="text-success fa fa-check-circle"></span>--}}
+{{--                                        @else--}}
+{{--                                            <span class="text-danger fa fa-circle-stop"></span>--}}
+{{--                                        @endif--}}
+{{--                                            <span id="loader" style="font-size: 8px" class=""></span>--}}
 
-                                        </div>
-                                        @if($key->status_device == 'success')
-                                            <span class="text-success fa fa-check-circle"></span>
-                                        @else
-                                            <span class="text-danger fa fa-circle-stop"></span>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <button onclick="get_time_attendance_data({{ $key }})" class="btn btn-success btn-sm"><span class="fa fa-edit"></span></button>
-                                        <a href="{{ route('setting.system_setting.async_data_from_attendance_device',['id'=>$key->id]) }}" class="btn btn-dark btn-sm"><span class="fa fa-sync"></span></a>
-                                        <a href="" class="btn btn-danger btn-sm"><span class="fa fa-trash"></span></a>
-                                    </td>
-                                </tr>
-                                <script>
-                                    $(document).ready(function () {
-                                        check_connection_attendance_device_ajax({{ $key->id }});
-                                    });
-                                </script>
-                            @endforeach
-                        @endif
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+{{--                                    </td>--}}
+{{--                                    <td>--}}
+{{--                                        <button onclick="get_time_attendance_data({{ $key }})" class="btn btn-success btn-sm"><span class="fa fa-edit"></span></button>--}}
+{{--                                        <button disabled onclick="async_data_from_attendance_device_ajax({{ $key->id }})" id="button_async_{{ $key->id }}" class="btn btn-dark btn-sm"><span class="fa fa-sync"></span></button>--}}
+{{--                                        <a href="" class="btn btn-danger btn-sm"><span class="fa fa-trash"></span></a>--}}
+{{--                                    </td>--}}
+{{--                                </tr>--}}
+{{--                            @endforeach--}}
+{{--                        @endif--}}
+{{--                        </tbody>--}}
+{{--                    </table>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
-    @include('admin.setting.system_setting.modals.time_attendance_devices')
+{{--    @include('admin.setting.system_setting.modals.time_attendance_devices')--}}
+{{--    @include('admin.setting.system_setting.modals.edit_time_attendance_devices')--}}
+{{--    @include('admin.etting.system_setting.modals.async_loader')--}}
 @endsection
 
 @section('script')
     <script src="{{ asset('assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
-
-    <script>
-        function get_time_attendance_data(data) {
-            $('#create-attendance-device').modal('show')
-            $('#ip_input').val(data.ip);
-            $('#port_input').val(data.port);
-            $('#user_name_input').val(data.user_name);
-            $('#password_input').val(data.password);
-            $('#status_up_input').val(data.status_up);
-            $('#status_down_input').val(data.status_down);
-            $('#status_right_input').val(data.status_right);
-            $('#status_down_input').val(data.status_left);
-        }
-    </script>
-
-    <script>
-        function check_connection_attendance_device_ajax(index){
-            alert('asd');
-            var csrfToken = $('meta[name="csrf-token"]').attr('content');
-            var headers = {
-                "X-CSRF-Token": csrfToken
-            };
-            $.ajax({
-                url: '{{ route('setting.system_setting.check_connection_attendance_device_ajax') }}',
-                method: 'get',
-                headers: headers,
-                success: function(data) {
-                    alert('success');
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    alert('error');
-                }
-            });
-        }
-    </script>
-
 @endsection
