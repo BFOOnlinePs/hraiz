@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Currency;
 use App\Models\CurrencyModel;
 use Illuminate\Http\Request;
 
@@ -16,6 +17,7 @@ class CurrencyController extends Controller
         $data = new CurrencyModel();
         $data->currency_name = $request->currency_name;
         $data->currency_symbol = $request->currency_symbol;
+        $data->is_default = 0;
         if ($request->hasFile('currency_flag')) {
             $file = $request->file('currency_flag');
             $extension = $file->getClientOriginalExtension();
@@ -28,6 +30,34 @@ class CurrencyController extends Controller
         }
         else{
             return redirect()->route('currency.index')->with(['fail'=>'هناك خلل ما لم يتم اضافة البيانات']);
+        }
+    }
+
+    public function set_default_value($id){
+        $check_if_find = Currency::where('is_default',1)->first();
+        if (empty($check_if_find)){
+            $data = Currency::where('id',$id)->first();
+            $data->is_default = 1;
+            $data->save();
+            if ($data->save()){
+                return redirect()->route('currency.index')->with(['success'=>'تم تعديل القيمة الافتراضية للعملة بنجاح']);
+            }
+            else{
+                return redirect()->route('currency.index')->with(['fail'=>'هناك خطا ما لم يتم تعديل البيانات']);
+            }
+        }
+        else{
+            $check_if_find->is_default = 0;
+            $check_if_find->save();
+            $data = Currency::where('id',$id)->first();
+            $data->is_default = 1;
+            $data->save();
+            if ($data->save()){
+                return redirect()->route('currency.index')->with(['success'=>'تم تعديل القيمة الافتراضية للعملة بنجاح']);
+            }
+            else{
+                return redirect()->route('currency.index')->with(['fail'=>'هناك خطا ما لم يتم تعديل البيانات']);
+            }
         }
     }
 

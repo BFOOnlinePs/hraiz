@@ -1,6 +1,6 @@
 <div class="modal fade" id="create-attendance-device">
     <div class="modal-dialog modal-lg">
-        <form action="{{ route('setting.system_setting.create_time_attendance_device_option') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('setting.attendance_device.create_time_attendance_device_option') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="modal-content">
                 <div class="modal-header">

@@ -112,6 +112,14 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false" class="nav-link text-white dropdown-toggle">المصروفات</a>
+                    <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                        <li><a href="{{route('accounting.expenses.index')}}" class="dropdown-item">قائمة المصروفات</a></li>
+                        <li><a href="{{route('accounting.expenses_category.index')}}" class="dropdown-item">تصنيف المصروفات</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false" class="nav-link text-white dropdown-toggle">التقارير</a>
                     <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                         <li><a href="{{ route('reports.suppliers.suppliers_report') }}" class="dropdown-item">قائمة الموردين</a></li>
@@ -136,7 +144,7 @@
                         <li><a href="{{ route('accounting.texes.index') }}" class="dropdown-item">الضرائب</a></li>
                         <li><a href="{{ route('setting.machine.setting_index') }}" class="dropdown-item">الآلات</a></li>
                         <li><a href="{{ route('setting.vacations_types.index') }}" class="dropdown-item">أنواع الإجازات</a></li>
-                        <li><a href="{{ route('setting.expenses_category.index') }}" class="dropdown-item">انوع المصروفات</a></li>
+                        <li><a href="{{ route('setting.attendance_device.index') }}" class="dropdown-item">ساعات الدوام</a></li>
                     </ul>
                 </li>
             </ul>

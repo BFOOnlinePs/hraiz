@@ -1,10 +1,5 @@
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -38,7 +33,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
             direction: ltr !important;
         }
     </style>
-
 </head>
 
 <body class="layout-top-nav" style="height: auto;" data-new-gr-c-s-check-loaded="14.1147.0" data-gr-ext-installed
@@ -129,5 +123,4 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     </script>
 </body>
-
 </html>

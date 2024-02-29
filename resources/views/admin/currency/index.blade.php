@@ -57,6 +57,11 @@
                                     <td>
                                         <a class="btn btn-primary btn-sm"
                                            href="{{ route('currency.edit',['id'=>$key->id]) }}">تعديل</a>
+                                        @if($key->is_default == 0)
+                                            <a class="btn btn-dark btn-sm" href="{{ route('currency.set_default_value',['id'=>$key->id]) }}">جعلها افتراضية</a>
+                                        @else
+                                            <span class="text-success">تم جعل هذه العملة افتراضية</span>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
