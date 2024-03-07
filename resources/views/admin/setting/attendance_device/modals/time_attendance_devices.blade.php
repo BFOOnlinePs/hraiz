@@ -14,13 +14,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">Ip</label>
-                                <input name="ip" class="form-control" type="text">
+                                <input pattern="^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$" title="يرجى ادخال عنوان ip صالح" required name="ip" class="form-control" type="text">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">Port</label>
-                                <input name="port" class="form-control" type="text">
+                                <input required name="port" class="form-control" type="text">
                             </div>
                         </div>
                         <div class="col-md-6">
