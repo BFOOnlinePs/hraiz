@@ -280,7 +280,7 @@
             متابعتها بواسطة <span class="text-danger text-bold">{{ $order['to_user']->name ?? '' }}</span></p>
     </div>
 
-@endsection()
+@endsection
 
 @section('script')
     <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>

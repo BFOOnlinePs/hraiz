@@ -28,7 +28,7 @@ class AttendaceDeviceController extends Controller
         $data->status_up = $request->status_up;
         $data->status_down = $request->status_down;
         if ($data->save()){
-            return redirect()->route('setting.system_setting.index')->with(['success'=>'تم اضافة البيانات بنجاح']);
+            return redirect()->route('setting.attendance_device.index')->with(['success'=>'تم اضافة البيانات بنجاح']);
         }
         else{
             return redirect()->route('setting.attendance_device.index')->with(['fail'=>'هناك خلل ما لم يتم اضافة البيانات']);

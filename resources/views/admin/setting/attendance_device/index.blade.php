@@ -61,7 +61,6 @@
                                                     <span class="text-danger fa fa-circle-stop"></span>
                                                 @endif
                                                 <span id="loader" style="font-size: 8px" class=""></span>
-
                                             </td>
                                             <td>
                                                 <button onclick="get_time_attendance_data({{ $key }})" class="btn btn-success btn-sm"><span class="fa fa-edit"></span></button>
@@ -126,7 +125,7 @@
                 success: function(data) {
                     if(data.success === 'true'){
                         $('#button_async_'+index).prop('disabled',false);
-                        document.getElementById('check_connection_td_'+index).innerHTML = '<div style="font-size: 7px" class="col text-success text-center"><i class="fas fa-3x fa-check-circle"></i></div>';
+                        document.getElementById('check_connection_td_'+index).innerHTML = '<div data-toggle="tooltip" title="تم الاتصال بنجاح" style="font-size: 7px" class="col text-success text-center"><i class="fas fa-3x fa-check-circle" data-toggle="tooltip" title="تم الاتصال بنجاح"></i></div>';
                     }
                     else{
                         document.getElementById('check_connection_td_'+index).innerHTML = '<div style="font-size: 7px" class="col text-danger text-center"><i class="fas fa-3x fa-stop-circle"></i></div>';
@@ -179,5 +178,6 @@
                 }
             });
         }
+
     </script>
 @endsection
