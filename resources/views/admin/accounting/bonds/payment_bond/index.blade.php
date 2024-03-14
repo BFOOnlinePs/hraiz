@@ -20,8 +20,7 @@
     @include('admin.messge_alert.fail')
     <div class="row">
         <div class="col-md-12">
-            <button class="btn btn-dark" data-toggle="modal"
-                    data-target="#create_payment_bond_modal">اضافة سند قبض
+            <button class="btn btn-dark" onclick="view_invoice_type()">اضافة سند قبض
             </button>
         </div>
     </div>
@@ -31,8 +30,8 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="">رقم الفاتورة</label>
-                        <input onkeyup="bonds_table_ajax()" class="form-control" id="invoice_number" type="text"
-                               placeholder="رقم الفاتورة">
+                        <input onkeyup="bonds_table_ajax()" class="form-control" id="reference_number" type="text"
+                               placeholder="الرقم المرجعي">
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -87,6 +86,9 @@
     </div>
     @include('admin.accounting.bonds.payment_bond.modals.create_payment_bond_modal')
     @include('admin.accounting.bonds.payment_bond.modals.update_check_payment_type')
+    @include('admin.accounting.bonds.payment_bond.modals.list_invoice_type')
+    @include('admin.accounting.bonds.payment_bond.modals.create_payment_bond_for_client_modal')
+    @include('admin.accounting.bonds.payment_bond.modals.list_invoice_clients')
 @endsection
 
 @section('script')
@@ -119,7 +121,7 @@
                 method: 'post',
                 headers: headers,
                 data: {
-                    'invoice_number': $('#invoice_number').val(),
+                    'reference_number': $('#reference_number').val(),
                     'payment_type': $('#payment_type').val(),
                     'insert_by': $('#insert_by').val(),
                     'client_id': $('#client_id').val()
@@ -132,6 +134,89 @@
                 }
             });
 
+        }
+
+        $(document).on('click', '#pagination a', function (e) {
+            e.preventDefault();
+            var page = $(this).attr('href').split('page=')[1];
+            list_invoice_clients_table_ajax(page);
+        });
+
+        function list_invoice_clients_table_ajax(page = 1,reference_number = '',client_name = '') {
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            var headers = {
+                "X-CSRF-Token": csrfToken
+            };
+            $.ajax({
+                url: '{{ route('bonds.list_invoice_clients_table_ajax') }}' + '?page=' + page,
+                method: 'post',
+                headers: headers,
+                data:{
+                    reference_number: reference_number,
+                    client_name:client_name
+                },
+                success: function (data) {
+                    $('#list_invoice_users').html(data.view);
+                    $('#pagination').html(data.pagination);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Error fetching data');
+                }
+            });
+        }
+
+        $('.input_serach').on('input', function () {
+            var client_name = $('#input_search_clients').val()
+            var reference_number = $('#input_search_reference_number').val()
+            list_invoice_clients_table_ajax(1,reference_number,client_name); // Call the function with page 1 and the search query
+        });
+
+        function get_amount_for_invoice() {
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            var headers = {
+                "X-CSRF-Token": csrfToken
+            };
+            $.ajax({
+                url: '{{ route('bonds.get_amount_for_invoice') }}',
+                method: 'post',
+                headers: headers,
+                data: {
+                    'invoice_id': $('#invoice_select').val(),
+                },
+                success: function (data) {
+                    $('#invoice_amount').val(data.data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('error');
+                }
+            });
+
+        }
+
+        function view_invoice_type(){
+            $('#list_invoice_type').modal('show');
+        }
+
+        function view_create_payment_bond_modal() {
+            $('#list_invoice_type').modal('hide');
+            $('#create_payment_bond_modal').modal('show');
+        }
+
+        function view_create_payment_bond_for_client_modal() {
+            $('#list_invoice_type').modal('hide');
+            $('#create_payment_bond_for_client_modal').modal('show');
+        }
+
+        function list_invoice_clients_modal() {
+            list_invoice_clients_table_ajax();
+            $('#list_invoice_type').modal('hide');
+            $('#list_invoice_clients_modal').modal('show');
+        }
+
+        function select_get_invoice_number_from_select_invoice(value) {
+            $('#invoice_select').val(value);
+            $('#list_invoice_clients_modal').modal('hide');
+            view_create_payment_bond_modal();
         }
     </script>
 

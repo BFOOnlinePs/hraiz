@@ -1,8 +1,8 @@
-<div class="modal fade" id="create_payment_bond_modal">
+<div class="modal fade" id="create_payment_bond_for_client_modal">
     <div class="modal-dialog modal-xl">
-        <form action="{{ route('accounting.bonds.payment_bond.create') }}" method="post" id="bonds_create" enctype="multipart/form-data">
+        <form action="{{ route('accounting.bonds.performance_bond.performance_bond_create') }}" method="post" id="bonds_create" enctype="multipart/form-data">
             @csrf
-            <input type="hidden" name="invoice_modal_type" value="invoice">
+            <input type="hidden" name="invoice_modal_type" value="client">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">اضافة سند دفع</h4>
@@ -14,14 +14,13 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="">اختر فاتورة</label>
-                                <input readonly type="text" class="form-control" name="invoice_id" id="invoice_select">
-{{--                                <select onchange="get_amount_for_invoice()" required class="form-control select2bs4" name="invoice_id" id="invoice_select">--}}
-{{--                                    <option value="">اختر فاتورة ...</option>--}}
-{{--                                    @foreach($invoices as $key)--}}
-{{--                                        <option value="{{ $key->id }}">{{ $key->id }}</option>--}}
-{{--                                    @endforeach--}}
-{{--                                </select>--}}
+                                <label for="">اختر عميل</label>
+                                <select required class="form-control select2bs4" name="client_id" id="invoice_select_id">
+                                    <option value="">اختر عميل ...</option>
+                                    @foreach($users as $key)
+                                        <option value="{{ $key->id }}">{{ $key->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -44,7 +43,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">القيمة</label>
-                                <input required id="invoice_amount" type="text" name="amount" class="form-control text-center" style="background-color: palegoldenrod;font-size: 50px;height: 80px !important;vertical-align: middle;padding-top: 25px" pattern="[0-9]+" title="يجب ادخال ارقام فقط" placeholder="قيمة سند القبض">
+                                <input required id="invoice_amount" type="text" name="amount" class="form-control text-center" style="background-color: palegoldenrod;font-size: 50px;height: 80px !important;vertical-align: middle;padding-top: 25px" pattern="[0-9]+" title="يجب ادخال ارقام فقط" placeholder="قيمة سند الصرف">
                             </div>
                         </div>
                         <div class="col-md-6">

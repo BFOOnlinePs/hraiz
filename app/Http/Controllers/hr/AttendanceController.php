@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\BfoAttendance;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use PDF;
 
 class AttendanceController extends Controller
 {
@@ -74,4 +75,9 @@ class AttendanceController extends Controller
         }
     }
 
+    public function export_pdf(){
+        $data = BfoAttendance::get();
+        $pdf = PDF::loadView('admin.hr.employees.pdf.attendance', ['data'=>$data]);
+        return $pdf->stream('document.pdf');
+    }
 }

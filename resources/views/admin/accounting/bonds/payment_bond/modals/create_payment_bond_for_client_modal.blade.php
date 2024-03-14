@@ -1,8 +1,8 @@
-<div class="modal fade" id="create_payment_bond_modal">
+<div class="modal fade" id="create_payment_bond_for_client_modal">
     <div class="modal-dialog modal-xl">
         <form action="{{ route('accounting.bonds.payment_bond.create') }}" method="post" id="bonds_create" enctype="multipart/form-data">
             @csrf
-            <input type="hidden" name="invoice_modal_type" value="invoice">
+            <input type="hidden" name="invoice_modal_type" value="client">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">اضافة سند دفع</h4>
@@ -14,14 +14,13 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="">اختر فاتورة</label>
-                                <input readonly type="text" class="form-control" name="invoice_id" id="invoice_select">
-{{--                                <select onchange="get_amount_for_invoice()" required class="form-control select2bs4" name="invoice_id" id="invoice_select">--}}
-{{--                                    <option value="">اختر فاتورة ...</option>--}}
-{{--                                    @foreach($invoices as $key)--}}
-{{--                                        <option value="{{ $key->id }}">{{ $key->id }}</option>--}}
-{{--                                    @endforeach--}}
-{{--                                </select>--}}
+                                <label for="">اختر عميل</label>
+                                <select required class="form-control select2bs4" name="client_id" id="invoice_select_id">
+                                    <option value="">اختر عميل ...</option>
+                                    @foreach($users as $key)
+                                        <option value="{{ $key->id }}">{{ $key->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-3">
