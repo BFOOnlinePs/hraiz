@@ -1,7 +1,7 @@
 <table class="table table-sm table-bordered table-hover">
     <thead>
     <tr>
-        <th>رقم الفاتورة</th>
+        <th>الرقم المرجعي</th>
         <th>القيمة</th>
         <th>الملاحظات</th>
         <th>العملة</th>
@@ -19,7 +19,7 @@
     @else
         @foreach($data as $key)
             <tr>
-                <td>{{ $key->invoice_id }}</td>
+                <td>{{ $key->reference_number }}</td>
                 <td>{{ $key->amount }}</td>
                 <td>{{ $key->notes }}</td>
                 <td>{{ $key->currency->currency_name }}</td>

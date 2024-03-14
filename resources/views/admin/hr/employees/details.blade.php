@@ -235,7 +235,10 @@
                              aria-labelledby="custom-content-below-attendance-tab">
                             <div class="p-2">
                                 <div class="row">
-                                    <button onclick="add_attendance()" class="btn btn-dark mb-2">تسجيل حضور</button>
+                                    <div class="col-md-12">
+                                        <button onclick="add_attendance()" class="btn btn-dark mb-2">تسجيل حضور</button>
+                                        <a href="{{ route('users.attendance.export_pdf') }}" class="btn btn-dark mb-2">تصدير pdf</a>
+                                    </div>
                                 </div>
 
                                 <table class="table table-bordered">

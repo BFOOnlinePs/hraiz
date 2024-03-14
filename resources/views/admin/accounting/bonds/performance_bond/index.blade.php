@@ -20,8 +20,7 @@
     @include('admin.messge_alert.fail')
     <div class="row">
         <div class="col-md-12">
-            <button class="btn btn-dark" data-toggle="modal"
-                    data-target="#create_payment_bond_modal">اضافة سند صرف
+            <button class="btn btn-dark" onclick="view_invoice_type()">اضافة سند صرف
             </button>
         </div>
     </div>
@@ -30,9 +29,9 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="">رقم الفاتورة</label>
-                        <input onkeyup="performance_bonds_table_ajax()" class="form-control" id="invoice_number" type="text"
-                               placeholder="رقم الفاتورة">
+                        <label for="">الرقم المرجعي</label>
+                        <input onkeyup="performance_bonds_table_ajax()" class="form-control" id="reference_number" type="text"
+                               placeholder="الرقم المرجعي">
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -87,6 +86,8 @@
     </div>
     @include('admin.accounting.bonds.performance_bond.modals.create_payment_bond_modal')
     @include('admin.accounting.bonds.performance_bond.modals.update_check_payment_type')
+    @include('admin.accounting.bonds.performance_bond.modals.create_payment_bond_for_client_modal')
+    @include('admin.accounting.bonds.performance_bond.modals.list_invoice_type')
 @endsection
 
 @section('script')
@@ -119,7 +120,7 @@
                 method: 'post',
                 headers: headers,
                 data: {
-                    'invoice_number': $('#invoice_number').val(),
+                    'reference_number': $('#reference_number').val(),
                     'payment_type': $('#payment_type').val(),
                     'insert_by': $('#insert_by').val(),
                     'client_id': $('#client_id').val()
@@ -137,6 +138,42 @@
             $('#check_number_edit').val(data.check_number);
             $('#due_date_edit').val(data.due_date);
             $('#bank_name_edit').val(data.bank_name);
+        }
+
+        function get_amount_for_invoice() {
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            var headers = {
+                "X-CSRF-Token": csrfToken
+            };
+            $.ajax({
+                url: '{{ route('bonds.get_amount_for_invoice') }}',
+                method: 'post',
+                headers: headers,
+                data: {
+                    'invoice_id': $('#invoice_select').val(),
+                },
+                success: function (data) {
+                    $('#invoice_amount').val(data.data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('error');
+                }
+            });
+
+        }
+
+        function view_invoice_type(){
+            $('#list_invoice_type').modal('show');
+        }
+
+        function view_create_payment_bond_modal() {
+            $('#list_invoice_type').modal('hide');
+            $('#create_payment_bond_modal').modal('show');
+        }
+
+        function view_create_payment_bond_for_client_modal() {
+            $('#list_invoice_type').modal('hide');
+            $('#create_payment_bond_for_client_modal').modal('show');
         }
     </script>
 

@@ -536,6 +536,7 @@ Route::group(['middleware' => 'auth',], function () {
             Route::post('editOutTime',[App\Http\Controllers\hr\AttendanceController::class, 'editOutTime'])->name('hr.attendance.editOutTime');
             Route::post('delete',[App\Http\Controllers\hr\AttendanceController::class, 'delete'])->name('hr.attendance.delete');
             Route::post('edit',[App\Http\Controllers\hr\AttendanceController::class, 'edit'])->name('hr.attendance.edit');
+            Route::get('export_pdf',[App\Http\Controllers\hr\AttendanceController::class, 'export_pdf'])->name('users.attendance.export_pdf');
         });
         Route::group(['prefix'=>'salaries'],function(){
             Route::get('index',[App\Http\Controllers\hr\SalaryController::class, 'index'])->name('hr.salaries.index');
@@ -583,7 +584,6 @@ Route::group(['prefix'=>'accounting','middleware'=>'auth'],function(){
             Route::post('update_tax_id_ratio',[App\Http\Controllers\accounting\PurchaseInvoicesController::class , 'update_tax_id_ratio'])->name('accounting.purchase_invoices.update_tax_id_ratio');
         });
     });
-
     Route::group(['prefix'=>'sales_invoices'],function(){
         Route::get('index',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'index'])->name('accounting.sales_invoices.index');
         Route::post('invoice_table_index_ajax',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'invoice_table_index_ajax'])->name('accounting.sales_invoices.invoice_table_index_ajax');
@@ -620,6 +620,8 @@ Route::group(['prefix'=>'accounting','middleware'=>'auth'],function(){
         });
     });
     Route::group(['prefix'=>'bonds'],function(){
+        Route::post('get_amount_for_invoice',[App\Http\Controllers\accounting\BondsController::class , 'get_amount_for_invoice'])->name('bonds.get_amount_for_invoice');
+        Route::post('list_invoice_clients_table_ajax',[App\Http\Controllers\accounting\BondsController::class , 'list_invoice_clients_table_ajax'])->name('bonds.list_invoice_clients_table_ajax');
         Route::group(['prefix'=>'payment_bond'],function (){
             Route::get('index',[App\Http\Controllers\accounting\BondsController::class , 'index'])->name('accounting.bonds.payment_bond.index');
             Route::post('create',[App\Http\Controllers\accounting\BondsController::class , 'create'])->name('accounting.bonds.payment_bond.create');
@@ -634,6 +636,12 @@ Route::group(['prefix'=>'accounting','middleware'=>'auth'],function(){
             Route::get('edit_performance_bonds/{id}',[App\Http\Controllers\accounting\BondsController::class , 'edit_performance_bonds'])->name('accounting.bonds.performance_bond.edit_performance_bonds');
             Route::post('update_performance_bond',[App\Http\Controllers\accounting\BondsController::class , 'update_performance_bond'])->name('accounting.bonds.performance_bond.update_performance_bond');
         });
+    });
+    Route::group(['prefix'=>'account-statement'],function (){
+        Route::get('customer_account_statement_index',[\App\Http\Controllers\accounting\AccountStatementController::class,'customer_account_statement_index'])->name('accounting.customer_account_statement_index');
+        Route::post('list_customers_table_ajax',[\App\Http\Controllers\accounting\AccountStatementController::class,'list_customers_table_ajax'])->name('accounting.account-statement.list_customers_table_ajax');
+        Route::get('account_statement_details/{id}/{user_type}',[\App\Http\Controllers\accounting\AccountStatementController::class,'account_statement_details'])->name('accounting.account-statement.account_statement_details');
+        Route::post('account_statement_details_table_ajax',[\App\Http\Controllers\accounting\AccountStatementController::class,'account_statement_details_table_ajax'])->name('accounting.account-statement.account_statement_details_table_ajax');
     });
 });
 

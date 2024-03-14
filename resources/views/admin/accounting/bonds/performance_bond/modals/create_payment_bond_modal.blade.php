@@ -2,6 +2,7 @@
     <div class="modal-dialog modal-xl">
         <form action="{{ route('accounting.bonds.performance_bond.performance_bond_create') }}" method="post" id="bonds_create" enctype="multipart/form-data">
             @csrf
+            <input type="hidden" name="invoice_modal_type" value="invoice">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">اضافة سند صرف</h4>
@@ -11,15 +12,21 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="">اختر فاتورة</label>
-                                <select required class="form-control select2bs4" name="invoice_id" id="">
+                                <select onchange="get_amount_for_invoice()" required class="form-control select2bs4" name="invoice_id" id="invoice_select">
                                     <option value="">اختر فاتورة ...</option>
                                     @foreach($invoices as $key)
                                         <option value="{{ $key->id }}">{{ $key->id }}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="">الرقم المرجعي</label>
+                                <input type="text" name="reference_number" class="form-control" placeholder="الرقم المرجعي">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -36,7 +43,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">القيمة</label>
-                                <input required type="text" name="amount" class="form-control text-center" pattern="[0-9]+" title="يجب ادخال ارقام فقط" style="background-color: palegoldenrod;font-size: 50px;height: 80px !important;vertical-align: middle;padding-top: 25px" placeholder="قيمة سند الدفع">
+                                <input required id="invoice_amount" type="text" name="amount" class="form-control text-center" pattern="[0-9]+" title="يجب ادخال ارقام فقط" style="background-color: palegoldenrod;font-size: 50px;height: 80px !important;vertical-align: middle;padding-top: 25px" placeholder="قيمة سند الصرف">
                             </div>
                         </div>
                         <div class="col-md-6">
