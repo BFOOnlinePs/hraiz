@@ -88,6 +88,7 @@
     @include('admin.accounting.bonds.performance_bond.modals.update_check_payment_type')
     @include('admin.accounting.bonds.performance_bond.modals.create_payment_bond_for_client_modal')
     @include('admin.accounting.bonds.performance_bond.modals.list_invoice_type')
+    @include('admin.accounting.bonds.performance_bond.modals.list_invoice_clients')
 @endsection
 
 @section('script')
@@ -98,6 +99,36 @@
         $(document).ready(function () {
             performance_bonds_table_ajax();
         });
+
+        $(document).on('click', '#pagination a', function (e) {
+            e.preventDefault();
+            var page = $(this).attr('href').split('page=')[1];
+            list_invoice_clients_table_ajax(page);
+        });
+
+        function list_invoice_clients_table_ajax(page = 1,reference_number = '',client_name = '') {
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            var headers = {
+                "X-CSRF-Token": csrfToken
+            };
+            $.ajax({
+                url: '{{ route('bonds.list_invoice_clients_table_ajax') }}' + '?page=' + page,
+                method: 'post',
+                headers: headers,
+                data:{
+                    reference_number: reference_number,
+                    client_name:client_name
+                },
+                success: function (data) {
+                    $('#list_invoice_users').html(data.view);
+                    $('#pagination').html(data.pagination);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Error fetching data');
+                }
+            });
+        }
+
 
         $('input[name="customRadio"]').on('change', function () {
             if ($(this).val() === 'check') {
@@ -162,6 +193,12 @@
 
         }
 
+        $('.input_serach').on('input', function () {
+            var client_name = $('#input_search_clients').val()
+            var reference_number = $('#input_search_reference_number').val()
+            list_invoice_clients_table_ajax(1,reference_number,client_name); // Call the function with page 1 and the search query
+        });
+
         function view_invoice_type(){
             $('#list_invoice_type').modal('show');
         }
@@ -174,6 +211,18 @@
         function view_create_payment_bond_for_client_modal() {
             $('#list_invoice_type').modal('hide');
             $('#create_payment_bond_for_client_modal').modal('show');
+        }
+
+        function list_invoice_clients_modal() {
+            list_invoice_clients_table_ajax();
+            $('#list_invoice_type').modal('hide');
+            $('#list_invoice_clients_modal').modal('show');
+        }
+
+        function select_get_invoice_number_from_select_invoice(value) {
+            $('#invoice_select').val(value);
+            $('#list_invoice_clients_modal').modal('hide');
+            view_create_payment_bond_modal();
         }
     </script>
 

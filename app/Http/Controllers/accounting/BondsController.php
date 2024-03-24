@@ -5,10 +5,12 @@ namespace App\Http\Controllers\accounting;
 use App\Http\Controllers\Controller;
 use App\Models\BondsModel;
 use App\Models\Currency;
+use App\Models\DocAmountModel;
 use App\Models\InvoiceItemsModel;
 use App\Models\PurchaseInvoicesModel;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BondsController extends Controller
 {
@@ -23,15 +25,19 @@ class BondsController extends Controller
 
     public function create(Request $request){
         $data = new BondsModel();
+        // ترحيل فاتورة
+        $doc_amount = new DocAmountModel();
 
         if ($request->invoice_modal_type == 'invoice'){
             $client = PurchaseInvoicesModel::where('id',$request->invoice_id)->first()->client_id;
             $data->invoice_id = $request->invoice_id;
             $data->client_id = $client;
+            $doc_amount->client_id = $client;
         }
         else{
             $data->invoice_id = -1;
             $data->client_id = $request->client_id;
+            $doc_amount->client_id = $request->client_id;
         }
         $data->amount = $request->amount;
         $data->reference_number = $request->reference_number;
@@ -43,6 +49,14 @@ class BondsController extends Controller
         $data->due_date = $request->due_date;
         $data->bank_name = $request->bank_name;
         $data->invoice_type = 'payment_bond';
+
+        $doc_amount->type = 'payment_bond';
+        $doc_amount->invoice_id = $request->invoice_id;
+        $doc_amount->amount = $request->amount;
+        $doc_amount->reference_number = $request->reference_number;
+        $doc_amount->currency = $request->currency_id;
+        $doc_amount->save();
+
         if ($data->save()){
             return redirect()->route('accounting.bonds.payment_bond.index')->with(['success'=>'تم اضافة البيانات بنجاح']);
         }
@@ -138,15 +152,19 @@ class BondsController extends Controller
 
     public function performance_bond_create(Request $request){
         $data = new BondsModel();
+        // ترحيل فاتورة
+        $doc_amount = new DocAmountModel();
 //        $data->invoice_id = $request->invoice_id;
         if ($request->invoice_modal_type == 'invoice'){
             $client = PurchaseInvoicesModel::where('id',$request->invoice_id)->first()->client_id;
             $data->invoice_id = $request->invoice_id;
             $data->client_id = $client;
+            $doc_amount->client_id = $client;
         }
         else{
             $data->invoice_id = -1;
             $data->client_id = $request->client_id;
+            $doc_amount->client_id = $request->client_id;
         }
         $data->amount = $request->amount;
         $data->reference_number = $request->reference_number;
@@ -158,6 +176,14 @@ class BondsController extends Controller
         $data->due_date = $request->due_date;
         $data->bank_name = $request->bank_name;
         $data->invoice_type = 'performance_bond';
+
+        $doc_amount->type = 'payment_bond';
+        $doc_amount->invoice_id = $request->invoice_id;
+        $doc_amount->amount = $request->amount;
+        $doc_amount->reference_number = $request->reference_number;
+        $doc_amount->currency = $request->currency_id;
+        $doc_amount->save();
+
         if ($data->save()){
             return redirect()->route('accounting.bonds.performance_bond.performance_bond_index')->with(['success'=>'تم اضافة البيانات بنجاح']);
         }

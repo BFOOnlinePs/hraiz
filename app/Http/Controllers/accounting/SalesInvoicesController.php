@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\accounting;
 
 use App\Http\Controllers\Controller;
+use App\Models\Currency;
 use App\Models\CurrencyModel;
+use App\Models\DocAmountModel;
 use App\Models\InvoiceItemsModel;
 use App\Models\OrderItemsModel;
 use App\Models\OrderModel;
@@ -17,6 +19,7 @@ use App\Models\TaxesModel;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SalesInvoicesController extends Controller
 {
@@ -42,7 +45,8 @@ class SalesInvoicesController extends Controller
     public function new_invoices_index(){
         $client = User::whereJsonContains('user_role',['10'])->get();
         $taxes = TaxesModel::get();
-        return view('admin.accounting.sales_invoices.new_invoice.index',['client'=>$client,'taxes'=>$taxes]);
+        $currency = CurrencyModel::get();
+        return view('admin.accounting.sales_invoices.new_invoice.index',['client'=>$client,'taxes'=>$taxes,'currency'=>$currency]);
     }
 
     public function create_new_invoices(Request $request){
@@ -58,12 +62,13 @@ class SalesInvoicesController extends Controller
         $data->repeat_every = $request->repeat_every;
         $data->repeat_type = $request->repeat_type;
         $data->no_of_cycles	= $request->no_of_cycles;
+        $data->currency_id	= $request->currency_id;
         $data->invoice_type	= 'sales';
         if($data->save()){
-            return redirect()->route('accounting.purchase_invoices.invoice_view',['id'=>$data->id])->with(['success'=>'تم اضافة البيانات بنجاح']);
+            return redirect()->route('accounting.sales_invoices.invoice_view',['id'=>$data->id])->with(['success'=>'تم اضافة البيانات بنجاح']);
         }
         else{
-            return redirect()->route('accounting.purchase_invoices.invoice_view',['id'=>$data->id])->with(['fail'=>'هناك خلل ما لم يتم اضافة البيانات بنجاح']);
+            return redirect()->route('accounting.sales_invoices.invoice_view',['id'=>$data->id])->with(['fail'=>'هناك خلل ما لم يتم اضافة البيانات بنجاح']);
         }
     }
 
@@ -71,7 +76,8 @@ class SalesInvoicesController extends Controller
         $data = PurchaseInvoicesModel::find($id);
         $data->user = User::where('id',$data->client_id)->first();
         $client = User::whereJsonContains('user_role',['10'])->get();
-        return view('admin.accounting.sales_invoices.new_invoice.edit',['data'=>$data,'client'=>$client]);
+        $currency = CurrencyModel::get();
+        return view('admin.accounting.sales_invoices.new_invoice.edit',['data'=>$data,'client'=>$client,'currency'=>$currency]);
     }
 
     public function update_invoices(Request $request){
@@ -87,6 +93,7 @@ class SalesInvoicesController extends Controller
         $data->repeat_every = $request->repeat_every;
         $data->repeat_type = $request->repeat_type;
         $data->no_of_cycles	= $request->no_of_cycles;
+        $data->currency_id	= $request->currency_id;
         if($data->save()){
             return redirect()->route('accounting.sales_invoices.index')->with(['success'=>'تم تعديل البيانات بنجاح']);
         }
@@ -107,18 +114,21 @@ class SalesInvoicesController extends Controller
 
     public function invoice_view($id){
         $purchase_invoice = PurchaseInvoicesModel::where('id',$id)->first();
-        $purchase_invoice->tax = TaxesModel::where('id',$purchase_invoice->tax_id)->first();
+        if ($purchase_invoice != null) {
+            $purchase_invoice->tax = TaxesModel::where('id', $purchase_invoice->tax_id)->first();
 //        $purchase_invoice->order = OrderModel::where('id',$purchase_invoice->order_id)->first();
-        $data = PurchaseInvoicesModel::find($id);
-        $data->user = User::where('id',$data->client_id)->first();
-        $taxes = TaxesModel::get();
-        $data->tax = TaxesModel::where('id',$data->tax_id)->first();
-        $invoice = InvoiceItemsModel::where('invoice_id',$id)->get();
-        foreach($invoice as $key){
-            $key->product = ProductModel::where('id',$key->item_id)->first();
+            $data = PurchaseInvoicesModel::find($id);
+            $data->user = User::where('id', $data->client_id)->first();
+            $taxes = TaxesModel::get();
+            $data->tax = TaxesModel::where('id', $data->tax_id)->first();
+            $invoice = InvoiceItemsModel::where('invoice_id', $id)->get();
+            foreach ($invoice as $key) {
+                $key->product = ProductModel::where('id', $key->item_id)->first();
+            }
+            $users = User::get();
+            return view('admin.accounting.sales_invoices.invoices.view', ['data' => $data, 'invoice' => $invoice, 'taxes' => $taxes, 'purchase_invoice' => $purchase_invoice, 'users' => $users]);
         }
-        $users = User::get();
-        return view('admin.accounting.sales_invoices.invoices.view',['data'=>$data,'invoice'=>$invoice,'taxes'=>$taxes,'purchase_invoice'=>$purchase_invoice,'users'=>$users]);
+        return redirect()->back();
     }
 
     public function invoice_table(Request $request){
@@ -308,6 +318,24 @@ class SalesInvoicesController extends Controller
                 'status'=>'false',
                 'message'=>'هناك خطا ما'
             ]);
+        }
+    }
+
+    //TODO ترحيل الفاتورة
+    public function invoice_posting($id){
+        $data = PurchaseInvoicesModel::where('id',$id)->first();
+        $data->status = 'stage';
+        $doc_amount = new DocAmountModel();
+        $doc_amount->type = 'sales';
+        $doc_amount->invoice_id = $id;
+        $doc_amount->amount = InvoiceItemsModel::where('invoice_id',$id)->sum(DB::raw('rate * quantity'));
+        $doc_amount->client_id = $data->client_id;
+        $doc_amount->save();
+        if ($data->save()){
+            return redirect()->route('accounting.sales_invoices.invoice_view',['id'=>$id])->with(['success'=>'تم ترحيل الفاتورة بنجاح']);
+        }
+        else{
+            return redirect()->route('accounting.sales_invoices.invoice_view',['id'=>$id])->with(['fail'=>'هناك خلل ما لم يتم ترحيل الفاتورة']);
         }
     }
 }

@@ -64,7 +64,7 @@
                     <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                         <li><a href="{{ route('accounting.sales_invoices.index') }}" class="dropdown-item">فواتير مبيعات</a></li>
                         <li><a href="{{ route('price_offer_sales.index') }}" class="dropdown-item">عروض اسعار البيع</a></li>
-                        <li><a href="{{ route('price_offer_sales.index') }}" class="dropdown-item">مردود مبيعات</a></li>
+                        <li><a href="{{ route('accounting.returns.index') }}" class="dropdown-item">مردود مبيعات</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -73,7 +73,7 @@
                     <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                         <li><a href="{{ route('accounting.purchase_invoices.index') }}" class="dropdown-item">فواتير مشتريات</a></li>
                         <li><a href="{{ route('orders.procurement_officer.order_index') }}" class="dropdown-item">طلبات شراء</a></li>
-                        <li><a href="{{ route('accounting.customer_account_statement_index') }}" class="dropdown-item">مردود مشتريات</a></li>
+                        <li><a href="{{ route('accounting.returns.index') }}" class="dropdown-item">مردود مشتريات</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -133,8 +133,7 @@
                             <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">كشف حساب</a>
                             <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
                                 <li>
-                                    <a href="#" class="dropdown-item">كشف حساب مورد</a>
-                                    <a href="{{ route('accounting.customer_account_statement_index') }}" class="dropdown-item">كشف حساب زبون</a>
+                                    <a href="{{ route('accounting.customer_account_statement_index') }}" class="dropdown-item">كشف حساب</a>
                                 </li>
                             </ul>
                         </li>

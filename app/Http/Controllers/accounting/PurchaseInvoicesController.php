@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\accounting;
 
 use App\Http\Controllers\Controller;
+use App\Models\DocAmountModel;
 use App\Models\InvoiceItemsModel;
 use App\Models\OrderItemsModel;
 use App\Models\OrderModel;
@@ -15,6 +16,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
 
 class PurchaseInvoicesController extends Controller
 {
@@ -109,18 +111,21 @@ class PurchaseInvoicesController extends Controller
 
     public function invoice_view($id){
         $purchase_invoice = PurchaseInvoicesModel::where('id',$id)->first();
-        $purchase_invoice->tax = TaxesModel::where('id',$purchase_invoice->tax_id)->first();
-        $purchase_invoice->order = OrderModel::where('id',$purchase_invoice->order_id)->first();
-        $data = PurchaseInvoicesModel::find($id);
-        $data->user = User::where('id',$data->client_id)->first();
-        $taxes = TaxesModel::get();
-        $data->tax = TaxesModel::where('id',$data->tax_id)->first();
-        $invoice = InvoiceItemsModel::where('invoice_id',$id)->get();
-        foreach($invoice as $key){
-            $key->product = ProductModel::where('id',$key->item_id)->first();
+        if ($purchase_invoice != null) {
+            $purchase_invoice->tax = TaxesModel::where('id', $purchase_invoice->tax_id)->first();
+            $purchase_invoice->order = OrderModel::where('id',$purchase_invoice->order_id)->first();
+            $data = PurchaseInvoicesModel::find($id);
+            $data->user = User::where('id',$data->client_id)->first();
+            $taxes = TaxesModel::get();
+            $data->tax = TaxesModel::where('id',$data->tax_id)->first();
+            $invoice = InvoiceItemsModel::where('invoice_id',$id)->get();
+            foreach($invoice as $key){
+                $key->product = ProductModel::where('id',$key->item_id)->first();
+            }
+            $users = User::get();
+            return view('admin.accounting.purchase_invoices.invoices.view',['data'=>$data,'invoice'=>$invoice,'taxes'=>$taxes,'purchase_invoice'=>$purchase_invoice,'users'=>$users]);
         }
-        $users = User::get();
-        return view('admin.accounting.purchase_invoices.invoices.view',['data'=>$data,'invoice'=>$invoice,'taxes'=>$taxes,'purchase_invoice'=>$purchase_invoice,'users'=>$users]);
+        return redirect()->back();
     }
 
     public function invoice_table(Request $request){
@@ -317,6 +322,24 @@ class PurchaseInvoicesController extends Controller
                 'status'=>'false',
                 'message'=>'هناك خطا ما'
             ]);
+        }
+    }
+
+    //TODO ترحيل الفاتورة
+    public function invoice_posting($id){
+        $data = PurchaseInvoicesModel::where('id',$id)->first();
+        $data->status = 'stage';
+        $doc_amount = new DocAmountModel();
+        $doc_amount->type = 'purchase';
+        $doc_amount->invoice_id = $id;
+        $doc_amount->amount = InvoiceItemsModel::where('invoice_id',$id)->sum(DB::raw('rate * quantity'));
+        $doc_amount->client_id = $data->client_id;
+        $doc_amount->save();
+        if ($data->save()){
+            return redirect()->route('accounting.purchase_invoices.invoice_view',['id'=>$id])->with(['success'=>'تم ترحيل الفاتورة بنجاح']);
+        }
+        else{
+            return redirect()->route('accounting.purchase_invoices.invoice_view',['id'=>$id])->with(['fail'=>'هناك خلل ما لم يتم ترحيل الفاتورة']);
         }
     }
 }
