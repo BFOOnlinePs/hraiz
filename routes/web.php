@@ -582,6 +582,7 @@ Route::group(['prefix'=>'accounting','middleware'=>'auth'],function(){
             Route::post('delete_item',[App\Http\Controllers\accounting\PurchaseInvoicesController::class , 'delete_item'])->name('accounting.purchase_invoices.delete_item');
             Route::post('update_invoice_reference_number_ajax',[App\Http\Controllers\accounting\PurchaseInvoicesController::class , 'update_invoice_reference_number_ajax'])->name('accounting.purchase_invoices.update_invoice_reference_number_ajax');
             Route::post('update_tax_id_ratio',[App\Http\Controllers\accounting\PurchaseInvoicesController::class , 'update_tax_id_ratio'])->name('accounting.purchase_invoices.update_tax_id_ratio');
+            Route::get('invoice_posting/{id}',[App\Http\Controllers\accounting\PurchaseInvoicesController::class , 'invoice_posting'])->name('accounting.purchase_invoices.invoice_posting');
         });
     });
     Route::group(['prefix'=>'sales_invoices'],function(){
@@ -605,6 +606,7 @@ Route::group(['prefix'=>'accounting','middleware'=>'auth'],function(){
             Route::post('delete_item',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'delete_item'])->name('accounting.sales_invoices.delete_item');
             Route::post('update_invoice_reference_number_ajax',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'update_invoice_reference_number_ajax'])->name('accounting.sales_invoices.update_invoice_reference_number_ajax');
             Route::post('update_tax_id_ratio',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'update_tax_id_ratio'])->name('accounting.sales_invoices.update_tax_id_ratio');
+            Route::get('invoice_posting/{id}',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'invoice_posting'])->name('accounting.sales_invoices.invoice_posting');
         });
         Route::group(['prefix'=>'expenses'],function(){
             Route::get('index',[App\Http\Controllers\accounting\ExpensesController::class, 'index'])->name('accounting.expenses.index');
@@ -637,11 +639,27 @@ Route::group(['prefix'=>'accounting','middleware'=>'auth'],function(){
             Route::post('update_performance_bond',[App\Http\Controllers\accounting\BondsController::class , 'update_performance_bond'])->name('accounting.bonds.performance_bond.update_performance_bond');
         });
     });
-    Route::group(['prefix'=>'account-statement'],function (){
+    Route::group(['prefix'=>'account_statement'],function (){
         Route::get('customer_account_statement_index',[\App\Http\Controllers\accounting\AccountStatementController::class,'customer_account_statement_index'])->name('accounting.customer_account_statement_index');
         Route::post('list_customers_table_ajax',[\App\Http\Controllers\accounting\AccountStatementController::class,'list_customers_table_ajax'])->name('accounting.account-statement.list_customers_table_ajax');
         Route::get('account_statement_details/{id}/{user_type}',[\App\Http\Controllers\accounting\AccountStatementController::class,'account_statement_details'])->name('accounting.account-statement.account_statement_details');
         Route::post('account_statement_details_table_ajax',[\App\Http\Controllers\accounting\AccountStatementController::class,'account_statement_details_table_ajax'])->name('accounting.account-statement.account_statement_details_table_ajax');
+        Route::get('print_account_statement_details_pdf/{user_id}',[\App\Http\Controllers\accounting\AccountStatementController::class,'print_account_statement_details_pdf'])->name('accounting.account-statement.print_account_statement_details_pdf');
+    });
+    Route::group(['prefix'=>'returns'],function (){
+        Route::get('index',[\App\Http\Controllers\accounting\ReturnsController::class,'index'])->name('accounting.returns.index');
+        Route::post('get_invoices_for_client',[\App\Http\Controllers\accounting\ReturnsController::class,'get_invoices_for_client'])->name('accounting.returns.get_invoices_for_client');
+        Route::post('get_invoice_items',[\App\Http\Controllers\accounting\ReturnsController::class,'get_invoice_items'])->name('accounting.returns.get_invoice_items');
+        Route::post('invoice_items_table',[\App\Http\Controllers\accounting\ReturnsController::class,'invoice_items_table'])->name('accounting.returns.invoice_items_table');
+        Route::post('create_return',[\App\Http\Controllers\accounting\ReturnsController::class,'create_return'])->name('accounting.returns.create_return');
+        Route::post('product_table',[\App\Http\Controllers\accounting\ReturnsController::class,'product_table'])->name('accounting.returns.product_table');
+        Route::get('returns_details/{id}',[\App\Http\Controllers\accounting\ReturnsController::class,'returns_details'])->name('accounting.returns.returns_details');
+        Route::post('return_item_table',[\App\Http\Controllers\accounting\ReturnsController::class,'return_item_table'])->name('accounting.returns.return_item_table');
+        Route::post('selected_product_from_search',[\App\Http\Controllers\accounting\ReturnsController::class,'selected_product_from_search'])->name('accounting.returns.selected_product_from_search');
+        Route::post('remove_item_from_return_items',[\App\Http\Controllers\accounting\ReturnsController::class,'remove_item_from_return_items'])->name('accounting.returns.remove_item_from_return_items');
+        Route::post('update_qty_from_return_items',[\App\Http\Controllers\accounting\ReturnsController::class,'update_qty_from_return_items'])->name('accounting.returns.update_qty_from_return_items');
+        Route::get('invoice_posting/{id}',[\App\Http\Controllers\accounting\ReturnsController::class,'invoice_posting'])->name('accounting.returns.invoice_posting');
+        Route::post('returns_table_ajax',[\App\Http\Controllers\accounting\ReturnsController::class,'returns_table_ajax'])->name('accounting.returns.returns_table_ajax');
     });
 });
 

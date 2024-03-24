@@ -71,6 +71,17 @@
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
+                            <label for="">العملة</label>
+                            <select name="currency_id" id="currency_id" class="form-control select2bs4">
+                                <option value="">اختر العملة ...</option>
+                                @foreach ($currency as $key)
+                                    <option @if($key->id == $data->currency_id) selected @endif value="{{ $key->id }}">{{ $key->currency_name }} {{ $key->currency_symbol }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
                             <label for="checkbox">التكرار</label>
                             <input type="checkbox" id="checkbox" onchange="if_checked(this.value)">
                         </div>

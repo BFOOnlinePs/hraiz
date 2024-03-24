@@ -21,7 +21,7 @@
     <div class="card mt-3">
         <div class="card-body">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-10">
                     @if($user_type == 'customer')
                         <p>كشف حساب زبون : <span>{{ $user->name }}</span></p>
                         <p>كشف حساب عميل تقرير بجميع المعاملات المالية للزبون</p>
@@ -30,15 +30,24 @@
                         <p>كشف حساب عميل تقرير بجميع المعاملات المالية للمورد</p>
                     @endif
                 </div>
+                <div class="col-md-2">
+                    <a target="_blank" href="{{ route('accounting.account-statement.print_account_statement_details_pdf',['user_id'=>$user->id]) }}" class="btn btn-dark float-right"><span class="fa fa-print"></span></a>
+                </div>
             </div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="">المستند</label>
+                        <input type="text" onkeyup="account_statement_details_table_ajax()" id="reference_number" class="form-control" placeholder="بحث عن مستند">
+                    </div>
+                </div>
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="">من تاريخ</label>
                         <input onchange="account_statement_details_table_ajax()" id="from" type="date" class="form-control" placeholder="من تاريخ">
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="">الى تاريخ</label>
                         <input onchange="account_statement_details_table_ajax()" id="to" type="date" class="form-control" placeholder="الى تاريخ">
@@ -77,6 +86,7 @@
                 header:headers,
                 data:{
                     'user_id':{{ $user->id }},
+                    'reference_number' : $('#reference_number').val(),
                     'from':$('#from').val(),
                     'to':$('#to').val(),
                     '_token': csrfToken

@@ -36,7 +36,7 @@
                 <div class="row">
                     <div class="col-md-8">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <?php
                                     $month = date('m');
@@ -49,19 +49,30 @@
                                            value="{{ $today }}">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="">تاريخ التسليم</label>
                                     <input required type="date" value="{{ date('Y-m-d') }}" name="due_date" class="form-control text-center">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="">الضريبة الاولى</label>
                                     <select name="tax_id" id="tax_id" class="form-control select2bs4">
                                         <option value="">اختر قيمة الضريبة ...</option>
                                         @foreach ($taxes as $key)
                                             <option value="{{ $key->id }}">{{ $key->tax_name }} ({{ $key->tax_ratio }}%)</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="">العملة</label>
+                                    <select name="currency_id" id="currency_id" class="form-control select2bs4">
+                                        <option value="">اختر العملة ...</option>
+                                        @foreach ($currency as $key)
+                                            <option value="{{ $key->id }}">{{ $key->currency_name }} {{ $key->currency_symbol }}</option>
                                         @endforeach
                                     </select>
                                 </div>

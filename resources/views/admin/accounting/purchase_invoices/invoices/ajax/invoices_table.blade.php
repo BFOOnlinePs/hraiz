@@ -1,85 +1,117 @@
 <div class="row">
-  <table class="table table-bordered search_table table-hover table-sm">
-    <thead>
-        <tr>
-            <th></th>
-            <th style="width: 250px">الصنف</th>
-            <th>الكمية</th>
-            <th>السعر</th>
-            <th>خصم</th>
-            <th>بونص</th>
-            <th>المجموع</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if($data->isEmpty())
+    <div class="col-md-12">
+        <table style="width: 100%" class="table-striped table-hover">
+            <thead>
             <tr>
-                <td class="text-center" colspan="6">لا توجد بيانات</td>
+                <th></th>
+                <th style="width: 400px">الصنف</th>
+                <th>الكمية</th>
+                <th>السعر</th>
+                <th>خصم</th>
+                <th>بونص</th>
+                <th>المجموع</th>
             </tr>
-        @else
-        @foreach ($data as $key)
-        <tr id="item_row_{{ $key->id }}">
-            <td>
-                @if(!empty($key['product']->product_photo))
-                    <img width="50" src="{{ asset('storage/product/'.$key["product"]->product_photo??'') }}" alt="">
-                @else
-                    <img width="50" src="{{ asset('img/no_img.jpeg') }}" alt="">
-                @endif
-            </td>
-            <td>{{ $key['product']->product_name_ar??'' }}</td>
-            <td>
-                <input class="input" id="qty_input_{{ $key->id }}" onchange="edit_inputs_from_invoice({{ $key->id }},this.value,'qty')" type="text" value="{{ $key->quantity ?? '' }}">
-            </td>
-            <td>
-                <input class="input" id="rate_input_{{ $key->id }}" onchange="edit_inputs_from_invoice({{ $key->id }},this.value,'rate')" type="text" value="{{ $key->rate ?? '' }}">
-            </td>
-            <td>
-                <input class="input" style="width: 40px" onchange="edit_inputs_from_invoice({{ $key->id }}, this.value, 'discount')" type="text" value="{{ $key->discount ?? '' }}"> %
-            </td>
-            <td>
-                <input class="input" onchange="edit_inputs_from_invoice({{ $key->id }}, this.value, 'bonus')" type="text" value="{{ $key->bonus ?? '' }}">
-            </td>
-            <td id="total_td_{{ $key->id }}"></td>
-            <td>
-                <button onclick="delete_item({{ $key->id }})" class="btn btn-danger btn-sm"><span class="fa fa-close"></span></button>
-            </td>
-        </tr>
-        @endforeach
+            </thead>
+            <tbody>
+            @if($data->isEmpty())
+                <tr>
+                    <td class="text-center" colspan="6">لا توجد بيانات</td>
+                </tr>
+            @else
+                @foreach ($data as $key)
+                    <tr id="item_row_{{ $key->id }}">
+                        <td>
+                            @if(!empty($key['product']->product_photo))
+                                <img width="50" src="{{ asset('storage/product/'.$key["product"]->product_photo??'') }}" alt="">
+                            @else
+                                <img width="50" src="{{ asset('img/no_img.jpeg') }}" alt="">
+                            @endif
+                        </td>
+                        <td>{{ $key['product']->product_name_ar??'' }}</td>
+                        <td>
+                            <input @if($invoice->status == 'stage') disabled @endif class="input" id="qty_input_{{ $key->id }}" onchange="edit_inputs_from_invoice({{ $key->id }},this.value,'qty')" type="text" value="{{ $key->quantity ?? '' }}">
+                        </td>
+                        <td>
+                            <input @if($invoice->status == 'stage') disabled @endif class="input" id="rate_input_{{ $key->id }}" onchange="edit_inputs_from_invoice({{ $key->id }},this.value,'rate')" type="text" value="{{ $key->rate ?? '' }}">
+                        </td>
+                        <td>
+                            <input @if($invoice->status == 'stage') disabled @endif class="input" style="width: 40px" onchange="edit_inputs_from_invoice({{ $key->id }}, this.value, 'discount')" type="text" value="{{ $key->discount ?? '' }}"> %
+                        </td>
+                        <td>
+                            <input @if($invoice->status == 'stage') disabled @endif class="input" onchange="edit_inputs_from_invoice({{ $key->id }}, this.value, 'bonus')" type="text" value="{{ $key->bonus ?? '' }}">
+                        </td>
+                        <td id="total_td_{{ $key->id }}"></td>
+                        <td>
+                            <button @if($invoice->status == 'stage') disabled @endif onclick="delete_item({{ $key->id }})" class="btn btn-danger btn-sm"><span class="fa fa-close"></span></button>
+                        </td>
+                    </tr>
+                @endforeach
 
-        @endif
-    </tbody>
-    </table>
-</div>
-<div class="row">
-    <div class="col-md-7">
-
-    </div>
-    <div class="col-md-5">
-        <table style="width: 100%" class="table-sm table-bordered rounded">
-            <tr>
-                <td class="bg-dark" colspan="1">المجموع الكلي</td>
-                <td class="text-center" id="sub_total"></td>
-            </tr>
-            <tr>
-                <td class="bg-dark" colspan="1">الخصم</td>
-                <td class="text-center">0</td>
-            </tr>
-            <tr>
-                <td class="bg-dark" colspan="1">{{ $invoice->tax->tax_name??'' }} ({{ $invoice->tax->tax_ratio??'' }})%</td>
-                <td class="text-center" id="tax_id"></td>
-                <td>
-                    <button type="button" class="btn btn-info btn-sm rounded-circle" data-toggle="modal" data-target="#discount-modal">
-                        <span class="fa fa-edit"></span>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td class="bg-dark" colspan="1">الرصيد المستحق</td>
-                <td class="text-center" id="sub_total_after_tax"></td>
-            </tr>
+            @endif
+            </tbody>
         </table>
+        <div class="row mt-3">
+            <div class="col-md-6">
+
+            </div>
+            <div class="col-6">
+                <div class="table-responsive">
+                    <table class="table">
+                        <tbody><tr>
+                            <th style="width:50%">المجموع الكلي:</th>
+                            <td class="" id="sub_total"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>الخصم:</th>
+                            <td class="">0</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>{{ $invoice->tax->tax_name??'' }} ({{ $invoice->tax->tax_ratio??'' }})%:</th>
+                            <td class="" id="tax_id"></td>
+                            <td>
+                                <button type="button" class="btn btn-info btn-sm rounded-circle" data-toggle="modal" data-target="#discount-modal">
+                                    <span class="fa fa-edit"></span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>الرصيد المستحق:</th>
+                            <td class="" id="sub_total_after_tax"></td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+{{--        <table style="width: 100%" class="table-sm table-bordered rounded">--}}
+{{--            <tr>--}}
+{{--                <td class="bg-dark" colspan="1">المجموع الكلي</td>--}}
+{{--                <td class="text-center" id="sub_total"></td>--}}
+{{--            </tr>--}}
+{{--            <tr>--}}
+{{--                <td class="bg-dark" colspan="1">الخصم</td>--}}
+{{--                <td class="text-center">0</td>--}}
+{{--            </tr>--}}
+{{--            <tr>--}}
+{{--                <td class="bg-dark" colspan="1">{{ $invoice->tax->tax_name??'' }} ({{ $invoice->tax->tax_ratio??'' }})%</td>--}}
+{{--                <td class="text-center" id="tax_id"></td>--}}
+{{--                <td>--}}
+{{--                    <button type="button" class="btn btn-info btn-sm rounded-circle" data-toggle="modal" data-target="#discount-modal">--}}
+{{--                        <span class="fa fa-edit"></span>--}}
+{{--                    </button>--}}
+{{--                </td>--}}
+{{--            </tr>--}}
+{{--            <tr>--}}
+{{--                <td class="bg-dark" colspan="1">الرصيد المستحق</td>--}}
+{{--                <td class="text-center" id="sub_total_after_tax"></td>--}}
+{{--            </tr>--}}
+{{--        </table>--}}
     </div>
 </div>
+
         <script>
             var sub_total = 0;
             var tax = 0;

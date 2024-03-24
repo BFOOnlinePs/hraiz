@@ -10,11 +10,11 @@
     <table>
         <tr>
             @foreach($data as $key)
+                <td>{{ $key->status }}</td>
                 <td>{{ $key->user_id }}</td>
                 <td>{{ $key->in_time }}</td>
                 <td>{{ $key->out_time }}</td>
-                <td>{{ $key->checked_by }}</td>
-                <td>{{ $key->note }}</td>
+                <td>{{ $key-> note }}</td>
                 <td>{{ $key->attendance_id }}</td>
             @endforeach
         </tr>

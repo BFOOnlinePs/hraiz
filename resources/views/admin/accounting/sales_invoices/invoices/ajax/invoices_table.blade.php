@@ -1,5 +1,5 @@
 <div class="row">
-  <table class="table table-bordered search_table table-hover table-sm">
+  <table width="100%" class="table-striped table-hover">
     <thead>
         <tr>
             <td></td>
@@ -14,7 +14,7 @@
     <tbody>
         @if($data->isEmpty())
             <tr>
-                <td class="text-center" colspan="6">لا توجد بيانات</td>
+                <td class="text-center" colspan="7">لا توجد بيانات</td>
             </tr>
         @else
         @foreach ($data as $key)
@@ -28,20 +28,20 @@
             </td>
             <td>{{ $key['product']->product_name_ar??'' }}</td>
             <td>
-                <input class="input" id="qty_input_{{ $key->id }}" onchange="edit_inputs_from_invoice({{ $key->id }},this.value,'qty')" type="text" value="{{ $key->quantity ?? '' }}">
+                <input @if($invoice->status == 'stage') disabled @endif class="input" id="qty_input_{{ $key->id }}" onchange="edit_inputs_from_invoice({{ $key->id }},this.value,'qty')" type="text" value="{{ $key->quantity ?? '' }}">
             </td>
             <td>
-                <input class="input" id="rate_input_{{ $key->id }}" onchange="edit_inputs_from_invoice({{ $key->id }},this.value,'rate')" type="text" value="{{ $key->rate ?? '' }}">
+                <input @if($invoice->status == 'stage') disabled @endif class="input" id="rate_input_{{ $key->id }}" onchange="edit_inputs_from_invoice({{ $key->id }},this.value,'rate')" type="text" value="{{ $key->rate ?? '' }}">
             </td>
             <td>
-                <input class="input" style="width: 40px" onchange="edit_inputs_from_invoice({{ $key->id }}, this.value, 'discount')" type="text" value="{{ $key->discount ?? '' }}"> %
+                <input @if($invoice->status == 'stage') disabled @endif class="input" style="width: 40px" onchange="edit_inputs_from_invoice({{ $key->id }}, this.value, 'discount')" type="text" value="{{ $key->discount ?? '' }}"> %
             </td>
             <td>
-                <input class="input" onchange="edit_inputs_from_invoice({{ $key->id }}, this.value, 'bonus')" type="text" value="{{ $key->bonus ?? '' }}">
+                <input @if($invoice->status == 'stage') disabled @endif class="input" onchange="edit_inputs_from_invoice({{ $key->id }}, this.value, 'bonus')" type="text" value="{{ $key->bonus ?? '' }}">
             </td>
             <td id="total_td_{{ $key->id }}"></td>
             <td>
-                <button onclick="delete_item({{ $key->id }})" class="btn btn-danger btn-sm"><span class="fa fa-close"></span></button>
+                <button @if($invoice->status == 'stage') disabled @endif onclick="delete_item({{ $key->id }})" class="btn btn-danger btn-sm"><span class="fa fa-close"></span></button>
             </td>
         </tr>
         @endforeach
@@ -50,32 +50,37 @@
     </tbody>
     </table>
 </div>
-<div class="row">
-    <div class="col-md-7">
+<div class="row mt-3">
+    <div class="col-md-6">
 
     </div>
-    <div class="col-md-5">
-        <table style="width: 100%" class="table-sm table-bordered rounded">
+    <div class="col-md-6">
+        <table style="width: 100%" class="table table-hover table-sm">
             <tr>
-                <td class="bg-dark" colspan="1">المجموع الكلي</td>
+                <td class="" colspan="1">المجموع الكلي:</td>
                 <td class="text-center" id="sub_total"></td>
+                <td></td>
             </tr>
             <tr>
-                <td class="bg-dark" colspan="1">الخصم</td>
+                <td class="" colspan="1">الخصم:</td>
                 <td class="text-center">0</td>
+                <td></td>
             </tr>
             <tr>
-                <td class="bg-dark" colspan="1">{{ $invoice->tax->tax_name??'' }} ({{ $invoice->tax->tax_ratio??'' }})%</td>
+                <td class="" colspan="1">{{ $invoice->tax->tax_name??'' }} ({{ $invoice->tax->tax_ratio??'' }})%:</td>
                 <td class="text-center" id="tax_id"></td>
                 <td>
-                    <button type="button" class="btn btn-info btn-sm rounded-circle" data-toggle="modal" data-target="#discount-modal">
-                        <span class="fa fa-edit"></span>
-                    </button>
+                    @if($invoice->status != 'stage')
+                        <button type="button" class="btn btn-info btn-sm rounded-circle" data-toggle="modal" data-target="#discount-modal">
+                            <span class="fa fa-edit"></span>
+                        </button>
+                    @endif
                 </td>
             </tr>
             <tr>
-                <td class="bg-dark" colspan="1">الرصيد المستحق</td>
+                <td class="" colspan="1">الرصيد المستحق:</td>
                 <td class="text-center" id="sub_total_after_tax"></td>
+                <td></td>
             </tr>
         </table>
     </div>

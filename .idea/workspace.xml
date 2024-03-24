@@ -2,29 +2,44 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dc0963de-5d4a-497e-a864-4d74efffd831" name="Changes" comment="edit">
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/accounting/account_statement/account_statement_details.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/accounting/account_statement/ajax/account_statement_details_table.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/accounting/account_statement/ajax/list_customers_table.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/accounting/account_statement/customer_account_statement_index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/payment_bond/ajax/list_invoice_clients.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/payment_bond/modals/create_payment_bond_for_client_modal.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/payment_bond/modals/list_invoice_clients.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/payment_bond/modals/list_invoice_type.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/performance_bond/modals/create_payment_bond_for_client_modal.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/performance_bond/modals/list_invoice_type.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/hr/employees/pdf/attendance.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/helpers.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/accounting/account_statement/pdf/account_statement_details_pdf.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/performance_bond/ajax/list_invoice_clients.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/performance_bond/modals/list_invoice_clients.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/accounting/returns/ajax/invoice_items.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/accounting/returns/ajax/product_table.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/accounting/returns/ajax/return_items_product.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/accounting/returns/ajax/returns_table.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/accounting/returns/details.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/accounting/returns/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/accounting/returns/modals/createReturns.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/accounting/returns/modals/createReturnsPurchases.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Helper/Helper.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/accounting/AccountStatementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/accounting/AccountStatementController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/accounting/BondsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/accounting/BondsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/hr/AttendanceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/hr/AttendanceController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/payment_bond/ajax/bonds_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/payment_bond/ajax/bonds_table.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/payment_bond/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/payment_bond/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/payment_bond/modals/create_payment_bond_modal.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/payment_bond/modals/create_payment_bond_modal.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/performance_bond/ajax/performance_bonds_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/performance_bond/ajax/performance_bonds_table.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/accounting/PurchaseInvoicesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/accounting/PurchaseInvoicesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/accounting/SalesInvoicesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/accounting/SalesInvoicesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/HelperServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/HelperServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/account_statement/account_statement_details.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/account_statement/account_statement_details.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/account_statement/ajax/account_statement_details_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/account_statement/ajax/account_statement_details_table.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/account_statement/ajax/list_customers_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/account_statement/ajax/list_customers_table.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/account_statement/customer_account_statement_index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/account_statement/customer_account_statement_index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/performance_bond/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/performance_bond/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/performance_bond/modals/create_payment_bond_modal.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/performance_bond/modals/create_payment_bond_modal.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/hr/employees/details.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/hr/employees/details.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/performance_bond/modals/list_invoice_type.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/performance_bond/modals/list_invoice_type.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/purchase_invoices/invoices/ajax/invoices_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/purchase_invoices/invoices/ajax/invoices_table.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/purchase_invoices/invoices/view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/purchase_invoices/invoices/view.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/sales_invoices/invoices/ajax/invoices_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/sales_invoices/invoices/ajax/invoices_table.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/sales_invoices/invoices/view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/sales_invoices/invoices/view.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/sales_invoices/new_invoice/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/sales_invoices/new_invoice/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/sales_invoices/new_invoice/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/sales_invoices/new_invoice/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/hr/employees/pdf/attendance.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/hr/employees/pdf/attendance.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/navbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/navbar.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_files.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_files.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,32 +210,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.highlight.mappings&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.highlight.symlinks&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.show.date&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Applications/XAMPP/xamppfiles/htdocs/BFound/jelanco_new/jolanko/resources/views/admin/accounting/bonds/payment_bond/modals&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.fileTypes&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Applications/PhpStorm.app/Contents/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.mappings": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.symlinks": "true",
+    "WebServerToolWindowPanel.toolwindow.show.date": "false",
+    "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
+    "WebServerToolWindowPanel.toolwindow.show.size": "false",
+    "last_opened_file_path": "/Applications/XAMPP/xamppfiles/htdocs/BFound/jelanco_new/jolanko/resources/views/admin/accounting/bonds/performance_bond/ajax",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Color Scheme Font",
+    "ts.external.directory.path": "/Applications/PhpStorm.app/Contents/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/resources/views/admin/accounting/bonds/payment_bond/modals" />
+      <recent name="$PROJECT_DIR$/resources/views/admin/accounting/bonds/performance_bond/ajax" />
       <recent name="$PROJECT_DIR$/resources/views/admin/accounting/bonds/performance_bond/modals" />
+      <recent name="$PROJECT_DIR$/resources/views/admin/accounting/bonds/payment_bond/modals" />
       <recent name="$PROJECT_DIR$/resources/views/admin/accounting/bonds/payment_bond" />
       <recent name="$PROJECT_DIR$/resources/views/admin/accounting/bonds" />
-      <recent name="$PROJECT_DIR$/resources/views/admin/setting/attendance_device" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/resources/views/admin/accounting/bonds/performance_bond" />
@@ -230,11 +245,11 @@
       <recent name="$PROJECT_DIR$/resources/views/admin/orders" />
     </key>
   </component>
-  <component name="RunManager" selected="PHPUnit.rere">
+  <component name="RunManager" selected="PHPUnit.e">
     <configuration name="price_offer_sales_items.blade.php" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://ftp.talabati.ps/resources/views/admin/sales/price_offer_sales/price_offer_sales_items/pdf/price_offer_sales_items.blade.php">
       <method v="2" />
     </configuration>
-    <configuration name="rere" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+    <configuration name="e" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner scope="XML" />
       <method v="2" />
     </configuration>
@@ -333,7 +348,12 @@
       <workItem from="1710329978870" duration="80000" />
       <workItem from="1710372264062" duration="16000" />
       <workItem from="1710401699241" duration="5000" />
-      <workItem from="1710411445354" duration="1005000" />
+      <workItem from="1710411445354" duration="1411000" />
+      <workItem from="1710418200486" duration="25604000" />
+      <workItem from="1710677531499" duration="47063000" />
+      <workItem from="1711010579486" duration="1401000" />
+      <workItem from="1711012607560" duration="265000" />
+      <workItem from="1711012884688" duration="8073000" />
     </task>
     <task id="LOCAL-00001" summary="edit">
       <created>1692272515017</created>
@@ -464,7 +484,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="main" />
+                        <option value="socket" />
                       </list>
                     </value>
                   </entry>

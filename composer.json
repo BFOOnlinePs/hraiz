@@ -38,7 +38,7 @@
             "CarlosMeneses\\LaravelMpdf\\": "vendor/carlos-meneses/laravel-mpdf/src"
         },
         "files": [
-            "app/Helper/Helper.php"
+            "app/helpers.php"
         ]
     },
     "autoload-dev": {

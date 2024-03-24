@@ -22,7 +22,7 @@
     @endif
     </tbody>
 </table>
-
+{{ $data->links() }}
 <script>
     {{--$(document).ready(function() {--}}
     {{--    $('.account-statement-details').click(function(event) {--}}
