@@ -157,6 +157,13 @@
                         <li><a href="{{ route('setting.attendance_device.index') }}" class="dropdown-item">ساعات الدوام</a></li>
                     </ul>
                 </li>
+                <li class="nav-item dropdown">
+                    <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false" class="nav-link text-white dropdown-toggle">المخازن</a>
+                    <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                        <li><a href="{{ route('wherehouse.index') }}" class="dropdown-item">المخازن</a></li>
+                    </ul>
+                </li>
             </ul>
 
             {{-- <form class="form-inline ml-0 ml-md-3">

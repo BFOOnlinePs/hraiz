@@ -11,12 +11,15 @@ use App\Models\PriceOfferItemsModel;
 use App\Models\PriceOffersModel;
 use App\Models\ProductModel;
 use App\Models\PurchaseInvoicesModel;
+use App\Models\SystemSettingModel;
 use App\Models\TaxesModel;
 use App\Models\User;
+use App\Models\WhereHouseModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class PurchaseInvoicesController extends Controller
 {
@@ -46,7 +49,8 @@ class PurchaseInvoicesController extends Controller
     public function new_invoices_index(){
         $client = User::whereJsonContains('user_role',['10'])->get();
         $taxes = TaxesModel::get();
-        return view('admin.accounting.purchase_invoices.new_invoice.index',['client'=>$client,'taxes'=>$taxes]);
+        $wherehouses = WhereHouseModel::get();
+        return view('admin.accounting.purchase_invoices.new_invoice.index',['client'=>$client,'taxes'=>$taxes,'wherehouses'=>$wherehouses]);
     }
 
     public function create_new_invoices(Request $request){
@@ -63,6 +67,7 @@ class PurchaseInvoicesController extends Controller
         $data->repeat_type = $request->repeat_type;
         $data->no_of_cycles	= $request->no_of_cycles;
         $data->invoice_type	= 'purchases';
+        $data->wherehouse_id = $request->wherehouse_id;
         if($data->save()){
             return redirect()->route('accounting.purchase_invoices.invoice_view',['id'=>$data->id])->with(['success'=>'تم انشاء البيانات بنجاح']);
         }
@@ -110,6 +115,7 @@ class PurchaseInvoicesController extends Controller
     }
 
     public function invoice_view($id){
+        $wherehouses = WhereHouseModel::get();
         $purchase_invoice = PurchaseInvoicesModel::where('id',$id)->first();
         if ($purchase_invoice != null) {
             $purchase_invoice->tax = TaxesModel::where('id', $purchase_invoice->tax_id)->first();
@@ -123,7 +129,7 @@ class PurchaseInvoicesController extends Controller
                 $key->product = ProductModel::where('id',$key->item_id)->first();
             }
             $users = User::get();
-            return view('admin.accounting.purchase_invoices.invoices.view',['data'=>$data,'invoice'=>$invoice,'taxes'=>$taxes,'purchase_invoice'=>$purchase_invoice,'users'=>$users]);
+            return view('admin.accounting.purchase_invoices.invoices.view',['data'=>$data,'invoice'=>$invoice,'taxes'=>$taxes,'purchase_invoice'=>$purchase_invoice,'users'=>$users,'wherehouses'=>$wherehouses]);
         }
         return redirect()->back();
     }
@@ -156,10 +162,13 @@ class PurchaseInvoicesController extends Controller
     public function create_product_ajax(Request $request){
         $data = new InvoiceItemsModel();
         $data->item_id = $request->item_id;
+
         // $data->quantity = $request->quantity;
         // $data->unit_type = $request->unit_type;
         // $data->rate = 200;
         $data->invoice_id = $request->invoice_id;
+        $data->wherehouse_id = PurchaseInvoicesModel::where('id',$request->invoice_id)->first()->wherehouse_id ?? 0;
+
         if($data->save()){
             return response()->json([
                 'status'=>'true',
@@ -267,6 +276,10 @@ class PurchaseInvoicesController extends Controller
             $data->note = $request->value;
             $message = 'تم تعديل الملاحظات بنجاح';
         }
+        if($request->operation == 'wherehouse_id'){
+            $data->note = $request->value;
+            $message = 'تم تعديل المخزن بنجاح';
+        }
         if($data->save()){
             return response()->json([
                 'success'=>'true',
@@ -341,5 +354,30 @@ class PurchaseInvoicesController extends Controller
         else{
             return redirect()->route('accounting.purchase_invoices.invoice_view',['id'=>$id])->with(['fail'=>'هناك خلل ما لم يتم ترحيل الفاتورة']);
         }
+    }
+
+    public function purchase_invoice_pdf($invoice_id){
+        $data = PurchaseInvoicesModel::where('id',$invoice_id)->first();
+
+//        $purchase_invoice->tax = TaxesModel::where('id', $purchase_invoice->tax_id)->first();
+//        $purchase_invoice->order = OrderModel::where('id',$purchase_invoice->order_id)->first();
+        $data->user = User::where('id', $data->client_id)->first();
+        $taxes = TaxesModel::get();
+        $data->tax = TaxesModel::where('id', $data->tax_id)->first();
+        $invoice = InvoiceItemsModel::where('invoice_id', $invoice_id)->get();
+        foreach ($invoice as $key) {
+            $key->product = ProductModel::where('id', $key->item_id)->first();
+        }
+
+        // حساب المجموع الكلي
+        $total = InvoiceItemsModel::where('invoice_id', $invoice_id)->sum(DB::raw('rate * quantity'));
+
+        // حساب المجموع المستحق
+        $final_total = InvoiceItemsModel::where('invoice_id', $invoice_id)->sum(DB::raw('rate * quantity'));
+
+        $system_setting = SystemSettingModel::first();
+        $users = User::get();
+        $pdf = PDF::loadView('admin.accounting.purchase_invoices.invoices.pdf.purchase_invoice',['data'=>$data,'invoice'=>$invoice,'total'=>$total,'final_total'=>$final_total,'system_setting'=>$system_setting]);
+        return $pdf->stream('sales_invoice.pdf');
     }
 }

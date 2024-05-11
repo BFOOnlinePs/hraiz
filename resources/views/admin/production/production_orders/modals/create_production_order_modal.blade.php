@@ -12,7 +12,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">اختر خط انتاج</label>
                                 <select required class="form-control" name="production_line_id" id="">
@@ -23,7 +23,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">اسم الموظف</label>
                                 <select class="form-control" name="employee_id" id="">
@@ -33,10 +33,16 @@
                                 </select>
                             </div>
                         </div>
-                        <div id="images" class="col-md-12">
+                        <div id="images" class="col-md-6">
                             <div class="form-group">
                                 <label for="">تاريخ التسليم</label>
                                 <input class="form-control text-center" name="submission_date" value="@php echo date('Y-m-d') @endphp" type="date">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">الكمية</label>
+                                <input type="text" class="form-control" name="qty" placeholder="الكمية">
                             </div>
                         </div>
                         <div class="col-md-12">

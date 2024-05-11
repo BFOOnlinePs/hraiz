@@ -60,9 +60,9 @@
                 {{--                    </td>--}}
                 <td>
                     @if ($key->product_status)
-                        <span class="text-success">فعال</span>
+                        <small class="badge btn-success">فعال</small>
                     @else
-                        <span class="text-danger">غير فعال</span>
+                        <small class="badge badge-danger">غير فعال</small>
                     @endif
                 </td>
                 <td>

@@ -32,6 +32,7 @@
                                     <th>الحالة</th>
                                     <th>تاريخ الانشاء</th>
                                     <th>تاريخ التسليم</th>
+                                    <th>الكمية</th>
                                     <th>الملاحظات</th>
                                     <th>العمليات</th>
                                 </tr>
@@ -41,9 +42,18 @@
                                     <tr>
                                         <td>{{ $key->production_lines->production_name }}</td>
                                         <td>{{ $key->user->name }}</td>
-                                        <td>{{ $key->status }}</td>
+                                        <td>
+                                            @if($key->status == 'process')
+                                                <small class="badge badge-warning">قيد المعالجة</small>
+                                            @elseif($key->status == 'new')
+                                                <small class="badge badge-info">جديد</small>
+                                            @elseif($key->status == 'complete')
+                                                <small class="badge badge-success">مكتمل</small>
+                                            @endif
+                                        </td>
                                         <td>{{ $key->insert_at }}</td>
                                         <td>{{ $key->submission_date }}</td>
+                                        <td>{{ $key->qty }}</td>
                                         <td>{{ $key->notes }}</td>
                                         <td>
                                             <a class="btn btn-dark btn-sm" href="{{ route('production.production_inputs.index',['id'=>$key->production_lines->id]) }}"><span class="fa fa-search"></span></a>

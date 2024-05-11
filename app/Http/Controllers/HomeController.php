@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\CashPaymentsModel;
 use App\Models\OrderModel;
 use App\Models\PriceOffersModel;
+use App\Models\ProducationLinesModel;
+use App\Models\ProductionOrdersModel;
 use App\Models\ProductModel;
 use App\Models\TasksModel;
 use App\Models\User;
@@ -43,6 +45,12 @@ class HomeController extends Controller
                 $child->name = User::select('name')->where('id', $child->supplier_id)->first();
             }
         }
-        return view('admin.home', ['data' => $data,'order_count'=>$order_count,'product_count'=>$product_count,'supplier_count'=>$supplier_count,'task_count'=>$task_count]);
+
+        $production_orders = ProductionOrdersModel::where('employee_id',auth()->user()->id)->get();
+        foreach ($production_orders as $key){
+            $key->production_lines = ProducationLinesModel::where('id',$key->production_line_id)->first();
+            $key->user = User::where('id',$key->employee_id)->first();
+        }
+        return view('admin.home', ['data' => $data,'order_count'=>$order_count,'product_count'=>$product_count,'supplier_count'=>$supplier_count,'task_count'=>$task_count,'production_orders'=>$production_orders]);
     }
 }

@@ -1,6 +1,6 @@
 <div class="modal fade" id="create-returns-modal">
     <div class="modal-dialog modal-xl">
-        <form style="width: 100%" action="{{ route('accounting.returns.create_return') }}" method="post" enctype="multipart/form-data">
+        <form style="width: 100%" id="create_return_form" action="{{ route('accounting.returns.create_return') }}" method="post" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="returns_type" id="returns_type" value="sales">
             <input type="hidden" name="returns_type_invoice" id="returns_type_invoice" value="with_invoice">

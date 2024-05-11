@@ -15,11 +15,13 @@ use App\Models\PriceOfferSalesModel;
 use App\Models\PriceOffersModel;
 use App\Models\ProductModel;
 use App\Models\PurchaseInvoicesModel;
+use App\Models\SystemSettingModel;
 use App\Models\TaxesModel;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class SalesInvoicesController extends Controller
 {
@@ -337,5 +339,31 @@ class SalesInvoicesController extends Controller
         else{
             return redirect()->route('accounting.sales_invoices.invoice_view',['id'=>$id])->with(['fail'=>'هناك خلل ما لم يتم ترحيل الفاتورة']);
         }
+    }
+
+    public function sales_invoice_pdf($invoice_id){
+        $data = PurchaseInvoicesModel::where('id',$invoice_id)->first();
+
+//        $purchase_invoice->tax = TaxesModel::where('id', $purchase_invoice->tax_id)->first();
+//        $purchase_invoice->order = OrderModel::where('id',$purchase_invoice->order_id)->first();
+        $data->user = User::where('id', $data->client_id)->first();
+        $taxes = TaxesModel::get();
+        $data->tax = TaxesModel::where('id', $data->tax_id)->first();
+        $invoice = InvoiceItemsModel::where('invoice_id', $invoice_id)->get();
+        foreach ($invoice as $key) {
+            $key->product = ProductModel::where('id', $key->item_id)->first();
+        }
+
+        // حساب المجموع الكلي
+        $total = InvoiceItemsModel::where('invoice_id', $invoice_id)->sum(DB::raw('rate * quantity'));
+
+        // حساب المجموع المستحق
+        $final_total = InvoiceItemsModel::where('invoice_id', $invoice_id)->sum(DB::raw('rate * quantity'));
+
+        $system_setting = SystemSettingModel::first();
+
+        $users = User::get();
+        $pdf = PDF::loadView('admin.accounting.sales_invoices.invoices.pdf.sales_invoice',['data'=>$data,'invoice'=>$invoice,'total'=>$total,'final_total'=>$final_total,'system_setting'=>$system_setting]);
+        return $pdf->stream('sales_invoice.pdf');
     }
 }

@@ -204,6 +204,15 @@
             });
         }
 
+        $(document).ready(function () {
+            $('#create_return_form').submit(function (event) {
+                if($('input[name="selected_products[]"]:checked').length === 0){
+                    alert('يجب على الاقل اختيار منتج واحد');
+                    event.preventDefault();
+                }
+            })
+        });
+
         $(document).on('click', '.pagination a', function(e) {
             e.preventDefault();
             var page = $(this).attr('href').split('page=')[1];
