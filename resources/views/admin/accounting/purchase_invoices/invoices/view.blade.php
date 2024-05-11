@@ -41,7 +41,8 @@
         </div> --}}
 
         <div class="card-body">
-            @if($purchase_invoice->status == 'stage')
+            <a href="{{ route('accounting.purchase_invoices.purchase_invoice_pdf',['invoice_id'=>$purchase_invoice->id]) }}" class="btn btn-warning"><span class="fa fa-print"></span></a>
+        @if($purchase_invoice->status == 'stage')
                 <div class="alert alert-success text-center">
                     تم ترحيل هذه الفاتورة بنجاح
                 </div>
@@ -72,13 +73,13 @@
             <div class="row">
                 <div class="col-md-9">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="from-group">
                                 <label for="">الرقم المرجعي للفاتورة</label>
                                 <input type="text" @if($purchase_invoice->status == 'stage') readonly @endif onchange="update_invoice_reference_number_ajax(this.value)" class="form-control" value="{{ $purchase_invoice->invoice_reference_number }}">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="">العميل</label>
                                 <select disabled name="client_id" id="" class="form-control select2bs4">
@@ -89,13 +90,24 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="">حالة الفاتورة</label>
                                 <select name="" class="form-control" id="">
                                     <option value="">اختر حالة الفاتورة ...</option>
                                     <option value="">فاتورة جديدة غير مرحلة</option>
                                     <option value="">فاتورة مرحلة</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="">المخزن</label>
+                                <select @if($purchase_invoice->status == 'stage') disabled @endif onchange="update_purchase_invoices_from_ajax('wherehouse_id',this.value)" required class="form-control" name="" id="wherehouse_select">
+                                    <option value="">اختر مخزن ...</option>
+                                    @foreach($wherehouses as $key)
+                                        <option @if($key->id == $purchase_invoice->wherehouse_id) selected @endif value="{{ $key->id }}">{{ $key->wherehouse_name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -187,7 +199,8 @@
                 <div class="col-md-3">
                     <div class="row">
                         <div class="col-md-12">
-                            <button @if($purchase_invoice->status == 'stage') disabled @endif onclick="window.location.href='{{ route('accounting.purchase_invoices.invoice_posting',['id'=>$purchase_invoice->id]) }}'" class="btn btn-info form-control" style="height: 200px">ترحيل</button>
+{{--                            <button @if($purchase_invoice->status == 'stage') disabled @endif onclick="window.location.href='{{ route('accounting.purchase_invoices.invoice_posting',['id'=>$purchase_invoice->id]) }}'" class="btn btn-info form-control" style="height: 200px">ترحيل</button>--}}
+                            <button @if($purchase_invoice->status == 'stage') disabled @endif onclick="post_the_invoice()" class="btn btn-info form-control" style="height: 200px">ترحيل</button>
                         </div>
                     </div>
 {{--                        <div class="row">--}}
@@ -407,6 +420,7 @@
                     'invoice_id': {{ $data->id }}
                 },
                 success: function(data) {
+                    console.log(data);
                     console.log(data.view);
                     invoices_table();
                     search_product_ajax(document.getElementById('search_product').value,page);
@@ -616,6 +630,16 @@
             recurring_form.style.display = "block";
         } else {
             recurring_form.style.display = "none";
+        }
+    }
+
+    // ترحيل الفاتورة
+    function post_the_invoice() {
+        if ($('#wherehouse_select').val()) {
+            window.location.href='{{ route('accounting.purchase_invoices.invoice_posting',['id'=>$purchase_invoice->id]) }}'
+        }
+        else{
+            alert('يجب ان تحدد المخزن')
         }
     }
 </script>

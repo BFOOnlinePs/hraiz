@@ -169,6 +169,7 @@ class ProducationLineController extends Controller
         $data->status = 'new';
         $data->insert_at = Carbon::now();
         $data->submission_date = $request->submission_date;
+        $data->qty = $request->qty;
         $data->notes = $request->notes;
         if ($data->save()){
             return redirect()->route('production.production_inputs.index',['id'=>$request->production_line_id])->with(['success'=>'تم اضافة البيانات بنجاح','tab_id'=>3]);

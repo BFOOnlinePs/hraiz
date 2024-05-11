@@ -34,13 +34,20 @@
 @section('content')
     @include('admin.messge_alert.success')
     @include('admin.messge_alert.fail')
-    <div class="card">
+
+    <div class="card mt-2">
 
         {{-- <div class="card-header">
             <h3 class="text-center">قائمة البنوك</h3>
         </div> --}}
 
         <div class="card-body">
+            @if($purchase_invoice->status == 'stage')
+                <div class="alert alert-success text-center">
+                    تم ترحيل هذه الفاتورة بنجاح
+                </div>
+            @endif
+            <a href="{{ route('accounting.sales_invoices.sales_invoice_pdf',['invoice_id'=>$purchase_invoice->id]) }}" class="btn btn-warning"><span class="fa fa-print"></span></a>
             {{-- <div class="row">
                 <div class="col-md-6">
                     <div class="p-1">
@@ -170,7 +177,11 @@
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <button @if($purchase_invoice->status == 'stage') disabled @endif onclick="window.location.href='{{ route('accounting.sales_invoices.invoice_posting',['id'=>$purchase_invoice->id]) }}'" class="btn btn-info form-control" style="height: 100%">ترحيل</button>
+{{--                    <button @if($purchase_invoice->status == 'stage') disabled @endif onclick="window.location.href='{{ route('accounting.sales_invoices.invoice_posting',['id'=>$purchase_invoice->id]) }}'" class="btn btn-info form-control" style="height: 100%">ترحيل</button>--}}
+                    <button @if($purchase_invoice->status == 'stage') disabled @endif onclick="post_invoice()" class="btn btn-info form-control" style="height: 100%">
+                        <span class="text-success">@if($purchase_invoice->status == 'stage') <span class="fa fa-check-circle"></span> @endif</span>
+                        <p>ترحيل</p>
+                    </button>
                 </div>
 {{--                <div class="col-md-4 p-3 card bg-warning">--}}
 {{--                        <div class="row">--}}
@@ -318,6 +329,25 @@
     <script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
 
     <script>
+
+        function validateForm() {
+            var inputs = document.querySelectorAll('[id^="qty_input_"], [id^="rate_input_"]');
+            var isEmpty = false;
+
+            inputs.forEach(function(input) {
+                if (input.value.trim() === '') {
+                    isEmpty = true;
+                    return;
+                }
+            });
+
+            if (isEmpty) {
+                alert('يرجى ملئ جميع حقول الاسعار والكميات في الاصناف');
+                return false; // Prevent form submission
+            }
+
+            return true; // Allow form submission
+        }
         function show_form_product() {
             document.getElementById('form_product').classList.add('show');
             document.getElementById('form_product').style.display = 'block';
@@ -565,6 +595,14 @@
                 $("#search_product").focus();
             });
         });
+
+        // ترحيل الفاتورة
+        function post_invoice() {
+            validate = validateForm();
+            if(validate === true){
+                window.location.href='{{ route('accounting.sales_invoices.invoice_posting',['id'=>$purchase_invoice->id]) }}';
+            }
+        }
     </script>
 
 <script>

@@ -9,9 +9,13 @@ use App\Models\ProductModel;
 use App\Models\PurchaseInvoicesModel;
 use App\Models\ReturnItemsModel;
 use App\Models\ReturnsModel;
+use App\Models\SystemSettingModel;
+use App\Models\UnitsModel;
 use App\Models\User;
+use App\Models\WhereHouseModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class ReturnsController extends Controller
 {
@@ -42,12 +46,16 @@ class ReturnsController extends Controller
 
     public function invoice_items_table(Request $request){
         $data = InvoiceItemsModel::where('invoice_id',$request->invoice_id)->get();
+
         foreach ($data as $key){
             $key->product = ProductModel::where('id',$key->item_id)->first();
+            $key->wherehouse = WhereHouseModel::where('id',$key->wherehouse_id)->first();
         }
+
+        $wherehouses = WhereHouseModel::get();
         return response()->json([
             'success' => 'true',
-            'view' => view('admin.accounting.returns.ajax.invoice_items',['data'=>$data])->render(),
+            'view' => view('admin.accounting.returns.ajax.invoice_items',['data'=>$data,'wherehouses'=>$wherehouses])->render(),
         ]);
     }
 
@@ -55,6 +63,7 @@ class ReturnsController extends Controller
         $selectedProducts = $request->input('selected_products');
         $quantities = $request->input('quantities');
         $rates = $request->input('rates');
+        $wherehouses = $request->input('wherehouses');
         $invoice = PurchaseInvoicesModel::where('id',$request->invoice_id)->first();
         $doc_amount = new DocAmountModel();
         $returns = new ReturnsModel();
@@ -69,37 +78,16 @@ class ReturnsController extends Controller
         $returns->returns_type = $request->returns_type;
         $returns->save();
 
-//        if($request->returns_type == 'sales'){
-//            $doc_amount->type = 'return_sales';
-//        }
-//        else{
-//            $doc_amount->type = 'return_purchase';
-//        }
-//        if ($request->returns_type_invoice == 'with_not_invoice'){
-//            $doc_amount->client_id = $request->client_id_with_not_invoice;
-//            $doc_amount->invoice_id = -1;
-//            $doc_amount->currency = -1;
-//        }
-//        else{
-//            $doc_amount->client_id = $request->client_id_with_invoice;
-//            $doc_amount->invoice_id = $request->invoice_id;
-//            $doc_amount->currency = $invoice->currency_id;
-//        }
-//        $doc_amount->amount = ReturnItemsModel::select(
-//            DB::raw('SUM(return_items.qty * bfo_invoice_items.rate) as total_return_price')
-//        )
-//            ->join('returns', 'return_items.invoice_id', '=', 'returns.id')
-//            ->join('bfo_invoice_items', 'returns.invoice_id', '=', 'bfo_invoice_items.invoice_id')
-//            ->groupBy('returns.id')
-//            ->first()->total_return_price;
         if ($request->returns_type_invoice == 'with_invoice'){
             foreach ($selectedProducts as $index => $productId){
                 $quantity = $quantities[$index];
                 $rate = $rates[$index];
+                $wherehouse = $wherehouses[$index];
                 $return_items = new ReturnItemsModel();
                 $return_items->invoice_id = $returns->id;
                 $return_items->product_id = $productId;
                 $return_items->qty = $quantity;
+                $return_items->wherehouse_id = $wherehouse;
                 if (!$return_items->save()){
                     return redirect()->route('accounting.returns.index')->with(['fail' => 'هناك خلل ما']);
                 }
@@ -150,6 +138,7 @@ class ReturnsController extends Controller
 
     public function returns_details($id){
         $data = ReturnsModel::where('id',$id)->first();
+        $data->invoice = PurchaseInvoicesModel::where('id',$data->invoice_id)->first();
         $return_items = ReturnItemsModel::where('invoice_id',$id)->get();
         return view('admin.accounting.returns.details',['return_items'=>$return_items,'data'=>$data]);
     }
@@ -161,9 +150,10 @@ class ReturnsController extends Controller
             $key->product = ProductModel::where('id',$key->product_id)->first();
             $key->invoice_qty = InvoiceItemsModel::where('invoice_id',$returns->invoice_id)->where('item_id',$key->product_id)->first()->quantity ?? 0;
         }
+        $wherehouses = WhereHouseModel::get();
         return response()->json([
             'success' => 'true',
-            'view' => view('admin.accounting.returns.ajax.return_items_product',['data'=>$data , 'returns'=>$returns])->render(),
+            'view' => view('admin.accounting.returns.ajax.return_items_product',['data'=>$data , 'returns'=>$returns,'wherehouses'=>$wherehouses])->render(),
         ]);
     }
 
@@ -212,14 +202,20 @@ class ReturnsController extends Controller
         }
         $doc_amount->invoice_id = $data->invoice_id;
         $doc_amount->reference_number = $invoice->invoice_reference_number;
-        $doc_amount->amount = ReturnItemsModel::select(
+        $record = ReturnItemsModel::select(
             DB::raw('SUM(return_items.qty * bfo_invoice_items.rate) as total_return_price')
         )
             ->where('returns.id',$id)
             ->join('returns', 'return_items.invoice_id', '=', 'returns.id')
             ->join('bfo_invoice_items', 'returns.invoice_id', '=', 'bfo_invoice_items.invoice_id')
             ->groupBy('returns.id') // Grouping by return.id to sum total_price for each return
-            ->first()->total_return_price;
+            ->first();
+        if ($record){
+            $doc_amount->amount = $record->total_return_price;
+        }
+        else{
+            return redirect()->back()->with(['fail'=>'يجب ان تحتوي على اصناف']);
+        }
 
         $doc_amount->client_id = $invoice->client_id;
         $doc_amount->save();
@@ -252,5 +248,28 @@ class ReturnsController extends Controller
             'success' => 'true',
             'view' => view('admin.accounting.returns.ajax.returns_table',['data'=>$data])->render()
         ]);
+    }
+
+    public function returns_pdf($id){
+        $system_setting = SystemSettingModel::first();
+        $data = ReturnItemsModel::where('invoice_id',$id)->get();
+        foreach ($data as $key){
+            $key->product = ProductModel::where('id',$key->product_id)->first();
+            $key->unit = UnitsModel::where('id',$key->unit_id)->first();
+        }
+        $return = ReturnsModel::where('id',$id)->first();
+        $pdf = PDF::loadView('admin.accounting.returns.pdf.returns_pdf',['data'=>$data,'return'=>$return,'system_setting'=>$system_setting]);
+        return $pdf->stream('returns.pdf');
+    }
+
+    public function update_wherehouse(Request $request){
+        $data = ReturnItemsModel::where('id',$request->id)->first();
+        $data->wherehouse_id = $request->wherehouse_id;
+        if ($data->save()){
+            return response()->json([
+                'success' => 'true',
+                'message' => 'تم تعديل المخزن بنجاح'
+            ]);
+        }
     }
 }

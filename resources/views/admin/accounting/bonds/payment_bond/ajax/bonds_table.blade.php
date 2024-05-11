@@ -25,7 +25,7 @@
                 <td>{{ $key->currency->currency_name }}</td>
                 <td>
                     @if($key->payment_type == 'cash')
-                        كاش
+                        <small class="badge badge-info">كاش</small>
                     @else
                         شيك
                     @endif

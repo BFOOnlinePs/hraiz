@@ -24,7 +24,7 @@ Route::get('/', function () {
 
 Auth::routes();
 // Purchases System //
-Route::group(['middleware' => 'auth',], function () {
+Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class,'index'])->name('home');
     Route::group(['prefix' => 'users'], function () {
         Route::get('/index', [App\Http\Controllers\UserController::class, 'index'])->name('users.index');
@@ -583,6 +583,7 @@ Route::group(['prefix'=>'accounting','middleware'=>'auth'],function(){
             Route::post('update_invoice_reference_number_ajax',[App\Http\Controllers\accounting\PurchaseInvoicesController::class , 'update_invoice_reference_number_ajax'])->name('accounting.purchase_invoices.update_invoice_reference_number_ajax');
             Route::post('update_tax_id_ratio',[App\Http\Controllers\accounting\PurchaseInvoicesController::class , 'update_tax_id_ratio'])->name('accounting.purchase_invoices.update_tax_id_ratio');
             Route::get('invoice_posting/{id}',[App\Http\Controllers\accounting\PurchaseInvoicesController::class , 'invoice_posting'])->name('accounting.purchase_invoices.invoice_posting');
+            Route::get('purchase_invoice_pdf/{invoice_id}',[App\Http\Controllers\accounting\PurchaseInvoicesController::class , 'purchase_invoice_pdf'])->name('accounting.purchase_invoices.purchase_invoice_pdf');
         });
     });
     Route::group(['prefix'=>'sales_invoices'],function(){
@@ -607,6 +608,7 @@ Route::group(['prefix'=>'accounting','middleware'=>'auth'],function(){
             Route::post('update_invoice_reference_number_ajax',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'update_invoice_reference_number_ajax'])->name('accounting.sales_invoices.update_invoice_reference_number_ajax');
             Route::post('update_tax_id_ratio',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'update_tax_id_ratio'])->name('accounting.sales_invoices.update_tax_id_ratio');
             Route::get('invoice_posting/{id}',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'invoice_posting'])->name('accounting.sales_invoices.invoice_posting');
+            Route::get('sales_invoice_pdf/{invoice_id}',[App\Http\Controllers\accounting\SalesInvoicesController::class , 'sales_invoice_pdf'])->name('accounting.sales_invoices.sales_invoice_pdf');
         });
         Route::group(['prefix'=>'expenses'],function(){
             Route::get('index',[App\Http\Controllers\accounting\ExpensesController::class, 'index'])->name('accounting.expenses.index');
@@ -660,6 +662,8 @@ Route::group(['prefix'=>'accounting','middleware'=>'auth'],function(){
         Route::post('update_qty_from_return_items',[\App\Http\Controllers\accounting\ReturnsController::class,'update_qty_from_return_items'])->name('accounting.returns.update_qty_from_return_items');
         Route::get('invoice_posting/{id}',[\App\Http\Controllers\accounting\ReturnsController::class,'invoice_posting'])->name('accounting.returns.invoice_posting');
         Route::post('returns_table_ajax',[\App\Http\Controllers\accounting\ReturnsController::class,'returns_table_ajax'])->name('accounting.returns.returns_table_ajax');
+        Route::get('returns_pdf/{id}',[\App\Http\Controllers\accounting\ReturnsController::class,'returns_pdf'])->name('accounting.returns.returns_pdf');
+        Route::post('update_wherehouse',[\App\Http\Controllers\accounting\ReturnsController::class,'update_wherehouse'])->name('accounting.returns.update_wherehouse');
     });
 });
 
@@ -730,4 +734,11 @@ Route::group(['prefix'=>'price_offer_sales'],function (){
         Route::post('get_sum_price_offer_sales_items_ajax',[App\Http\Controllers\sales\PriceOfferSalesController::class,'get_sum_price_offer_sales_items_ajax'])->name('price_offer_sales.price_offer_sales_items.get_sum_price_offer_sales_items_ajax');
     });
 });
+
+Route::group(['prefix'=>'wherehouse'],function (){
+    Route::get('index',[App\Http\Controllers\WhereHouseController::class,'index'])->name('wherehouse.index');
+    Route::post('create',[App\Http\Controllers\WhereHouseController::class,'create'])->name('wherehouse.create');
+    Route::post('update',[App\Http\Controllers\WhereHouseController::class,'update'])->name('wherehouse.update');
+});
+
 

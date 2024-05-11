@@ -13,6 +13,8 @@
 @endsection
 @section('style')
     <link rel="stylesheet" href="{{ asset('assets/plugins/toastr/toastr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 @endsection
 @section('content')
     @include('admin.messge_alert.success')
@@ -23,7 +25,14 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <h3>المنتجات المردودة <button @if($data->status == 'stage') disabled @endif onclick="window.location.href='{{ route('accounting.returns.invoice_posting',['id'=>$data->id]) }}'" class="btn btn-info float-right">ترحيل</button></h3>
+                            @if($data->status == 'stage')
+                                <div class="alert alert-success">
+                                    تم ترحيل هذه الفاتورة
+                                </div>
+                            @endif
+                            <h6>الرقم المرجعي للفاتورة : <span>{{ $data->invoice->invoice_reference_number }}</span></h6>
+                            <span><button onclick="window.location.href='{{ route('accounting.returns.returns_pdf',['id'=>$data->id]) }}'" class="btn btn-warning mr-1 float-right"><i class="fa fa-print"></i></button></span>
+                            <span>المنتجات المردودة <button @if($data->status == 'stage') disabled @endif onclick="window.location.href='{{ route('accounting.returns.invoice_posting',['id'=>$data->id]) }}'" class="btn btn-info float-right">ترحيل</button></span>
                             <hr>
                             <div class="table-responsive">
                                 <div id="return_item_table">
@@ -56,6 +65,7 @@
 
 @section('script')
     <script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
 
     <script>
         $(document).ready(function () {
@@ -182,6 +192,28 @@
                     }
                 });
             }
+        }
+
+        function update_wherehouse(id,wherehouse_id) {
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            var headers = {
+                "X-CSRF-Token": csrfToken
+            };
+            $.ajax({
+                url: '{{ route('accounting.returns.update_wherehouse') }}',
+                method: 'post',
+                headers: headers,
+                data: {
+                    'id' : id,
+                    'wherehouse_id' : wherehouse_id,
+                },
+                success: function (response) {
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('error');
+                }
+            });
         }
     </script>
 @endsection

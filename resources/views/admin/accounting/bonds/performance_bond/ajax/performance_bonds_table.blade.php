@@ -25,9 +25,9 @@
                 <td>{{ $key->currency->currency_name }}</td>
                 <td>
                     @if($key->payment_type == 'cash')
-                        كاش
+                        <small class="badge badge-info">كاش</small>
                     @else
-                        <span>شيك </span><span data-toggle="modal" data-target="#update_check_payment_type_modal" onclick="get_check_data({{ $key }})" class="fa fa-money-check"></span>
+                        <small class="badge badge-warning"><span>شيك </span><span data-toggle="modal" data-target="#update_check_payment_type_modal" onclick="get_check_data({{ $key }})" class="fa fa-money-check"></span></small>
                     @endif
                 </td>
                 <td>{{ $key->users->name }}</td>
