@@ -17,7 +17,7 @@
                                 <label for="">اختر عميل</label>
                                 <select required class="form-control select2bs4" name="client_id" id="invoice_select_id">
                                     <option value="">اختر عميل ...</option>
-                                    @foreach($clients as $key)
+                                    @foreach($users as $key)
                                         <option value="{{ $key->id }}">{{ $key->name }}</option>
                                     @endforeach
                                 </select>
