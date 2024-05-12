@@ -15,11 +15,12 @@ use Illuminate\Support\Facades\DB;
 class BondsController extends Controller
 {
     public function index(){
+        return 'asd';
         $data = BondsModel::get();
         $invoices = PurchaseInvoicesModel::where('invoice_type','sales')->get();
         $currencies = Currency::get();
         $users = User::whereJsonContains('user_role',['2'])->get();
-        $clients = User::get();
+        $clients = User::whereJsonContains('user_role',['10'])->get();
         return view('admin.accounting.bonds.payment_bond.index',['data'=>$data,'invoices'=>$invoices,'currencies'=>$currencies,'users'=>$users,'clients'=>$clients]);
     }
 
