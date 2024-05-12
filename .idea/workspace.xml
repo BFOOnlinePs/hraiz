@@ -2,36 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dc0963de-5d4a-497e-a864-4d74efffd831" name="Changes" comment="edit">
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/accounting/purchase_invoices/invoices/pdf/purchase_invoice.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/accounting/returns/pdf/returns_pdf.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/accounting/sales_invoices/invoices/pdf/sales_invoice.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/wherehouse/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/wherehouse/modals/wherehouseCreateModal.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/wherehouse/modals/wherehouseEditModal.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/accounting/PurchaseInvoicesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/accounting/PurchaseInvoicesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/accounting/ReturnsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/accounting/ReturnsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/accounting/SalesInvoicesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/accounting/SalesInvoicesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/production/ProducationLineController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/production/ProducationLineController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/payment_bond/ajax/bonds_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/payment_bond/ajax/bonds_table.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/performance_bond/ajax/performance_bonds_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/performance_bond/ajax/performance_bonds_table.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/purchase_invoices/invoices/ajax/invoices_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/purchase_invoices/invoices/ajax/invoices_table.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/purchase_invoices/invoices/view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/purchase_invoices/invoices/view.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/purchase_invoices/new_invoice/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/purchase_invoices/new_invoice/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/returns/ajax/invoice_items.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/returns/ajax/invoice_items.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/returns/ajax/return_items_product.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/returns/ajax/return_items_product.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/returns/details.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/returns/details.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/returns/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/returns/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/returns/modals/createReturns.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/returns/modals/createReturns.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/sales_invoices/invoices/ajax/invoices_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/sales_invoices/invoices/ajax/invoices_table.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/sales_invoices/invoices/view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/sales_invoices/invoices/view.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/product/ajax/search_product.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/product/ajax/search_product.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/production/production_orders/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/production/production_orders/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/production/production_orders/modals/create_production_order_modal.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/production/production_orders/modals/create_production_order_modal.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/navbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/navbar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/accounting/BondsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/accounting/BondsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/users/clients/details.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/users/clients/details.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -362,6 +335,13 @@
       <workItem from="1712080048484" duration="25000" />
       <workItem from="1712080215000" duration="18000" />
       <workItem from="1712221090580" duration="45000" />
+      <workItem from="1715424384881" duration="1506000" />
+      <workItem from="1715492127097" duration="1458000" />
+      <workItem from="1715494908767" duration="372000" />
+      <workItem from="1715495741506" duration="139000" />
+      <workItem from="1715495888672" duration="14000" />
+      <workItem from="1715495909520" duration="659000" />
+      <workItem from="1715498323875" duration="209000" />
     </task>
     <task id="LOCAL-00001" summary="edit">
       <created>1692272515017</created>

@@ -80,6 +80,18 @@
                                    href="#custom-content-below-settings" role="tab"
                                    aria-controls="custom-content-below-settings" aria-selected="false">سجل المتابعة</a>
                             </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-white" id="subscriptions-tab" data-toggle="pill"
+                                   href="#subscriptions" role="tab"
+                                   aria-controls="subscriptions" aria-selected="false">الاشتراكات</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-white" id="pages-tab" data-toggle="pill"
+                                   href="#pages" role="tab"
+                                   aria-controls="pages" aria-selected="false">الصفحات</a>
+                            </li>
 {{--                            <li class="nav-item">--}}
 {{--                                <a class="nav-link text-white" id="custom-content-below-settings-tab" data-toggle="pill"--}}
 {{--                                   href="#custom-content-below-settings" role="tab"--}}
@@ -430,8 +442,52 @@
                                 <div class="p-2">
                                     <div class="container">
                                         <div class="response"></div>
-                                        <div
                                     </div>
+                            </div>
+                        </div>
+                            <div class="tab-pane fade" id="subscriptions" role="tabpanel"
+                                 aria-labelledby="subscriptions-tab">
+                                <div class="p-2">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button class="btn btn-dark">اضافة اشتراك</button>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-md-12">
+                                            <div class="table-responsive">
+                                                <table class="table table-sm table-bordered">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>من تاريخ</th>
+                                                        <th>الى تاريخ</th>
+                                                        <th>ملاحظات</th>
+                                                        <th>حالة الاشتراك</th>
+                                                        <th>تمت الاضافة بواسطة</th>
+                                                        <th>تمت الاضافة بتاريخ</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="pages" role="tabpanel"
+                                 aria-labelledby="pages-tab">
+                                <div class="p-2">
+                                    pages
+                                </div>
                             </div>
                         </div>
                     </div>
