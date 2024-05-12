@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 class BondsController extends Controller
 {
     public function index(){
+        return User::get();
         $data = BondsModel::get();
         $invoices = PurchaseInvoicesModel::where('invoice_type','sales')->get();
         $currencies = Currency::get();
