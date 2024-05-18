@@ -14,7 +14,7 @@
         }
 
         .table_invoice td, th {
-            border: 1px solid #dddddd;
+            border: 0.5px solid black;
             text-align: center;
             padding: 8px;
         }
@@ -23,18 +23,38 @@
             background-color: #dddddd;
         }
 
+        @page{
+            @if(!empty($system_setting))
+                background-image: url("{{ asset('storage/setting/'.$system_setting->letter_head_image) }}");
+            @endif
+            background-image-resize: 6;
+            header: page-header;
+            footer: page-footer;
+            margin-top: 200px;
+        }
+
         @page :first {
             @if(!empty($system_setting))
                 background-image: url("{{ asset('storage/setting/'.$system_setting->letter_head_image) }}");
             @endif
             background-image-resize: 6;
-            margin-bottom: 50px;
-            margin-top: 220px;
+            margin-top: 0;
+            /*margin-bottom: 50px;*/
+            /*margin-top: 220px;*/
         }
     </style>
 </head>
 <body>
-<h2 style="text-align: center">فاتورة مشتريات</h2>
+<div style="page-break-after: always">
+    <div style="padding-top: 50%;height: 100%">
+        <div>
+            <p style="font-weight: bold">מידע כללי</p>
+        </div>
+        <div>
+            אנו מתמחים בייצור, ושיווק פרזול לחלונות ודלתות אלומיניום
+        </div>
+    </div>
+</div>
 <div style="width: 100%">
     <table width="100%">
         <tr>

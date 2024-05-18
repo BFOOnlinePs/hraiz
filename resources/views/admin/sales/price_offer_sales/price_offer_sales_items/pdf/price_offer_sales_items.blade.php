@@ -15,7 +15,6 @@
                 background-image: url("{{ asset('storage/setting/'.\App\Models\SystemSettingModel::first()->letter_head_image) }}");
             @endif
             background-image-resize:6;
-            margin-top:220px;
             margin-bottom:50px;
         }
 
@@ -25,7 +24,7 @@
             @endif
             background-image-resize:6;
             margin-bottom:50px;
-            margin-top:220px;
+            margin-top:150px;
         }
         .title{
 
@@ -47,13 +46,11 @@
         }
 
         .float-container {
-            padding: 20px;
         }
 
         .float-child {
             width: 43.4%;
             float: left;
-            padding: 20px;
         }
 
         .sum{
@@ -94,6 +91,7 @@
                 שם מוצר
             @endif
         </th>
+        <th></th>
         <th>
             @if($language == 'ar')
                 الكمية
@@ -144,6 +142,9 @@
                 @elseif($language == 'he')
                     {{ $key->product->product_name_he }}
                 @endif
+            </td>
+            <td>
+                <img style="width: 40px" src="{{ asset('storage/product/'.$key->product->product_photo) }}" alt="">
             </td>
             <td>
                 {{ $key->qty }}

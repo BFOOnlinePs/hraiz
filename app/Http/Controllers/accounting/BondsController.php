@@ -120,7 +120,7 @@ class BondsController extends Controller
         $invoices = PurchaseInvoicesModel::where('invoice_type','purchases')->get();
         $currencies = Currency::get();
         $users = User::whereJsonContains('user_role',['2'])->get();
-        $clients = User::get();
+        $clients = User::whereJsonContains('user_role',['10'])->get();
         return view('admin.accounting.bonds.performance_bond.index',['data'=>$data,'invoices'=>$invoices,'currencies'=>$currencies,'users'=>$users,'clients'=>$clients]);
     }
 
