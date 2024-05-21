@@ -1,13 +1,13 @@
 <table class="table table-bordered">
     <thead>
     <tr>
-        <td>#</td>
+{{--        <td>#</td>--}}
         <td>الرقم المرجعي</td>
         <th>تاريخ الفاتورة</th>
         <th>تاريخ التسليم</th>
         <th>العميل</th>
-        <th>الضريبة الاولى</th>
-        <th>الضريبة الثانية</th>
+        <th>المجموع</th>
+        <th>حالة الفاتورة</th>
         <th>الملاحظات</th>
         <th>العمليات</th>
     </tr>
@@ -20,13 +20,19 @@
     @else
         @foreach ($data as $key)
             <tr>
-                <td>{{ ($data ->currentpage()-1) * $data ->perpage() + $loop->index + 1 }}</td>
+{{--                <td>{{ ($data ->currentpage()-1) * $data ->perpage() + $loop->index + 1 }}</td>--}}
                 <td>{{ $key->invoice_reference_number }}</td>
                 <td>{{ $key->bill_date }}</td>
                 <td>{{ $key->due_date }}</td>
                 <td>{{ App\Models\User::where('id',$key->client_id)->value('name') }}</td>
-                <td>{{ $key->tax_id }}</td>
-                <td>{{ $key->tax_id2 }}</td>
+                <td>{{ $key->totalAmount }}</td>
+                <td class="text-center">
+                    @if($key->status == 'stage')
+                        <span class="badge bg-success">مرحل</span>
+                    @else
+                        <span class="badge bg-warning">غير مرحل</span>
+                    @endif
+                </td>
                 <td>{{ $key->note }}</td>
                 <td>
                     <a href="{{ route('accounting.sales_invoices.invoice_view',['id'=>$key->id]) }}" class="btn btn-dark btn-sm"><span class="fa fa-search"></span></a>

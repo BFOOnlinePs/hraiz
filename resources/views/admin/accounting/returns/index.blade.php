@@ -127,10 +127,10 @@
         }
 
         function selected_client_with_not_invoices(value) {
-            alert(value);
 
             if (value !== ''){
                 $('#product_form_search').css('display','block');
+                product_table('');
             }
             else{
                 $('#product_form_search').css('display','none');
@@ -173,6 +173,27 @@
                 },
                 success: function (data) {
                     $('#invoice_items_table').html(data.view);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('error');
+                }
+            });
+        }
+
+        function product_table(search) {
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            var headers = {
+                "X-CSRF-Token": csrfToken
+            };
+            $.ajax({
+                url: '{{ route('accounting.returns.invoice_items_table') }}',
+                method: 'post',
+                headers: headers,
+                data: {
+                    'search' : search,
+                },
+                success: function (data) {
+                    $('#product_table').html(data.view);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     alert('error');

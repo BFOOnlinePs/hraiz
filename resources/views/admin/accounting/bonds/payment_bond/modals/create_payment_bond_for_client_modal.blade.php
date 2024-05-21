@@ -5,7 +5,7 @@
             <input type="hidden" name="invoice_modal_type" value="client">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">اضافة سند دفع</h4>
+                    <h4 class="modal-title">اضافة سند قبض</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -65,7 +65,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row" style="display: none" id="check_information">
+                    <div class="row" style="display: none" id="check_information_client">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="checkNumber">رقم الشيك</label>

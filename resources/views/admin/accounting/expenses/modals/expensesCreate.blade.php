@@ -22,7 +22,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">العملة</label>
-                                        <select required class="form-control" name="" id="">
+                                        <select required class="form-control" name="currency_id" id="">
                                             <option value="">اختر العملة</option>
                                             @foreach($currencies as $key)
                                                 <option value="{{ $key->id }}">{{ $key->currency_name }}</option>
@@ -50,6 +50,7 @@
                                     <div class="form-group">
                                         <label for="">التصنيف</label>
                                         <select required class="form-control" name="category_id" id="">
+                                            <option value="">اختر تصنيف ...</option>
                                             @foreach($expenses_categories as $key)
                                                 <option value="{{ $key->id }}">{{ $key->title }}</option>
                                             @endforeach

@@ -103,16 +103,16 @@
         $(document).on('click', '#pagination a', function (e) {
             e.preventDefault();
             var page = $(this).attr('href').split('page=')[1];
-            list_invoice_clients_table_ajax(page);
+            list_invoice_for_performance_bond_clients_table_ajax(page);
         });
 
-        function list_invoice_clients_table_ajax(page = 1,reference_number = '',client_name = '') {
+        function list_invoice_for_performance_bond_clients_table_ajax(page = 1,reference_number = '',client_name = '') {
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
             var headers = {
                 "X-CSRF-Token": csrfToken
             };
             $.ajax({
-                url: '{{ route('bonds.list_invoice_clients_table_ajax') }}' + '?page=' + page,
+                url: '{{ route('bonds.list_invoice_for_performance_bond_clients_table_ajax') }}' + '?page=' + page,
                 method: 'post',
                 headers: headers,
                 data:{
@@ -214,7 +214,7 @@
         }
 
         function list_invoice_clients_modal() {
-            list_invoice_clients_table_ajax();
+            list_invoice_for_performance_bond_clients_table_ajax();
             $('#list_invoice_type').modal('hide');
             $('#list_invoice_clients_modal').modal('show');
         }

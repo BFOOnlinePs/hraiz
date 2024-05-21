@@ -8,12 +8,32 @@
     <style>
         .tbb { border-collapse: collapse; width:400px; }
         .tbb th, .tbb td { padding: 5px; border: solid 1px black; }
-        .tbb th { background-color: aliceblue; }
+        /*.tbb th { background-color: aliceblue; }*/
         .tbb { width: 100% }
+
+        @page{
+            @if(!empty(\App\Models\SystemSettingModel::first()->letter_head_image))
+                background-image: url("{{ asset('storage/setting/'.\App\Models\SystemSettingModel::first()->letter_head_image) }}");
+            @endif
+            background-image-resize: 6;
+            header: page-header;
+            footer: page-footer;
+            margin-top: 130px;
+        }
+
+        @page :first {
+            @if(!empty(\App\Models\SystemSettingModel::first()->letter_head_image))
+                background-image: url("{{ asset('storage/setting/'.\App\Models\SystemSettingModel::first()->letter_head_image) }}");
+            @endif
+            background-image-resize: 6;
+            /*margin-bottom: 50px;*/
+            /*margin-top: 220px;*/
+        }
     </style>
+
 </head>
 <body>
-    <h3>كشف حساب</h3>
+    <h3 style="text-align: center">كشف حساب</h3>
     <p>اسم الزبون : <span>{{ $user->name }}</span></p>
     <p>التاريخ : <span>{{ \Carbon\Carbon::now()->toDateString() }}</span></p>
     <table width="100%" class="tbb">
@@ -32,7 +52,7 @@
         @endphp
         @if($data->isEmpty())
             <tr>
-                <td colspan="6" class="text-center">لا توجد بيانات</td>
+                <td colspan="6" style="text-align: center">لا توجد بيانات</td>
             </tr>
         @else
             <tr>

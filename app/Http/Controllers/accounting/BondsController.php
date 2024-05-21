@@ -237,7 +237,7 @@ class BondsController extends Controller
         ]);
     }
 
-    public function list_invoice_clients_table_ajax(Request $request){
+    public function list_invoice_for_payment_bond_clients_table_ajax(Request $request){
         $reference_number = $request->input('reference_number');
         $client_name = $request->input('client_name');
 
@@ -254,7 +254,34 @@ class BondsController extends Controller
                 });
             });
         }
-        $data = $query->paginate(10);
+        $data = $query->where('invoice_type','sales')->paginate(10);
+        foreach ($data as $key){
+            $key->client = User::where('id',$key->client_id)->first();
+        }
+        return response()->json([
+            'success' => 'true',
+            'view' => view('admin.accounting.bonds.payment_bond.ajax.list_invoice_clients',['data'=>$data])->render(),
+            'pagination' => $data->links()->toHtml(),
+        ]);
+    }
+    public function list_invoice_for_performance_bond_clients_table_ajax(Request $request){
+        $reference_number = $request->input('reference_number');
+        $client_name = $request->input('client_name');
+
+        $query = PurchaseInvoicesModel::query();
+        if ($reference_number){
+            $query->where(function ($q) use ($reference_number){
+                $q->where('invoice_reference_number','like','%'.$reference_number.'%');
+            });
+        }
+        if ($client_name){
+            $query->where(function ($q) use ($client_name){
+                $q->whereIn('client_id',function ($q) use ($client_name){
+                    $q->select('id')->from('users')->where('name','like','%'.$client_name.'%');
+                });
+            });
+        }
+        $data = $query->where('invoice_type','purchases')->paginate(10);
         foreach ($data as $key){
             $key->client = User::where('id',$key->client_id)->first();
         }

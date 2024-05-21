@@ -1,4 +1,4 @@
-<html>
+<html dir="@if($language == 'en') ltr @else rtl @endif">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -59,16 +59,48 @@
         }
     </style>
 </head>
-<body dir="rtl">
-<h2 align="center">عرض سعر</h2>
+<body>
+<h2 align="center">
+    @if($language == 'ar')
+        <p style="text-align: center">عرض سعر</p>
+    @elseif($language == 'en')
+        <p style="text-align: center">Price Offer</p>
+    @elseif($language == 'he')
+        <p style="text-align: center">הצעת מחיר</p>
+    @endif
+</h2>
 <div class="float-container">
     <div class="float-child" style="float: right">
-        <h5>الى :</h5>
+        <h5>
+            @if($language == 'ar')
+                الى :
+            @elseif($language == 'en')
+                to :
+            @elseif($language == 'he')
+                ל :
+            @endif
+        </h5>
         <h5>{{ $price_offer_sales->customer->name }}</h5>
     </div>
     <div class="float-child" style="float: left;text-align: center">
-        <h5>عرض الاسعار : <span>{{ $price_offer_sales->id }}</span></h5>
-        <h5>تاريخ : <span>{{ \Carbon\Carbon::parse($price_offer_sales->insert_at)->toDateString() }}</span></h5>
+        <h5>
+            @if($language == 'ar')
+                عرض سعر رقم :
+            @elseif($language == 'en')
+                Price Offer Number :
+            @elseif($language == 'he')
+                צפו במחיר מס :
+            @endif
+            <span>{{ $price_offer_sales->id }}</span></h5>
+        <h5>
+            @if($language == 'ar')
+                تاريخ :
+            @elseif($language == 'en')
+                Date :
+            @elseif($language == 'he')
+                תאריך :
+            @endif
+            <span>{{ \Carbon\Carbon::parse($price_offer_sales->insert_at)->toDateString() }}</span></h5>
     </div>
 </div>
 <table class="table" cellpadding="10">
@@ -157,13 +189,29 @@
         </tr>
     @endforeach
     <tr>
-        <td class="sum" colspan="4">المجموع</td>
+        <td class="sum" colspan="5">
+            @if($language == 'ar')
+                المجموع
+            @elseif($language == 'en')
+                Total
+            @elseif($language == 'he')
+                סך הכל
+            @endif
+        </td>
         <td>{{ $sum }} <span style="text-align: left">{{ $price_offer_sales->currency->currency_symbol ?? '' }}</span></td>
         <td></td>
     </tr>
 </table>
 <div style="margin-top: 20px">
-    <h5>الملاحظات :</h5>
+    <h5>
+        @if($language == 'ar')
+            الملاحظات
+        @elseif($language == 'en')
+            Notes
+        @elseif($language == 'he')
+            הערות
+        @endif
+    </h5>
     <p>{{ $price_offer_sales->notes }}</p>
 </div>
 </body>

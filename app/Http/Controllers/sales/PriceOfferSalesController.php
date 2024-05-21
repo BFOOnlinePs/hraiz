@@ -233,7 +233,7 @@ class PriceOfferSalesController extends Controller
                         Carbon::parse($to)->addDays()
                     ]);
                 });
-            })->get();
+            })->orderBy('id','desc')->get();
         foreach ($data as $key){
             $key->user = User::where('id',$key->customer_id)->first();
             $key->insert_by_user = User::where('id',$key->insert_by)->first();

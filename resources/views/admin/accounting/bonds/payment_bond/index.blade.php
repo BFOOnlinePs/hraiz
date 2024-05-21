@@ -84,7 +84,7 @@
             </div>
         </div>
     </div>
-    @include('admin.accounting.bonds.payment_bond.modals.create_payment_bond_modal')
+{{--    @include('admin.accounting.bonds.payment_bond.modals.create_payment_bond_modal')--}}
     @include('admin.accounting.bonds.payment_bond.modals.update_check_payment_type')
     @include('admin.accounting.bonds.payment_bond.modals.list_invoice_type')
     @include('admin.accounting.bonds.payment_bond.modals.create_payment_bond_for_client_modal')
@@ -102,12 +102,12 @@
 
         $('input[name="customRadio"]').on('change', function () {
             if ($(this).val() === 'check') {
-                $('#check_information').show();
+                $('#check_information_client').css('display','block');
                 $('#checkNumber').prop('required',true);
                 $('#due_date').prop('required',true);
                 $('#bank_name').prop('required',true);
             } else {
-                $('#check_information').hide();
+                $('#check_information_client').hide();
             }
         })
 
@@ -139,16 +139,16 @@
         $(document).on('click', '#pagination a', function (e) {
             e.preventDefault();
             var page = $(this).attr('href').split('page=')[1];
-            list_invoice_clients_table_ajax(page);
+            list_invoice_for_payment_bond_clients_table_ajax(page);
         });
 
-        function list_invoice_clients_table_ajax(page = 1,reference_number = '',client_name = '') {
+        function list_invoice_for_payment_bond_clients_table_ajax(page = 1,reference_number = '',client_name = '') {
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
             var headers = {
                 "X-CSRF-Token": csrfToken
             };
             $.ajax({
-                url: '{{ route('bonds.list_invoice_clients_table_ajax') }}' + '?page=' + page,
+                url: '{{ route('bonds.list_invoice_for_payment_bond_clients_table_ajax') }}' + '?page=' + page,
                 method: 'post',
                 headers: headers,
                 data:{
@@ -168,7 +168,7 @@
         $('.input_serach').on('input', function () {
             var client_name = $('#input_search_clients').val()
             var reference_number = $('#input_search_reference_number').val()
-            list_invoice_clients_table_ajax(1,reference_number,client_name); // Call the function with page 1 and the search query
+            list_invoice_for_payment_bond_clients_table_ajax(1,reference_number,client_name); // Call the function with page 1 and the search query
         });
 
         function get_amount_for_invoice() {
@@ -208,7 +208,7 @@
         }
 
         function list_invoice_clients_modal() {
-            list_invoice_clients_table_ajax();
+            list_invoice_for_payment_bond_clients_table_ajax();
             $('#list_invoice_type').modal('hide');
             $('#list_invoice_clients_modal').modal('show');
         }

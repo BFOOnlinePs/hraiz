@@ -31,7 +31,7 @@
         @endforeach
     @else
         <tr>
-            <td colspan="1" class="text-center">لا توجد بيانات</td>
+            <td colspan="5" class="text-center">لا توجد بيانات</td>
         </tr>
     @endif
     </tbody>

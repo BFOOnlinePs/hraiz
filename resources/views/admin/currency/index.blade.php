@@ -23,7 +23,7 @@
     @include('admin.messge_alert.success')
     @include('admin.messge_alert.fail')
 
-    <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modal-default">اضافة عملة
+    <button type="button" class="btn btn-dark mb-2" data-toggle="modal" data-target="#modal-default">اضافة عملة
     </button>
     <div class="card">
 
@@ -55,10 +55,10 @@
                                              src="{{ asset('storage/currency_flag/'.$key->currency_flag) }}" alt="">
                                     </td>
                                     <td>
-                                        <a class="btn btn-primary btn-sm"
-                                           href="{{ route('currency.edit',['id'=>$key->id]) }}">تعديل</a>
+                                        <a class="btn btn-success btn-sm"
+                                           href="{{ route('currency.edit',['id'=>$key->id]) }}"><span class="fa fa-edit"></span></a>
                                         @if($key->is_default == 0)
-                                            <a class="btn btn-dark btn-sm" href="{{ route('currency.set_default_value',['id'=>$key->id]) }}">جعلها افتراضية</a>
+                                            <a class="btn btn-warning btn-sm" href="{{ route('currency.set_default_value',['id'=>$key->id]) }}">جعلها افتراضية</a>
                                         @else
                                             <span class="text-success">تم جعل هذه العملة افتراضية</span>
                                         @endif

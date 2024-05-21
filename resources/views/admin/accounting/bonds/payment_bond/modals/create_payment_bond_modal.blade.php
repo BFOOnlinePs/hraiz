@@ -5,7 +5,7 @@
             <input type="hidden" name="invoice_modal_type" value="invoice">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">اضافة سند دفع</h4>
+                    <h4 class="modal-title">اضافة سند قبض</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

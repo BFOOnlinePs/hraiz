@@ -81,16 +81,16 @@
                                             </select>
                                         </div>
                                     </div>
-{{--                                    <div class="col-md-6" style="display: none" id="product_form_search">--}}
-{{--                                        <div class="form-group">--}}
-{{--                                            <input onkeyup="product_table(this.value)" type="text" class="form-control" placeholder="بحث عن صنف">--}}
-{{--                                            <div class="table-responsive">--}}
-{{--                                                <div id="product_table">--}}
+                                    <div class="col-md-6" style="display: none" id="product_form_search">
+                                        <div class="form-group">
+                                            <input onkeyup="product_table(this.value)" type="text" class="form-control" placeholder="بحث عن صنف">
+                                            <div class="table-responsive">
+                                                <div id="product_table">
 
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

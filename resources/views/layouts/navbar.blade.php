@@ -145,7 +145,7 @@
                     <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                         <li><a href="{{ route('currency.index') }}" class="dropdown-item">العملات</a></li>
                         <li><a href="{{ route('bank.index') }}" class="dropdown-item">البنوك</a></li>
-                        <li><a href="{{ route('tasks_type.index') }}" class="dropdown-item">أنواع المهام</a></li>
+{{--                        <li><a href="{{ route('tasks_type.index') }}" class="dropdown-item">أنواع المهام</a></li>--}}
                         <li><a href="{{ route('shipping_methods.index') }}" class="dropdown-item">طرق الشحن</a></li>
                         <li><a href="{{ route('clearance_attachment.index') }}" class="dropdown-item">مرفقات التخليص</a></li>
                         <li><a href="{{ route('estimation_cost_element.index') }}" class="dropdown-item">عناصر تقدير التكلفة</a></li>

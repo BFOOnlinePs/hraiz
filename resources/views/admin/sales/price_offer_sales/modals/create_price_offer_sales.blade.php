@@ -42,7 +42,7 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">اغلاق</button>
-                    <button type="submit" class="btn btn-primary">حفظ</button>
+                    <button type="submit" class="btn btn-dark">حفظ</button>
                 </div>
 
             </div>

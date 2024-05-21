@@ -56,13 +56,13 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="">من</label>
-                                <input onchange="expenses_table_ajax()" id="from" type="date" class="form-control">
+                                <input onchange="expenses_table_ajax()" value="{{ $start_date }}" id="from" type="date" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="">الى</label>
-                                <input onchange="expenses_table_ajax()" id="to" type="date" class="form-control">
+                                <input onchange="expenses_table_ajax()" value="{{ $end_date }}" id="to" type="date" class="form-control">
                             </div>
                         </div>
                     </div>
