@@ -36,8 +36,12 @@ class SalesInvoicesController extends Controller
             $query->where('client_id','like','%'.$request->supplier_user_id.'%');
         })->when(!empty($request->invoice_reference_number),function ($query) use ($request){
             $query->where('invoice_reference_number','like','%'.$request->invoice_reference_number.'%');
-        })->paginate(10);
-        $order = OrderModel::get();
+        })->orderBy('id','desc')->paginate(10);
+        foreach ($data as $key){
+            $key->totalAmount =InvoiceItemsModel::where('invoice_id',$key->id)
+                ->sum('rate');
+        }
+        $order = OrderModel::orderBy('id','desc')->get();
         return response()->json([
             'success'=>'true',
             'view'=>view('admin.accounting.sales_invoices.ajax.invoice_table',['data'=>$data,'order'=>$order])->render(),

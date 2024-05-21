@@ -5,6 +5,7 @@
             <th>العميل</th>
             <th>تاريخ الفاتورة</th>
             <th>تاريخ الاستحقاق</th>
+            <th>الحالة</th>
             <th>نوع الفاتورة</th>
             <th></th>
         </tr>
@@ -21,6 +22,13 @@
                 <td>{{ $key->client->name }}</td>
                 <td>{{ $key->bill_date }}</td>
                 <td>{{ $key->due_date }}</td>
+                <td>
+                    @if($key->status == 'status')
+                        <small class="badge badge-success">مرحل</small>
+                    @else
+                        <small class="badge badge-warning">غير مرحل</small>
+                    @endif
+                </td>
                 <td>
                     @if($key->invoice_type == 'sales')
                         مبيعات
