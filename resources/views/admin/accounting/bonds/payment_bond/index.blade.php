@@ -84,7 +84,7 @@
             </div>
         </div>
     </div>
-{{--    @include('admin.accounting.bonds.payment_bond.modals.create_payment_bond_modal')--}}
+    @include('admin.accounting.bonds.payment_bond.modals.create_payment_bond_modal')
     @include('admin.accounting.bonds.payment_bond.modals.update_check_payment_type')
     @include('admin.accounting.bonds.payment_bond.modals.list_invoice_type')
     @include('admin.accounting.bonds.payment_bond.modals.create_payment_bond_for_client_modal')
@@ -103,11 +103,13 @@
         $('input[name="customRadio"]').on('change', function () {
             if ($(this).val() === 'check') {
                 $('#check_information_client').css('display','block');
+                $('#check_information').css('display','block');
                 $('#checkNumber').prop('required',true);
                 $('#due_date').prop('required',true);
                 $('#bank_name').prop('required',true);
             } else {
                 $('#check_information_client').hide();
+                $('#check_information').hide();
             }
         })
 
