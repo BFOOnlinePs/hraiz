@@ -23,7 +23,7 @@
                 <td>{{ $key->bill_date }}</td>
                 <td>{{ $key->due_date }}</td>
                 <td>
-                    @if($key->status == 'status')
+                    @if($key->status == 'stage')
                         <small class="badge badge-success">مرحل</small>
                     @else
                         <small class="badge badge-warning">غير مرحل</small>
