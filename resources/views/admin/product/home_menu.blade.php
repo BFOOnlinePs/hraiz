@@ -1,6 +1,6 @@
 <div class="card-body">
     <div class="row">
-        <div class="col-md-12 col-sm-6 col-12">
+        <div class="@if (request()->routeIs('product.index') || request()->routeIs('category.index') || request()->routeIs('units.index')) col-md-12 @else col-md-4 @endif col-sm-6 col-4">
             <a href="{{ route('product.index') }}" style="text-decoration: none" class="text-dark">
                 <div class="row">
                     <div class="col-md-12">
@@ -24,7 +24,7 @@
             </a>
         </div>
 
-        <div class="col-md-12 col-sm-6 col-12">
+        <div class="@if (request()->routeIs('product.index') || request()->routeIs('category.index') || request()->routeIs('units.index')) col-md-12 @else col-md-4 @endif col-sm-6 col-4">
             <a href="{{ route('category.index') }}" style="text-decoration: none" class="text-dark">
                 <div class="row">
                     <div class="col-md-12">
@@ -48,7 +48,7 @@
             </a>
         </div>
 
-        <div class="col-md-12 col-sm-6 col-12">
+        <div class="@if (request()->routeIs('product.index') || request()->routeIs('category.index') || request()->routeIs('units.index')) col-md-12 @else col-md-4 @endif col-sm-6 col-4">
             <a href="{{ route('units.index') }}" style="text-decoration: none" class="text-dark">
                 <div class="row">
                     <div class="col-md-12">
@@ -61,7 +61,6 @@
                                     <div class="col-md-12">
                                         <div class="">
                                             <span class="info-box-text">الوحدات</span>
-                                            <br>
                                             <span class="info-box-number">{{ $unit_count }}</span>
                                         </div>
                                     </div>

@@ -165,10 +165,39 @@
             });
         }
 
+        $(document).ready(function () {
+            $('#check_create_form').submit(function (e) {
+                e.preventDefault();
+                var form_data = $(this).serialize();
+                var csrfToken = $('meta[name="csrf-token"]').attr('content');
+                var headers = {
+                    "X-CSRF-Token": csrfToken
+                };
+                $.ajax({
+                    url: '{{ route('bonds.update_check_information') }}',
+                    method: 'post',
+                    headers: headers,
+                    data: form_data,
+                    success: function (data) {
+                        performance_bonds_table_ajax();
+                        $('#update_check_payment_type_modal').modal('hide');
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert('error');
+                    }
+                });
+            });
+        });
+        function update_check_information() {
+
+        }
+
         function get_check_data(data) {
             $('#check_number_edit').val(data.check_number);
             $('#due_date_edit').val(data.due_date);
             $('#bank_name_edit').val(data.bank_name);
+            $('#bonds_id').val(data.id);
+            $('#update_check_payment_type_modal').modal('show');
         }
 
         function get_amount_for_invoice() {
