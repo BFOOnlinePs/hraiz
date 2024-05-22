@@ -1,4 +1,4 @@
-<div class="modal fade" id="list_invoice_type">
+    <div class="modal fade" id="list_invoice_type">
     <div class="modal-dialog modal-dialog-centered">
         <input type="hidden" name="">
         <div class="modal-content">

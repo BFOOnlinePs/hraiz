@@ -291,4 +291,17 @@ class BondsController extends Controller
             'pagination' => $data->links()->toHtml(),
         ]);
     }
+
+    public function update_check_information(Request $request){
+        $data = BondsModel::where('id',$request->bonds_id)->first();
+        $data->check_number = $request->check_number;
+        $data->due_date = $request->due_date;
+        $data->bank_name = $request->bank_name;
+        if ($data->save()){
+            return response()->json([
+                'success' => 'true',
+                'message' => 'تم تعديل معلومات البنك بنجاح'
+            ]);
+        }
+    }
 }

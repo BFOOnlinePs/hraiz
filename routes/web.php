@@ -640,6 +640,7 @@ Route::group(['prefix'=>'accounting','middleware'=>'auth'],function(){
             Route::get('edit_performance_bonds/{id}',[App\Http\Controllers\accounting\BondsController::class , 'edit_performance_bonds'])->name('accounting.bonds.performance_bond.edit_performance_bonds');
             Route::post('update_performance_bond',[App\Http\Controllers\accounting\BondsController::class , 'update_performance_bond'])->name('accounting.bonds.performance_bond.update_performance_bond');
             Route::post('list_invoice_for_performance_bond_clients_table_ajax',[App\Http\Controllers\accounting\BondsController::class , 'list_invoice_for_performance_bond_clients_table_ajax'])->name('bonds.list_invoice_for_performance_bond_clients_table_ajax');
+            Route::post('update_check_information',[App\Http\Controllers\accounting\BondsController::class , 'update_check_information'])->name('bonds.update_check_information');
         });
     });
     Route::group(['prefix'=>'account_statement'],function (){
