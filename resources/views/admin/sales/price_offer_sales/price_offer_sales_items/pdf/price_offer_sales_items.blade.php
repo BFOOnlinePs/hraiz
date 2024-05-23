@@ -124,15 +124,15 @@
             @endif
         </th>
         <th></th>
-        <th>
-            @if($language == 'ar')
-                الكمية
-            @elseif($language == 'en')
-                Quantity
-            @elseif($language == 'he')
-                כַּמוּת
-            @endif
-        </th>
+{{--        <th>--}}
+{{--            @if($language == 'ar')--}}
+{{--                الكمية--}}
+{{--            @elseif($language == 'en')--}}
+{{--                Quantity--}}
+{{--            @elseif($language == 'he')--}}
+{{--                כַּמוּת--}}
+{{--            @endif--}}
+{{--        </th>--}}
         <th>
             @if($language == 'ar')
                 السعر
@@ -142,15 +142,15 @@
                 המחיר
             @endif
         </th>
-        <th>
-            @if($language == 'ar')
-                المجموع
-            @elseif($language == 'en')
-                Total
-            @elseif($language == 'he')
-                סך הכל
-            @endif
-        </th>
+{{--        <th>--}}
+{{--            @if($language == 'ar')--}}
+{{--                المجموع--}}
+{{--            @elseif($language == 'en')--}}
+{{--                Total--}}
+{{--            @elseif($language == 'he')--}}
+{{--                סך הכל--}}
+{{--            @endif--}}
+{{--        </th>--}}
         <th>
             @if($language == 'ar')
                 الملاحظات
@@ -178,29 +178,29 @@
             <td>
                 <img style="width: 40px" src="{{ asset('storage/product/'.$key->product->product_photo) }}" alt="">
             </td>
-            <td>
-                {{ $key->qty }}
-            </td>
+{{--            <td>--}}
+{{--                {{ $key->qty }}--}}
+{{--            </td>--}}
             <td>{{ $key->price }}</td>
-            <td>
-                {{ $key->qty * $key->price }} {{ $price_offer_sales->currency->currency_symbol ?? '' }}
-            </td>
+{{--            <td>--}}
+{{--                {{ $key->qty * $key->price }} {{ $price_offer_sales->currency->currency_symbol ?? '' }}--}}
+{{--            </td>--}}
             <td>{{ $key->notes }}</td>
         </tr>
     @endforeach
-    <tr>
-        <td class="sum" colspan="5">
-            @if($language == 'ar')
-                المجموع
-            @elseif($language == 'en')
-                Total
-            @elseif($language == 'he')
-                סך הכל
-            @endif
-        </td>
-        <td>{{ $sum }} <span style="text-align: left">{{ $price_offer_sales->currency->currency_symbol ?? '' }}</span></td>
-        <td></td>
-    </tr>
+{{--    <tr>--}}
+{{--        <td class="sum" colspan="5">--}}
+{{--            @if($language == 'ar')--}}
+{{--                المجموع--}}
+{{--            @elseif($language == 'en')--}}
+{{--                Total--}}
+{{--            @elseif($language == 'he')--}}
+{{--                סך הכל--}}
+{{--            @endif--}}
+{{--        </td>--}}
+{{--        <td>{{ $sum }} <span style="text-align: left">{{ $price_offer_sales->currency->currency_symbol ?? '' }}</span></td>--}}
+{{--        <td></td>--}}
+{{--    </tr>--}}
 </table>
 <div style="margin-top: 20px">
     <h5>
