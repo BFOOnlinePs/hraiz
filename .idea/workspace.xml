@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dc0963de-5d4a-497e-a864-4d74efffd831" name="Changes" comment="edit">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/accounting/BondsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/accounting/BondsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/performance_bond/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/performance_bond/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/performance_bond/modals/list_invoice_type.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/performance_bond/modals/list_invoice_type.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/performance_bond/modals/update_check_payment_type.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/performance_bond/modals/update_check_payment_type.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/product/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/product/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/product/home_menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/product/home_menu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/sales/price_offer_sales/price_offer_sales_items/ajax/price_offer_sales_items_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/sales/price_offer_sales/price_offer_sales_items/ajax/price_offer_sales_items_table.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -351,7 +344,8 @@
       <workItem from="1716014992403" duration="8616000" />
       <workItem from="1716195183417" duration="17472000" />
       <workItem from="1716364834543" duration="76000" />
-      <workItem from="1716366551354" duration="6880000" />
+      <workItem from="1716366551354" duration="7513000" />
+      <workItem from="1716455093185" duration="184000" />
     </task>
     <task id="LOCAL-00001" summary="edit">
       <created>1692272515017</created>
