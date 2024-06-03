@@ -50,7 +50,7 @@ class BondsController extends Controller
         $data->bank_name = $request->bank_name;
         $data->invoice_type = 'payment_bond';
         if (!$request->check_number == ''){
-            $data->check_type = 'incoming';
+            $data->check_type = 'outgoing';
             $data->check_status = $request->check_status;
         }
 
@@ -183,7 +183,7 @@ class BondsController extends Controller
         $data->bank_name = $request->bank_name;
         $data->invoice_type = 'performance_bond';
         if (!$request->check_number == ''){
-            $data->check_type = 'outgoing';
+            $data->check_type = 'incoming';
             $data->check_status = $request->check_status;
         }
 
