@@ -133,11 +133,13 @@
         $('input[name="customRadio"]').on('change', function () {
             if ($(this).val() === 'check') {
                 $('#check_information').show();
+                $('#check_information_client').show();
                 $('#checkNumber').prop('required',true);
                 $('#due_date').prop('required',true);
                 $('#bank_name').prop('required',true);
             } else {
                 $('#check_information').hide();
+                $('#check_information_client').hide();
             }
         })
 
@@ -196,6 +198,7 @@
             $('#check_number_edit').val(data.check_number);
             $('#due_date_edit').val(data.due_date);
             $('#bank_name_edit').val(data.bank_name);
+            $('#check_status').val(data.check_status);
             $('#bonds_id').val(data.id);
             $('#update_check_payment_type_modal').modal('show');
         }

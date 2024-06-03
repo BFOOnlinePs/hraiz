@@ -642,6 +642,12 @@ Route::group(['prefix'=>'accounting','middleware'=>'auth'],function(){
             Route::post('list_invoice_for_performance_bond_clients_table_ajax',[App\Http\Controllers\accounting\BondsController::class , 'list_invoice_for_performance_bond_clients_table_ajax'])->name('bonds.list_invoice_for_performance_bond_clients_table_ajax');
             Route::post('update_check_information',[App\Http\Controllers\accounting\BondsController::class , 'update_check_information'])->name('bonds.update_check_information');
         });
+        Route::group(['prefix'=>'check'],function (){
+            Route::get('index',[App\Http\Controllers\accounting\CheckController::class , 'index'])->name('accounting.bonds.check.index');
+            Route::post('list_cheques_ajax',[App\Http\Controllers\accounting\CheckController::class , 'list_cheques_ajax'])->name('accounting.bonds.check.list_cheques_ajax');
+            Route::post('update_check_status_ajax',[App\Http\Controllers\accounting\CheckController::class , 'update_check_status_ajax'])->name('accounting.bonds.check.update_check_status_ajax');
+            Route::post('update_check_type_ajax',[App\Http\Controllers\accounting\CheckController::class , 'update_check_type_ajax'])->name('accounting.bonds.check.update_check_type_ajax');
+        });
     });
     Route::group(['prefix'=>'account_statement'],function (){
         Route::get('customer_account_statement_index',[\App\Http\Controllers\accounting\AccountStatementController::class,'customer_account_statement_index'])->name('accounting.customer_account_statement_index');

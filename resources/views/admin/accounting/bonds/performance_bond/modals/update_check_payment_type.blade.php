@@ -24,10 +24,21 @@
                                 <input type="date" name="due_date" id="due_date_edit" class="form-control">
                             </div>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">اسم البنك</label>
                                 <input name="bank_name" id="bank_name_edit" type="text" class="form-control" placeholder="اسم البنك">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">حالة الشيك</label>
+                                <select name="check_status" class="form-control" id="check_status">
+                                    <option value="paid">مصروف</option>
+                                    <option value="under_collection">في التحصيل</option>
+                                    <option value="returned">راجع</option>
+                                    <option value="portfolio">في المحفظة</option>
+                                </select>
                             </div>
                         </div>
                     </div>

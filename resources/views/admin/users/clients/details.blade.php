@@ -1,15 +1,15 @@
 @extends('home')
 @section('title')
-    تفاصيل السكرتيريا
+    تفاصيل الزبون
 @endsection
 @section('header_title')
-    تفاصيل السكرتيريا
+    تفاصيل الزبون
 @endsection
 @section('header_link')
-    السكرتيريا
+    الزبون
 @endsection
 @section('header_title_link')
-    تفاصيل السكرتيريا
+    تفاصيل الزبون
 @endsection
 @section('content')
     <link rel="stylesheet" href="{{ asset('assets/plugins/toastr/toastr.min.css') }}">
@@ -450,7 +450,7 @@
                                 <div class="p-2">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <button class="btn btn-dark">اضافة اشتراك</button>
+                                            <button data-toggle="modal" data-target="#add_subscriptions" class="btn btn-dark">اضافة اشتراك</button>
                                         </div>
                                     </div>
                                     <div class="row mt-2">
@@ -495,7 +495,7 @@
             </div>
         </div>
     </div>
-
+    @include('admin.users.clients.modals.add_subscriptions')
 @endsection
 
 @section('script')
