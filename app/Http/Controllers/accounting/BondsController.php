@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\DB;
 class BondsController extends Controller
 {
     public function index(){
-        $data = BondsModel::get();
+        $data = BondsModel::orderBy('desc')->get();
         $invoices = PurchaseInvoicesModel::where('invoice_type','sales')->get();
         $currencies = Currency::get();
         $users = User::whereJsonContains('user_role',['2'])->get();
@@ -49,12 +49,17 @@ class BondsController extends Controller
         $data->due_date = $request->due_date;
         $data->bank_name = $request->bank_name;
         $data->invoice_type = 'payment_bond';
+        if (!$request->check_number == ''){
+            $data->check_type = 'incoming';
+            $data->check_status = $request->check_status;
+        }
 
         $doc_amount->type = 'payment_bond';
         $doc_amount->invoice_id = $request->invoice_id;
         $doc_amount->amount = $request->amount;
         $doc_amount->reference_number = $request->reference_number;
         $doc_amount->currency = $request->currency_id;
+
         $doc_amount->save();
 
         if ($data->save()){
@@ -137,6 +142,7 @@ class BondsController extends Controller
             ->when($request->filled('insert_by'),function ($query) use ($request){
                 $query->where('insert_by','like','%'.$request->insert_by.'%')->get();
             })
+            ->orderBy('id','desc')
             ->get();
         foreach ($data as $key){
             $key->currency = Currency::where('id',$key->currency_id)->first();
@@ -176,6 +182,10 @@ class BondsController extends Controller
         $data->due_date = $request->due_date;
         $data->bank_name = $request->bank_name;
         $data->invoice_type = 'performance_bond';
+        if (!$request->check_number == ''){
+            $data->check_type = 'outgoing';
+            $data->check_status = $request->check_status;
+        }
 
         $doc_amount->type = 'payment_bond';
         $doc_amount->invoice_id = $request->invoice_id;
@@ -297,6 +307,7 @@ class BondsController extends Controller
         $data->check_number = $request->check_number;
         $data->due_date = $request->due_date;
         $data->bank_name = $request->bank_name;
+        $data->check_status = $request->check_status;
         if ($data->save()){
             return response()->json([
                 'success' => 'true',

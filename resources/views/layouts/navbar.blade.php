@@ -82,6 +82,7 @@
                     <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                         <li><a href="{{ route('accounting.bonds.performance_bond.performance_bond_index') }}" class="dropdown-item">سندات صرف</a></li>
                         <li><a href="{{ route('accounting.bonds.payment_bond.index') }}" class="dropdown-item">سندات قبض</a></li>
+                        <li><a href="{{ route('accounting.bonds.check.index') }}" class="dropdown-item">محفظة الشيكات</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">

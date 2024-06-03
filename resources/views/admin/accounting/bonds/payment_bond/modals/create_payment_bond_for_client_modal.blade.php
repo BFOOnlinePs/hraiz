@@ -66,22 +66,33 @@
                         </div>
                     </div>
                     <div class="row" style="display: none" id="check_information_client">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="checkNumber">رقم الشيك</label>
                                 <input name="check_number" type="text" class="form-control" id="checkNumber" placeholder="رقم الشيك" pattern="[0-9]+" title="يرجى إدخال رقم شيك صحيح (الأرقام فقط)">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="">تاريخ الاستحقاق</label>
                                 <input name="due_date" id="due_date" type="date" class="form-control" placeholder="تاريخ الاستحقاق">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="">اسم البنك</label>
                                 <input name="bank_name" id="bank_name" type="text" class="form-control" placeholder="اسم البنك">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="">حالة الشيك</label>
+                                <select class="form-control" name="check_status" id="check_status_for_client">
+                                    <option value="paid">مصروف</option>
+                                    <option value="under_collection">في التحصيل</option>
+                                    <option value="returned">راجع</option>
+                                    <option value="portfolio">في المحفظة</option>
+                                </select>
                             </div>
                         </div>
                     </div>
