@@ -4,24 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc0963de-5d4a-497e-a864-4d74efffd831" name="Changes" comment="edit">
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/accounting/cheques/ajax/list_cheques_ajax.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/accounting/cheques/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/users/clients/modals/add_subscriptions.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/accounting/BondsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/accounting/BondsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/payment_bond/modals/create_payment_bond_for_client_modal.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/payment_bond/modals/create_payment_bond_for_client_modal.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/payment_bond/modals/create_payment_bond_modal.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/payment_bond/modals/create_payment_bond_modal.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/performance_bond/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/performance_bond/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/performance_bond/modals/create_payment_bond_for_client_modal.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/performance_bond/modals/create_payment_bond_for_client_modal.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/performance_bond/modals/create_payment_bond_modal.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/performance_bond/modals/create_payment_bond_modal.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/performance_bond/modals/update_check_payment_type.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/accounting/bonds/performance_bond/modals/update_check_payment_type.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/users/clients/details.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/users/clients/details.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/navbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/navbar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-    </list>
+    <list default="true" id="dc0963de-5d4a-497e-a864-4d74efffd831" name="Changes" comment="edit" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
