@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->enum('check_type', ['outgoing','incoming']);
-            $table->enum('check_status', ['paid','under_collection','returned','portfolio']);
+            $table->enum('check_type', ['outgoing','incoming'])->nullable();
+            $table->enum('check_status', ['paid','under_collection','returned','portfolio'])->nullable();
         });
     }
 
