@@ -31,7 +31,9 @@
 {{--                        @endif--}}
                     </td>
                     <td>{{ $key->user }}</td>
-                    <td>{{ $key->amount }}</td>
+                    <td>
+                        <input type="text" onchange="update_check_amount_ajax({{ $key->id }} , this.value)" class="form-control" value="{{ $key->amount }}">
+                    </td>
                     <td>{{ $key->due_date }}</td>
                     <td>
                         <select onchange="update_check_status({{ $key->id }}, this.value )" class="form-control" name="" id="">

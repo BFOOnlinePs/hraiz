@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\BondsModel;
 use App\Models\User;
 use Illuminate\Http\Request;
+use function Symfony\Component\String\s;
 
 class CheckController extends Controller
 {
@@ -71,6 +72,18 @@ class CheckController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'تم تعديل نوع الشيك بنجاح'
+            ]);
+        }
+    }
+
+    public function update_check_amount_ajax(Request $request)
+    {
+        $data = BondsModel::where('id',$request->id)->first();
+        $data->amount = $request->amount;
+        if($data->save()){
+            return response()->json([
+                'success' => true,
+                'message' => 'تم تعديل البيانات بنجاح'
             ]);
         }
     }

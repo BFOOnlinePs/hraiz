@@ -173,6 +173,28 @@
                 }
             });
         }
+
+        function update_check_amount_ajax(id,value) {
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            var headers = {
+                "X-CSRF-Token": csrfToken
+            };
+            $.ajax({
+                url: '{{ route('accounting.bonds.check.update_check_amount_ajax') }}',
+                method: 'post',
+                headers: headers,
+                data: {
+                    'id' : id,
+                    'amount': value
+                },
+                success: function (response) {
+                    toastr.success(response.message);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('error');
+                }
+            });
+        }
     </script>
 
     <script>

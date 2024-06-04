@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -551,6 +552,12 @@ Route::group(['middleware' => 'auth'], function () {
         echo 'ok';
     });
 
+    Route::get('migrate',function(){
+        Artisan::call('migrate');
+    });
+
+
+
 });
 
 // Accounting System //
@@ -647,6 +654,7 @@ Route::group(['prefix'=>'accounting','middleware'=>'auth'],function(){
             Route::post('list_cheques_ajax',[App\Http\Controllers\accounting\CheckController::class , 'list_cheques_ajax'])->name('accounting.bonds.check.list_cheques_ajax');
             Route::post('update_check_status_ajax',[App\Http\Controllers\accounting\CheckController::class , 'update_check_status_ajax'])->name('accounting.bonds.check.update_check_status_ajax');
             Route::post('update_check_type_ajax',[App\Http\Controllers\accounting\CheckController::class , 'update_check_type_ajax'])->name('accounting.bonds.check.update_check_type_ajax');
+            Route::post('update_check_amount_ajax',[App\Http\Controllers\accounting\CheckController::class , 'update_check_amount_ajax'])->name('accounting.bonds.check.update_check_amount_ajax');
         });
     });
     Route::group(['prefix'=>'account_statement'],function (){
