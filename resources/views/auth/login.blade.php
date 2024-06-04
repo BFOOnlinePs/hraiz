@@ -42,7 +42,7 @@
         <div class="card-body">
 {{--            <p class="login-box-msg">ابدا بتسجيل الدخول من هنا</p>--}}
             <div class="text-center">
-                <img class="text-center" src="{{ asset('storage/setting/'.$system_setting->company_logo) }}" style="width: 100px" alt="">
+<!--                 <img class="text-center" src="{{ asset('storage/setting/'.$system_setting->company_logo) }}" style="width: 100px" alt=""> -->
             </div>
             <form action="{{ route('login') }}" method="post" class="mt-2">
                 @csrf
